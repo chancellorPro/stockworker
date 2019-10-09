@@ -1,546 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/AbstractController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Customer/IndexController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Plan/IndexController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Product/IndexController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Stock/IndexController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/User/IndexController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/FormRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Product/FastSaveRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Product/ProductRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/User/UserDebug.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/AbstractBaseModel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/ActionLog.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Customer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Plan.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Stock.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/AppSettingsFilterTrait.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/AppSettingsTrait.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/Deploy/DeployFileModel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/Deploy/DeployHelper.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/FilterBuilder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/HasCompositePrimaryKeyTrait.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/PetIdConvertTrait.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/PstMutator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/Relations/HasOneUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/Requests/AdpBundles.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Traits/Requests/Authorize.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/css/vendor.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/green-android-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/preview-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/fonts/webgl_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/app/js/vendor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/daterangepicker.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/gentelella.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/_all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/aero.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/aero.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/aero@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/blue.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/blue@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/flat.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/flat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/flat@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/green@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/grey.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/grey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/grey@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/orange.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/orange.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/orange@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/pink.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/pink.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/pink@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/purple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/purple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/purple@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/red.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/red@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/yellow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/flat/yellow@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/futurico/futurico.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/futurico/futurico.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/futurico/futurico@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/_all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/aero.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/blue.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/grey.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/line.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/line@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/orange.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/pink.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/purple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/red.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/line/yellow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/_all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/aero.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/aero.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/aero@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/blue.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/blue@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/green@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/grey.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/grey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/grey@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/minimal.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/minimal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/minimal@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/orange.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/orange.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/orange@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/pink.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/pink.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/pink@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/purple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/purple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/purple@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/red.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/red@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/yellow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/minimal/yellow@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/polaris/polaris.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/polaris/polaris.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/polaris/polaris@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/_all.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/aero.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/aero.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/aero@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/blue.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/blue@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/green@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/grey.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/grey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/grey@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/orange.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/orange.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/orange@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/pink.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/pink.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/pink@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/purple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/purple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/purple@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/red.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/red@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/square.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/square.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/square@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/yellow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/icheck-skins/square/yellow@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/daterangepicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/filter-col.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/gentelella.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/icheck.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/jquery.tablestickyheader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/lightbox-form-save.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/moment-with-locales.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/table-edit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/svg/403.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/svg/404.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/svg/500.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/svg/503.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/bootstrap/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/bootstrap/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/dropzone/DropzoneBuilder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/http/RequestBuilder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/http/errorHandler.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/http/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/http/successHandler.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/modal/ModalBuilder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/modal/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/modal/modalConfirm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/notify/base.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/notify/notifyError.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/notify/notifySuccess.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/observer/EventObserver.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/components/observer/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/exceptions/SavedItemNotFound.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/addEmbed.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/ajaxPagination.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/confirmModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/fastSave.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/fastSavePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/filterDateRange.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/modalData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/pageLimit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/removeEmbed.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/handlers/submitForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/helpers/getFilePath.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/helpers/getFormData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/helpers/getSubFolder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/listeners/awardCreate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/listeners/awardDelete.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/listeners/dropZoneInit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/listeners/updateSaveAllButton.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/action-type/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/action-type/handlers/collapseState.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/action-type/handlers/collapseStates.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/action-type/handlers/removeActionTypeState.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/action-type/listeners/updateIndexes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/action-type/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/action-type/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/add-me/handlers/saveState.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/add-me/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/announcements/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/announcements/listeners/showForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/announcements/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/assets-log/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/assets-log/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/assets/handlers/changeType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/assets/handlers/copyAssets.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/assets/handlers/downloadAssets.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/assets/handlers/getLastCollectionNumber.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/assets/handlers/markChanged.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/assets/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/award/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/award/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/banner/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/banner/handlers/changeType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/banner/handlers/showForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/banner/listeners/showForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/banner/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/handlers/bundleVersionSelect.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/handlers/copyAdp.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/handlers/copyAssets.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/handlers/downloadAdp.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/handlers/hideArchive.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/handlers/hideTasks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/handlers/selectRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/handlers/showArchive.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/handlers/showTasks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-adps/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-user-actions/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/cms-user-actions/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/collection/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/collection/handlers/fastSave.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/collection/handlers/hideAdditionalRows.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/collection/handlers/markInputAsChanged.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/collection/handlers/sortableInit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/collection/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/collection/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/crop/handlers/addRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/crop/handlers/deleteRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/crop/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/daily-loot/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/daily-loot/handlers/saveState.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/daily-loot/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/daily-loot/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/default/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/deploy/deployStatus.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/deploy/handlers/changeTab.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/deploy/handlers/showDependency.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/deploy/handlers/showDependencyPopup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/deploy/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/deploy/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/dpa/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/dpa/handlers/saveDpaState.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/dpa/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/dye/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/dye/handlers/changeRowIndex.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/dye/handlers/dyeSavePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/dye/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/gift-wrap/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/gift-wrap/handlers/assetChanged.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/gift-wrap/handlers/fastSavePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/gift-wrap/handlers/removeRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/gift-wrap/handlers/sortableInit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/gift-wrap/helpers/positionUpdate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/gift-wrap/listeners/addRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/gift-wrap/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/linked-assets/handlers/showAsset.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/linked-assets/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/localization/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/localization/handlers/removeRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/localization/handlers/saveLocalizationState.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/localization/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/magic/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/magic/handlers/saveMagicState.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/magic/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/makeup-kit-asset/handlers/getLastMakeupKitID.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/makeup-kit-asset/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/makeup-kit/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/makeup-kit/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal-ingredient-groups/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal-ingredient-groups/handlers/ingredientDelete.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal-ingredient-groups/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal-ingredients/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal-ingredients/handlers/ingredientDelete.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal-ingredients/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal/handlers/mealDelete.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal/handlers/savePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/meal/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/neighbor-activity/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/neighbor-activity/handlers/changeType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/neighbor-activity/listeners/showForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/neighbor-activity/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/news-gifts-log/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/news-gifts-log/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/product/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/product/handlers/priceInit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/product/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/purchase/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/purchase/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/settings/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/settings/handlers/dropzoneInit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/settings/handlers/markChanged.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/settings/handlers/savePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/settings/handlers/saveRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/settings/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/settings/modules/ai_animation/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/settings/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-department/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-department/handlers/addShop.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-department/handlers/fastSave.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-department/handlers/radioInput.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-department/handlers/sortableDepartmentInit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-department/handlers/sortableInit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-department/listeners/showForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-department/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-department/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-releases/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-releases/handlers/savePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-releases/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/shop-stats/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/sound/handlers/addNewRow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/sound/handlers/saveSoundState.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/sound/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/subtype-attributes/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/subtype-attributes/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/tamatool/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/tamatool/listeners/showForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/tamatool/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/addCollectible.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/addComment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/changeMovePlacement.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/changePageLimit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/changePlacement.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/changeRandomNeighbors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/hidePlacementAssets.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/loadPlacementAssets.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/selectRows.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/handlers/updateNeighbors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/listeners/addNeighbor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/listeners/deleteNeighbor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/listeners/searchNeighbor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/listeners/searchUserAssets.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/listeners/submitUserPartForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/app-settings.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/button.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/dropzone.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/form.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/icon.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/image.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/animation.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/cash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/coin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/green-android-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/ios-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/no-img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/preview-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/user_actions/asset.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/user_actions/cash-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/user_actions/earn-spent-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/user_actions/load-tracking-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/user_actions/pc-icon.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/user_actions/xp-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/images/webgl_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/styles/table.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/animate/animate.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/animate/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/bootstrap-confirmation/bootstrap-confirmation.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/bootstrap-confirmation/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/bootstrap-datetimepicker/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/bootstrap-notify/bootstrap-notify.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/bootstrap-notify/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/bootstrap/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/ekko-lightbox/ekko-lightbox.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/ekko-lightbox/ekko-lightbox.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/ekko-lightbox/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/select2/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/select2/select2.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/select2/select2.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/theme/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/theme/theme.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/app/vendor/theme/theme.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/en/cms-action-history.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/en/common.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/en/forms.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/ru.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/ru/auth.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/ru/common.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/ru/pagination.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/ru/passwords.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/ru/validation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/action-log/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/action-log/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/action-log/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/action-log/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/award-asset-chain.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/award/button-template.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/award/button/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/award/button/delete.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/award/button/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/award/buttons.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/award/info.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/award/template.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/buttons/add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/buttons/back.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/buttons/base.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/buttons/cancel.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/buttons/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/buttons/delete.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/buttons/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/buttons/save.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/buttons/sort.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/date/pst.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/env-select.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/form/history.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/grid/base-actions.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/icons/cash.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/icons/coins.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/icons/xp.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/image/preview.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/paginate.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/rotation-full-search.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/common/user/name.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/footer.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/notify.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/sidebar.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/topbar.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/auth.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/filter-col.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/bool.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/checkbox.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/color.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/dropzone.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/file.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/files.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/info-select.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/info.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/input.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/radio.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/select2.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/slider.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/form-fields/text.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/lightbox.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/pages/config.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/old_auth/login.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/old_auth/passwords/email.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/old_auth/passwords/reset.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/old_auth/register.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/old_auth/verify.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/plan/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/plan/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/plan/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/plan/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/product/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/product/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/product/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/product/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/stock/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/stock/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/stock/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/stock/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db" beforeDir="false" afterPath="$PROJECT_DIR$/db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ExampleComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ExampleComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/pagination.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/passwords.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/passwords.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+    <list default="true" id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="" />
+    <list id="10e0d690-025d-40e9-a979-1f0f28ac23f3" name="Never" comment="Never">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -568,56 +32,81 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name=".env" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.env">
+      <file leaf-file-name="artisan" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/artisan">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+            <state relative-caret-position="80">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="webpack.mix.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webpack.mix.js">
+      <file leaf-file-name="app.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bootstrap/app.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="41" column="81" selection-start-line="41" selection-start-column="81" selection-end-line="41" selection-end-column="81" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="128">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="google.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/google.php">
+      <file leaf-file-name="FileViewFinder.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="22" column="50" lean-forward="true" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+            <state relative-caret-position="96">
+              <caret line="52" column="89" selection-start-line="52" selection-start-column="85" selection-end-line="52" selection-end-column="89" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sheets.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Sheets.php">
+      <file leaf-file-name="ViewServiceProvider.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+            <state relative-caret-position="496">
+              <caret line="76" column="54" selection-start-line="76" selection-end-line="77" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="credentials.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/storage/credentials.json">
+      <file leaf-file-name="view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="356">
+              <caret line="24" column="55" lean-forward="true" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".editorconfig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.editorconfig">
+      <file leaf-file-name="app.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/app.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="121" column="15" lean-forward="true" selection-start-line="121" selection-start-column="15" selection-end-line="121" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="helpers.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/helpers.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="640" column="13" selection-start-line="640" selection-start-column="13" selection-end-line="640" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filesystems.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/filesystems.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="presets.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/presets.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="menu.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/menu.php">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
@@ -631,15 +120,16 @@
       <find>APACHE_DOCUMENT_ROOT</find>
       <find>PMA_HOST</find>
       <find>arrayToCollection</find>
-      <find>webpack.mix.js</find>
       <find>prompt</find>
       <find>scopes</find>
       <find>file</find>
+      <find>webpack.mix.js</find>
+      <find>url</find>
     </findStrings>
     <dirStrings>
-      <dir>$PROJECT_DIR$/config</dir>
       <dir>$PROJECT_DIR$/app/Http/Controllers/ActionLog</dir>
       <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/config</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -661,6 +151,9 @@
         <option value="$PROJECT_DIR$/config/google.php" />
         <option value="$PROJECT_DIR$/storage/credentials.json" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/artisan" />
+        <option value="$PROJECT_DIR$/bootstrap/app.php" />
       </list>
     </option>
   </component>
@@ -797,7 +290,7 @@
             <path>
               <item name="larapa" type="b2602c69:ProjectViewProjectNode" />
               <item name="larapa" type="462c0819:PsiDirectoryNode" />
-              <item name="storage" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -809,7 +302,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../inventory" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -842,22 +335,51 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="" />
+      <changelist id="10e0d690-025d-40e9-a979-1f0f28ac23f3" name="Never" comment="" />
       <created>1570541880814</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1570541880814</updated>
       <workItem from="1570541882098" duration="3860000" />
       <workItem from="1570549514959" duration="659000" />
-      <workItem from="1570621869219" duration="7550000" />
+      <workItem from="1570621869219" duration="10199000" />
     </task>
+    <task id="LOCAL-00001" summary="init app">
+      <created>1570630197968</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1570630197968</updated>
+    </task>
+    <task id="LOCAL-00002" summary="init app">
+      <created>1570631633902</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1570631633902</updated>
+    </task>
+    <task id="LOCAL-00003" summary="init app">
+      <created>1570631734022</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1570631734022</updated>
+    </task>
+    <task id="LOCAL-00004" summary="init app">
+      <created>1570631862338</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1570631862338</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12069000" />
+    <option name="totallyTimeSpent" value="14718000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Messages" />
@@ -865,8 +387,8 @@
       <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="6" />
       <window_info anchor="bottom" id="Version Control" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.28961748" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25506938" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.26885247" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25506938" />
       <window_info anchor="bottom" id="Docker" order="0" weight="0.3293348" />
       <window_info anchor="right" id="Database" order="3" weight="0.14354323" />
       <window_info anchor="bottom" id="Find" order="5" />
@@ -907,6 +429,12 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="init app" />
+    <option name="LAST_COMMIT_MESSAGE" value="init app" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.env">
@@ -1007,13 +535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
-          <caret line="45" column="38" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/c459fa9c-0fae-4d0c-8987-aa8cce29b1ff/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1052,13 +573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="82" column="19" selection-start-line="82" selection-start-column="19" selection-end-line="82" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/includes/topbar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
@@ -1090,20 +604,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.editorconfig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/storage/credentials.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/google.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
-          <caret line="22" column="50" lean-forward="true" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+          <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1114,10 +618,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/storage/credentials.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.editorconfig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+        <state relative-caret-position="371">
+          <caret line="27" column="19" lean-forward="true" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="38" column="13" lean-forward="true" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="7" lean-forward="true" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/artisan">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="52" column="89" selection-start-line="52" selection-start-column="85" selection-end-line="52" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/filesystems.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/menu.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/presets.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="24" column="55" lean-forward="true" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="121" column="15" lean-forward="true" selection-start-line="121" selection-start-column="15" selection-end-line="121" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="640" column="13" selection-start-line="640" selection-start-column="13" selection-end-line="640" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="76" column="54" selection-start-line="76" selection-end-line="77" />
         </state>
       </provider>
     </entry>
