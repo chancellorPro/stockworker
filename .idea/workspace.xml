@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="init app" />
+    <list default="true" id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="init app">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
+    </list>
     <list id="10e0d690-025d-40e9-a979-1f0f28ac23f3" name="Never" comment="Never">
       <change afterPath="$PROJECT_DIR$/database/dumps/app_public_action_log.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/larapa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/larapa.iml" afterDir="false" />
@@ -154,7 +158,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -195,7 +199,7 @@
       <workItem from="1570873110409" duration="2472000" />
       <workItem from="1570875897738" duration="13568000" />
       <workItem from="1570907425258" duration="762000" />
-      <workItem from="1570909620603" duration="10033000" />
+      <workItem from="1570909620603" duration="11775000" />
     </task>
     <task id="LOCAL-00001" summary="init app">
       <created>1570630197968</created>
@@ -260,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570920532675</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="init app">
+      <created>1570920787320</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1570920787320</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

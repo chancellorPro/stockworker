@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -161,7 +162,20 @@ class IndexController extends Controller
         $income = $request->get('income') == ActionLog::INCOME ? ActionLog::INCOME : ActionLog::OUTOME;
         $hasParent = $request->get('hasParent') == 1 ? 1 : 0;
 
-        return Excel::download(new OrderExport($from, $to, $income, $hasParent), 'file.xlsx');
+        $attach = Excel::download(new OrderExport($from, $to, $income, $hasParent), 'file.xlsx')
+            ->getFile();
+
+        Mail::send('welcome', [
+            'name' => 'Pavel',
+            'email' => 'pavel@zolotarev.pp.ua',
+            'user_message' => 'pavel@zolotarev.pp.ua'
+        ], function ($message) use ($attach) {
+            $message->from('stockworker100@gmail.com', 'Stock-worker');
+            $message->to('pavel@zolotarev.pp.ua');
+            $message->attachData($attach, 'report.xlsx', $options = []);
+        });
+
+//        return Excel::download(new OrderExport($from, $to, $income, $hasParent), 'file.xlsx');
     }
 
     /**
