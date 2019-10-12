@@ -2,21 +2,28 @@ FROM php:7.2-apache
 
 RUN apt-get update
 
-# 1. development packages
-RUN apt-get install -y \
+# Install any custom system requirements here
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    curl \
+    libicu-dev \
+    libmemcached-dev \
+    libz-dev \
+    libpq-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libssl-dev \
+    libmcrypt-dev \
+    libxml2-dev \
+    libbz2-dev \
+    libjpeg62-turbo-dev \
+    curl \
     git \
     zip \
-    curl \
     sudo \
     unzip \
-    libicu-dev \
-    libbz2-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libmcrypt-dev \
-    libreadline-dev \
-    libfreetype6-dev \
-    g++
+    g++ \
+  && rm -rf /var/lib/apt/lists/*
 
 # 2. apache configs + document root
 RUN echo "ServerName laravel-app.local" >> /etc/apache2/apache2.conf
@@ -31,16 +38,34 @@ RUN a2enmod rewrite headers
 # 4. start with base php config, then add extensions
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-RUN docker-php-ext-install \
-    bz2 \
-    intl \
-    iconv \
-    bcmath \
-    opcache \
-    calendar \
-    mbstring \
-    pdo_mysql \
-    zip
+# Install various PHP extensions
+RUN docker-php-ext-configure bcmath --enable-bcmath \
+    && docker-php-ext-configure pcntl --enable-pcntl \
+    && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
+    && docker-php-ext-configure pdo_pgsql --with-pgsql \
+    && docker-php-ext-configure mbstring --enable-mbstring \
+    && docker-php-ext-configure soap --enable-soap \
+    && docker-php-ext-install \
+        bz2 \
+        bcmath \
+        intl \
+        iconv \
+        calendar \
+        mbstring \
+        mysqli \
+        pcntl \
+        pdo_mysql \
+        pdo_pgsql \
+        soap \
+        sockets \
+        zip \
+  && docker-php-ext-configure gd \
+    --enable-gd-native-ttf \
+    --with-jpeg-dir=/usr/lib \
+    --with-freetype-dir=/usr/include/freetype2 && \
+    docker-php-ext-install gd \
+  && docker-php-ext-install opcache \
+  && docker-php-ext-enable opcache
 
 # 5. composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
