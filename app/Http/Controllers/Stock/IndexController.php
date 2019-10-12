@@ -34,9 +34,14 @@ class IndexController extends Controller
     {
         $data = $this->applyFilter(
             $request,
-            Stock::selectRaw('stock.product_id, stock.partition, stock.count, stock.description, p.count as plan_count')
-            ->leftJoin('plan AS p', 'p.product_id', '=', 'stock.product_id')
-            ->orderBy('p.product_id')
+            Stock::selectRaw('count(a.id) as aggregate, stock.product_id, max(stock.partition) as partition_number, max(stock.count) as count, max(stock.description) as description, max(p.count) as plan_count, max(p.progress) as progress')
+                ->leftJoin('plan AS p', 'p.product_id', '=', 'stock.product_id')
+                ->leftJoin('action_log AS a', 'a.product_id', '=', 'stock.product_id')
+                ->join('products AS pr', 'pr.id', '=', 'stock.product_id')
+                ->orderBy('p.product_id', 'desc')
+                ->orderBy('aggregate', 'desc')
+                ->orderBy('stock.product_id')
+                ->groupBy('a.product_id', 'stock.product_id', 'p.product_id')
         )->paginate($this->perPage);
 
         return view('stock.index', [

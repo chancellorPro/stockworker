@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="homestead@mysql-db" uuid="c459fa9c-0fae-4d0c-8987-aa8cce29b1ff">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    <data-source name="MySQL for 5.1 - homestead@localhost" uuid="c459fa9c-0fae-4d0c-8987-aa8cce29b1ff">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
       <secret-storage>master_key</secret-storage>
-      <first-sync>true</first-sync>
       <user-name>homestead</user-name>
+      <schema-mapping />
     </data-source>
   </component>
 </project>

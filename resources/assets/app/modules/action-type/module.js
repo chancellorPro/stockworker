@@ -13,6 +13,11 @@ updateIndexes();
 
 $(document)
 
+    .on('click', '#product_id', function () {
+        console.log('product_id');
+        $('#product_id').prev('.select2-container').find('.select2-search__field').focus()
+    })
+
     .on('change', '[name$="[time_type]"]', function () {
         const currentLi = $(this).closest('li');
         const deltaTimeHidden = currentLi.find('[name$="[attributes][' + DELTA_TIME_ATTRIBUTE + '][value]"]');

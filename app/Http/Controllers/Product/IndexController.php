@@ -39,8 +39,9 @@ class IndexController extends Controller
         )->get();
 
         return view('product.index', [
-            'rows'         => $data,
-            'filter'       => $this->getFilter(),
+            'rows'   => $data,
+            'filter' => $this->getFilter(),
+            'boxes'  => arrayToKeyValue(config('presets.boxes'), 'id', 'name'),
         ]);
     }
 

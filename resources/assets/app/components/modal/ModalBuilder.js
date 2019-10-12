@@ -187,6 +187,8 @@ export default class {
             .append(this._getBody())
             .append(this._getFooter());
 
+        html.find('.select2').select2();
+
         html.find('.datepicker')
             .datetimepicker({
                 format: 'yyyy-mm-dd',

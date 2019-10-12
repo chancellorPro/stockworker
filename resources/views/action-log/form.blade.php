@@ -3,7 +3,7 @@
 @endphp
 
 @include('layouts.form-fields.select2', [
-    'label' => __('Income'),
+    'label' => __('Action type'),
     'model' => $currentModel,
     'name' => 'income',
     'collection' => $transaction_type,
@@ -13,6 +13,7 @@
 ])
 
 @include('layouts.form-fields.select2', [
+    'fieldId' => 'product_id',
     'label' => __('Product'),
     'model' => $currentModel,
     'name' => 'product_id',
