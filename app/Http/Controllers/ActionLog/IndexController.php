@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ActionLog;
 
+use App\Exports\OrderExport;
 use App\Http\Controllers\Controller;
 use App\Models\ActionLog;
 use App\Models\Customer;
@@ -14,6 +15,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * Class IndexController
@@ -147,7 +150,7 @@ class IndexController extends Controller
      * getExportData
      *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @return BinaryFileResponse
      */
     public function getExportData(Request $request)
     {
@@ -155,21 +158,10 @@ class IndexController extends Controller
         $date_to = $request->has('date_to') ? Carbon::createFromFormat('Y-m-d', $request->get('date_to')) : Carbon::now();
         $from = $date_from->startOfDay()->format('Y-m-d H:i:s');
         $to = $date_to->endOfDay()->format('Y-m-d H:i:s');
+        $income = $request->get('income') == ActionLog::INCOME ? ActionLog::INCOME : ActionLog::OUTOME;
+        $hasParent = $request->get('hasParent') == 1 ? 1 : 0;
 
-        $data = ActionLog::selectRaw('action_log.product_id, max(p.name) as p_name, max(pl.count) as pl_count, sum(action_log.count) as al_count, max(c.name) as c_name')
-            ->leftJoin('products AS p', 'p.id', '=', 'action_log.product_id')
-            ->leftJoin('plan AS pl', 'pl.product_id', '=', 'action_log.product_id')
-            ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id')
-            ->whereBetween('action_log.date', [$from, $to])
-            ->where(['income' => ActionLog::INCOME])
-            ->orderBy('pl_count')
-            ->groupBy('action_log.product_id')
-            ->get()
-            ->toArray();
-
-        $headers = ['№', 'Товар', 'План', 'Выполнено', 'Заказчик'];
-
-        return self::getCsv($data, $headers);
+        return Excel::download(new OrderExport($from, $to, $income, $hasParent), 'file.xlsx');
     }
 
     /**

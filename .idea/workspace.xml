@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="init app">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Product/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Product/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Stock/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Stock/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/presets.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/presets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/app/components/modal/ModalBuilder.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/app/components/modal/ModalBuilder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/app/modules/action-type/module.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/app/modules/action-type/module.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/action-log/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/action-log/form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/product/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/product/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/stock/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/stock/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
     </list>
-    <list id="10e0d690-025d-40e9-a979-1f0f28ac23f3" name="Never" comment="Never" />
+    <list id="10e0d690-025d-40e9-a979-1f0f28ac23f3" name="Never" comment="Never">
+      <change afterPath="$PROJECT_DIR$/database/dumps/app_public_action_log.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/larapa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/larapa.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +105,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/translation" />
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/vendor/symfony/contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
       <path value="$PROJECT_DIR$/vendor/symfony/routing" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
@@ -144,6 +139,15 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/vendor/revolution/laravel-google-sheets" />
       <path value="$PROJECT_DIR$/vendor/pulkitjalan/google-apiclient" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
     </include_path>
   </component>
   <component name="ProjectId" id="1S69Jk04V1CAMDFSYOtwz3OjreE" />
@@ -153,7 +157,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laravel-in-docker" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../inventory" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -197,6 +201,8 @@
       <workItem from="1570632833320" duration="927000" />
       <workItem from="1570873110409" duration="2472000" />
       <workItem from="1570875897738" duration="13568000" />
+      <workItem from="1570907425258" duration="762000" />
+      <workItem from="1570909620603" duration="9791000" />
     </task>
     <task id="LOCAL-00001" summary="init app">
       <created>1570630197968</created>
@@ -240,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570633433455</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="init app">
+      <created>1570916129947</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1570916129947</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
