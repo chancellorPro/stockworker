@@ -33,15 +33,19 @@ class OrderExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return ActionLog::selectRaw('action_log.product_id, max(p.name) as p_name, max(pl.count) as pl_count, sum(action_log.count) as al_count, max(c.name) as c_name')
+        $builder = ActionLog::selectRaw('action_log.product_id, max(p.name) as p_name, max(pl.count) as pl_count, sum(action_log.count) as al_count, max(c.name) as c_name')
             ->leftJoin('products AS p', 'p.id', '=', 'action_log.product_id')
             ->leftJoin('plan AS pl', 'pl.product_id', '=', 'action_log.product_id')
             ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id')
             ->whereBetween('action_log.date', [$this->from, $this->to])
-            ->where(['income' => $this->income])
-            ->where(['p.parent_product', ($this->hasParent > 0 ? '>' : '='), 0])
-            ->orderBy('pl_count')
-            ->groupBy('action_log.product_id')
-            ->get();
+            ->where(['income' => $this->income]);
+
+        if($this->hasParent > 0) {
+            $builder->where('p.parent_product', '>', 0);
+        } else {
+            $builder->where('p.parent_product', '=', 0);
+        }
+
+        return $builder->orderBy('pl_count')->groupBy('action_log.product_id')->get();
     }
 }
