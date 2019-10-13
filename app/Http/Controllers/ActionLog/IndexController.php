@@ -184,9 +184,10 @@ class IndexController extends Controller
 //            $message->attachData($attach, 'report.xlsx', $options = []);
 //        });
 
-        return response()->json([
-            'response' => $attach,
-        ]);
+        dd($attach);
+//        return response()->json([
+//            'response' => $attach,
+//        ]);
 
 //        return Excel::download(new OrderExport($from, $to, $income, $hasParent), 'file.xlsx');
     }
