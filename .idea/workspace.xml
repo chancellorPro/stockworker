@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="init app">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
     </list>
     <list id="10e0d690-025d-40e9-a979-1f0f28ac23f3" name="Never" comment="Never">
       <change afterPath="$PROJECT_DIR$/database/dumps/app_public_action_log.sql" afterDir="false" />
@@ -203,7 +198,7 @@
       <workItem from="1570875897738" duration="13568000" />
       <workItem from="1570907425258" duration="762000" />
       <workItem from="1570909620603" duration="15281000" />
-      <workItem from="1570946551598" duration="5608000" />
+      <workItem from="1570946551598" duration="5926000" />
     </task>
     <task id="LOCAL-00001" summary="init app">
       <created>1570630197968</created>
@@ -324,7 +319,21 @@
       <option name="project" value="LOCAL" />
       <updated>1570951027773</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="init app">
+      <created>1570952177730</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1570952177730</updated>
+    </task>
+    <task id="LOCAL-00019" summary="init app">
+      <created>1570952248770</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1570952248770</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
