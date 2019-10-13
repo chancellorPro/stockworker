@@ -9,14 +9,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "ext-json": "*",
         "fideloper/proxy": "^4.0",
         "google/apiclient": "^2.0",
+        "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "^3.1",
         "phpoffice/phpspreadsheet": "^1.9",
-        "revolution/laravel-google-sheets": "^5.0",
-        "ext-json": "*"
+        "revolution/laravel-google-sheets": "^5.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

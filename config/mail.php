@@ -1,13 +1,13 @@
 <?php
 return [
     "driver" => "smtp",
-    "host" => "smtp.mailtrap.io",
-    "port" => 2525,
+    "host" => "smtp.googlemail.com",
+    "port" => 465,
     "from" => array(
-        "address" => "from@example.com",
-        "name" => "Example"
+        "address" => "stockworker100@gmail.com",
+        "name" => "stockworker"
     ),
-    "username" => "ddb8e27ca581ed",
-    "password" => "f089e14ed9bb49",
-    "sendmail" => "/usr/sbin/sendmail -bs"
+    "username" => "stockworker100@gmail.com",
+    "password" => "workerstock714",
+//    "sendmail" => "/usr/sbin/sendmail -bs"
 ];

@@ -14,6 +14,16 @@ return [
     |
     */
 
+    'google' => [
+        'client_id'       => env('GOOGLE_CLIENT_ID', ''),
+        'client_secret'   => env('GOOGLE_CLIENT_SECRET', ''),
+        'redirect_uri'    => env('GOOGLE_REDIRECT', ''),
+        'scopes'          => [\Google_Service_Sheets::DRIVE, \Google_Service_Sheets::SPREADSHEETS],
+        'access_type'     => 'online',
+        'approval_prompt' => 'auto',
+        'prompt'          => 'consent', //"none", "consent", "select_account" default:none
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
@@ -35,7 +45,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => App\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
         'webhook' => [
