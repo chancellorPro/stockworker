@@ -166,21 +166,14 @@ class IndexController extends Controller
         $excel = App::make('excel');
         $attach = $excel->raw(new OrderExport($from, $to, $income, $hasParent), Excel::XLSX);
 
-        Mail::to('pavel@zolotarev.pp.ua')->send(['test mail']);
-
-//        mail('pavel@zolotarev.pp.ua', 'Stock-worker', 'The exception itself says there is something wrong in email address fields such as From, Sender or Reply-To fields. Swift Mailer strictly follow RFC standard to avoid emails being caught by spam checker tools. There are following reason can lead to this error.
-//Incorrect email address format in to,from or reply-to fields
-//Email address or host does not existended but some time developer need to apply fix temporarily.');
-//
-//
-//        Mail::send('welcome', [
-//            'name' => 'Pavel',
-//            'email' => 'pavel@zolotarev.pp.ua',
-//            'user_message' => 'pavel@zolotarev.pp.ua'
-//        ], function ($message) {
-//            $message->from(env('MAIL_USERNAME'), 'Stock-worker');
-//            $message->to('pavel@zolotarev.pp.ua');
-//        });
+        Mail::send('welcome', [
+            'name' => 'Pavel',
+            'email' => 'pavel@zolotarev.pp.ua',
+            'user_message' => 'pavel@zolotarev.pp.ua'
+        ], function ($message) {
+            $message->from(env('MAIL_USERNAME'), 'Stock-worker');
+            $message->to('pavel@zolotarev.pp.ua');
+        });
 //        Mail::send('welcome', [
 //            'name' => 'Pavel',
 //            'email' => 'pavel@zolotarev.pp.ua',
