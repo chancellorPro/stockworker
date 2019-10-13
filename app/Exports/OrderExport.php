@@ -41,11 +41,11 @@ class OrderExport implements FromCollection, WithHeadings
 //            ->where(['income' => $this->income])
         ;
 
-        if($this->hasParent > 0) {
-            $builder->where('p.parent_product', '>', 0);
-        } else {
-            $builder->where('p.parent_product', '=', 0);
-        }
+//        if($this->hasParent > 0) {
+//            $builder->where('p.parent_product', '>', 0);
+//        } else {
+//            $builder->where('p.parent_product', '=', 0);
+//        }
 
         return $builder->orderBy('pl_count')->groupBy('action_log.product_id')->get();
     }

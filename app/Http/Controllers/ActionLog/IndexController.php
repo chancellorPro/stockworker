@@ -175,7 +175,7 @@ class IndexController extends Controller
 
         Mail::send('emails.mail', [
             'orderType' => 'pavel@zolotarev.pp.ua',
-            'data' => $entity
+            'data' => $entity->collection()
         ], function ($message) use ($attach) {
             $message->from('stockworker100@gmail.com', 'Stock-worker');
             $message->to('pavel@zolotarev.pp.ua');
