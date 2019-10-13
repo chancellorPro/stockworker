@@ -169,13 +169,13 @@ class IndexController extends Controller
         $to_name = 'Pavel';
         $to_email = 'pavel@zolotarev.pp.ua';
 
-        Mail::send('emails.mail', ['data' => $attach], function ($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)
-                ->subject('Laravel Test Mail');
-            $message->from('stockworker100@gmail.com', 'Test Mail');
-        });
+//        Mail::send('emails.mail', ['data' => $attach], function ($message) use ($to_name, $to_email) {
+//            $message->to($to_email, $to_name)
+//                ->subject('Laravel Test Mail');
+//            $message->from('stockworker100@gmail.com', 'Test Mail');
+//        });
 
-//        Mail::send('welcome', [
+//        Mail::send('emails.mail', [
 //            'name' => 'Pavel',
 //            'email' => 'pavel@zolotarev.pp.ua',
 //            'user_message' => 'pavel@zolotarev.pp.ua'
@@ -183,15 +183,15 @@ class IndexController extends Controller
 //            $message->from(env('MAIL_USERNAME'), 'Stock-worker');
 //            $message->to('pavel@zolotarev.pp.ua');
 //        });
-//        Mail::send('welcome', [
-//            'name' => 'Pavel',
-//            'email' => 'pavel@zolotarev.pp.ua',
-//            'user_message' => 'pavel@zolotarev.pp.ua'
-//        ], function ($message) use ($attach) {
-//            $message->from('stockworker100@gmail.com', 'Stock-worker');
-//            $message->to('pavel@zolotarev.pp.ua');
-//            $message->attachData($attach, 'report.xlsx', $options = []);
-//        });
+        Mail::send('emails.mail', [
+            'name' => 'Pavel',
+            'email' => 'pavel@zolotarev.pp.ua',
+            'user_message' => 'pavel@zolotarev.pp.ua'
+        ], function ($message) use ($attach) {
+            $message->from('stockworker100@gmail.com', 'Stock-worker');
+            $message->to('pavel@zolotarev.pp.ua');
+            $message->attachData($attach, 'report.xlsx', $options = []);
+        });
 
         dd($attach);
 //        return response()->json([
