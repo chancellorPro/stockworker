@@ -170,8 +170,8 @@ class IndexController extends Controller
 
         $to_name = 'Cyr';
 //        $to_name = 'Pavel';
-//        $to_email = 'cyr@zolotarev.pp.ua';
-        $to_email = 'pavel@zolotarev.pp.ua';
+        $to_email = 'cyr@zolotarev.pp.ua';
+//        $to_email = 'pavel@zolotarev.pp.ua';
 
         Mail::send('emails.mail', [
             'orderType' => 'Состояние склада',
