@@ -8,12 +8,11 @@ html , body{
  }
 
 .income{
-  text-align: center;
-  vertical-align: middle;
-}
-.income i{
-  color: #fff;
-  font-size: 18px;
+    background: #1abb9c;
+    text-align: left;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .new-row {

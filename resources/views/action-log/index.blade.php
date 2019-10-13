@@ -35,7 +35,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th class="id">@lang('Income')</th>
+                    <th>@lang('Income')</th>
                     <th>@lang('Product')</th>
                     <th>@lang('Date')</th>
                     <th>@lang('Count')</th>
@@ -58,10 +58,8 @@
             <tbody class="fast-save-page-container">
                 @foreach($data as $item)
                     <tr>
-                        <td class="income" style="{{ $item->income ? 'background:#ff897b' : 'background:#1abb9c' }}" title="{{ $item->income ? __('Outcome') : __('Income') }}">
-                          <b><i>
+                        <td style="background: #1abb9c;text-align: left;color: #fff;font-size: 17px;font-weight: bold;{{ $item->income ? 'background:#ff897b' : 'background:#1abb9c' }}" title="{{ $item->income ? __('Outcome') : __('Income') }}">
                             {{ $item->income ? __('Outcome') : __('Income') }}
-                          </i></b>
                         </td>
                         <td>{{ $item->product->name }}</td>
                         <td>{{ $item->date }}</td>
