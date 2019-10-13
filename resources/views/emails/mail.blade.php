@@ -1,8 +1,7 @@
-@extends('layouts.pages.mail', [
-    'title' => $orderType,
-])
+@extends('layouts.pages.mail')
 
 @section('main_container')
+    <h3>{{ $orderType }}</h3>
     <table>
         <thead>
         <tr>

@@ -177,6 +177,7 @@ class IndexController extends Controller
             'orderType' => 'Состояние склада',
             'data' => $entity->collection()
         ], function ($message) use ($attach) {
+            $message->subject('Состояние склада');
             $message->from('stockworker100@gmail.com', 'Stock-worker');
             $message->to('pavel@zolotarev.pp.ua');
             $message->attachData($attach, 'report.xlsx', $options = []);
