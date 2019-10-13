@@ -37,8 +37,9 @@ class OrderExport implements FromCollection, WithHeadings
             ->leftJoin('products AS p', 'p.id', '=', 'action_log.product_id')
             ->leftJoin('plan AS pl', 'pl.product_id', '=', 'action_log.product_id')
             ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id')
-            ->whereBetween('action_log.date', [$this->from, $this->to])
-            ->where(['income' => $this->income]);
+//            ->whereBetween('action_log.date', [$this->from, $this->to])
+//            ->where(['income' => $this->income])
+        ;
 
         if($this->hasParent > 0) {
             $builder->where('p.parent_product', '>', 0);

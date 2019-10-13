@@ -163,37 +163,26 @@ class IndexController extends Controller
         $income = $request->get('income') == ActionLog::INCOME ? ActionLog::INCOME : ActionLog::OUTOME;
         $hasParent = $request->get('hasParent') == 1 ? 1 : 0;
 
-        $excel = App::make('excel');
-        $attach = $excel->raw(new OrderExport($from, $to, $income, $hasParent), Excel::XLSX);
+        $entity = new OrderExport($from, $to, $income, $hasParent);
 
-        $to_name = 'Pavel';
+        $excel = App::make('excel');
+        $attach = $excel->raw($entity, Excel::XLSX);
+
+        $to_name = 'Cyr';
+//        $to_name = 'Pavel';
+//        $to_email = 'cyr@zolotarev.pp.ua';
         $to_email = 'pavel@zolotarev.pp.ua';
 
-//        Mail::send('emails.mail', ['data' => $attach], function ($message) use ($to_name, $to_email) {
-//            $message->to($to_email, $to_name)
-//                ->subject('Laravel Test Mail');
-//            $message->from('stockworker100@gmail.com', 'Test Mail');
-//        });
-
-//        Mail::send('emails.mail', [
-//            'name' => 'Pavel',
-//            'email' => 'pavel@zolotarev.pp.ua',
-//            'user_message' => 'pavel@zolotarev.pp.ua'
-//        ], function ($message) {
-//            $message->from(env('MAIL_USERNAME'), 'Stock-worker');
-//            $message->to('pavel@zolotarev.pp.ua');
-//        });
         Mail::send('emails.mail', [
-            'name' => 'Pavel',
-            'email' => 'pavel@zolotarev.pp.ua',
-            'user_message' => 'pavel@zolotarev.pp.ua'
+            'orderType' => 'pavel@zolotarev.pp.ua',
+            'data' => $entity
         ], function ($message) use ($attach) {
             $message->from('stockworker100@gmail.com', 'Stock-worker');
             $message->to('pavel@zolotarev.pp.ua');
             $message->attachData($attach, 'report.xlsx', $options = []);
         });
 
-        dd($attach);
+//        dd($attach);
 //        return response()->json([
 //            'response' => $attach,
 //        ]);
