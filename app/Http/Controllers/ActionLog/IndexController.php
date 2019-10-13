@@ -166,14 +166,23 @@ class IndexController extends Controller
         $excel = App::make('excel');
         $attach = $excel->raw(new OrderExport($from, $to, $income, $hasParent), Excel::XLSX);
 
-        Mail::send('welcome', [
-            'name' => 'Pavel',
-            'email' => 'pavel@zolotarev.pp.ua',
-            'user_message' => 'pavel@zolotarev.pp.ua'
-        ], function ($message) {
-            $message->from(env('MAIL_USERNAME'), 'Stock-worker');
-            $message->to('pavel@zolotarev.pp.ua');
+        $to_name = 'Pavel';
+        $to_email = 'pavel@zolotarev.pp.ua';
+
+        Mail::send('action-log.index', $attach, function ($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+                ->subject('Laravel Test Mail');
+            $message->from('stockworker100@gmail.com', 'Test Mail');
         });
+
+//        Mail::send('welcome', [
+//            'name' => 'Pavel',
+//            'email' => 'pavel@zolotarev.pp.ua',
+//            'user_message' => 'pavel@zolotarev.pp.ua'
+//        ], function ($message) {
+//            $message->from(env('MAIL_USERNAME'), 'Stock-worker');
+//            $message->to('pavel@zolotarev.pp.ua');
+//        });
 //        Mail::send('welcome', [
 //            'name' => 'Pavel',
 //            'email' => 'pavel@zolotarev.pp.ua',
