@@ -179,7 +179,7 @@ class IndexController extends Controller
         ], function ($message) use ($attach) {
             $message->subject('Состояние склада');
             $message->from('stockworker100@gmail.com', 'Stock-worker');
-            $message->to('pavel@zolotarev.pp.ua');
+            $message->to('alexander@zolotarev.pp.ua')->cc(['cyr@zolotarev.pp.ua','pavel@zolotarev.pp.ua']);
             $message->attachData($attach, 'report.xlsx', $options = []);
         });
 
