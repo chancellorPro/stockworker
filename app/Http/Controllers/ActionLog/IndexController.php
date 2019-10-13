@@ -175,6 +175,10 @@ class IndexController extends Controller
             $message->attachData($attach, 'report.xlsx', $options = []);
         });
 
+        return response()->json([
+            'response' => json_encode($attach),
+        ]);
+
 //        return Excel::download(new OrderExport($from, $to, $income, $hasParent), 'file.xlsx');
     }
 
