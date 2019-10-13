@@ -169,7 +169,7 @@ class IndexController extends Controller
         $to_name = 'Pavel';
         $to_email = 'pavel@zolotarev.pp.ua';
 
-        Mail::send('action-log.index', ['$attach' => $attach], function ($message) use ($to_name, $to_email) {
+        Mail::send('emails.mail', ['data' => $attach], function ($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)
                 ->subject('Laravel Test Mail');
             $message->from('stockworker100@gmail.com', 'Test Mail');
