@@ -170,11 +170,19 @@ class IndexController extends Controller
             'name' => 'Pavel',
             'email' => 'pavel@zolotarev.pp.ua',
             'user_message' => 'pavel@zolotarev.pp.ua'
-        ], function ($message) use ($attach) {
+        ], function ($message) {
             $message->from('stockworker100@gmail.com', 'Stock-worker');
             $message->to('pavel@zolotarev.pp.ua');
-            $message->attachData($attach, 'report.xlsx', $options = []);
         });
+//        Mail::send('welcome', [
+//            'name' => 'Pavel',
+//            'email' => 'pavel@zolotarev.pp.ua',
+//            'user_message' => 'pavel@zolotarev.pp.ua'
+//        ], function ($message) use ($attach) {
+//            $message->from('stockworker100@gmail.com', 'Stock-worker');
+//            $message->to('pavel@zolotarev.pp.ua');
+//            $message->attachData($attach, 'report.xlsx', $options = []);
+//        });
 
         return response()->json([
             'response' => $attach,
