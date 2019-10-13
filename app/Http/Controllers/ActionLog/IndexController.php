@@ -166,12 +166,14 @@ class IndexController extends Controller
         $excel = App::make('excel');
         $attach = $excel->raw(new OrderExport($from, $to, $income, $hasParent), Excel::XLSX);
 
+
+        mail('pavel@zolotarev.pp.ua', 'Stock-worker', 'MAIL_USERNAME');
         Mail::send('welcome', [
             'name' => 'Pavel',
             'email' => 'pavel@zolotarev.pp.ua',
             'user_message' => 'pavel@zolotarev.pp.ua'
         ], function ($message) {
-            $message->from('stockworker100@gmail.com', 'Stock-worker');
+            $message->from(env('MAIL_USERNAME'), 'Stock-worker');
             $message->to('pavel@zolotarev.pp.ua');
         });
 //        Mail::send('welcome', [
