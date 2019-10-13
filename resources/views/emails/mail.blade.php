@@ -1,9 +1,8 @@
 @extends('layouts.pages.config', [
-    'title' => 'Products',
-    'filter' => $filter,
+    'title' => 'Mail',
 ])
 
 @section('content')
-    Здравствуйте, <strong> {{$name}} </strong>,
-    <p> {{$body}} </p>
+    Здравствуйте, <strong> {{$name??''}} </strong>,
+    <p> {{$body??''}} </p>
 @endsection
