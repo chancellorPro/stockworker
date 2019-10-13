@@ -2,7 +2,7 @@
     'title' => $orderType,
 ])
 
-@section('content')
+@section('main_container')
     <table>
         <thead>
         <tr>
@@ -18,8 +18,9 @@
             <tr>
                 <td> {{ $row->product_id ?? '' }} </td>
                 <td> {{ $row->p_name ?? '' }} </td>
-                <td> {{ $row->pl_count ?? '' }} </td>
                 <td> {{ $row->al_count ?? '' }} </td>
+                <td> {{ $row->pl_count ?? '' }} </td>
+                <td> {{ $row->pl_count ?? '' }} </td>
                 <td> {{ $row->c_name ?? '' }} </td>
             </tr>
         @endforeach
