@@ -180,7 +180,7 @@ class IndexController extends Controller
             $message->subject('Состояние склада');
             $message->from('stockworker100@gmail.com', 'Stock-worker');
             $message->to('alexander@zolotarev.pp.ua');
-            //->cc(['cyr@zolotarev.pp.ua','pavel@zolotarev.pp.ua']);
+            $message->cc(['cyr@zolotarev.pp.ua','pavel@zolotarev.pp.ua']);
             $message->attachData($attach, 'report.xlsx', $options = []);
         });
 
