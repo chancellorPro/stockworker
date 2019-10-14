@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\ActionLog;
+use App\Models\Product;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -40,10 +41,12 @@ class OrderExport implements FromCollection, WithHeadings
             ->whereBetween('action_log.date', [$this->from, $this->to])
             ->where(['income' => $this->income]);
 
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->toArray();
+
         if($this->hasParent) {
-            $builder->whereNotNull('p.parent_product');
-        } else {
             $builder->whereNull('p.parent_product');
+        } else {
+            $builder->whereNotIn('p.id', $parentIds);
         }
 
         return $builder->orderBy('pl_count')->groupBy('action_log.product_id')->get();

@@ -37,46 +37,54 @@
 			</div>
 		</div>
 
-		{{-- Export --}}
+		{{-- Income report --}}
 		@include('common.buttons.save', [
 			'route' => 'export',
 			'id' => 'income',
-			'route_params' => ['income' => \App\Models\ActionLog::INCOME, 'has_parent' => false, 'date_from' => $currentDay, 'date_to' => $currentDay],
+			'route_params' => [
+			    'income' => \App\Models\ActionLog::INCOME,
+			    'has_parent' => false,
+			    'date_from' => $currentDay,
+			    'date_to' => $currentDay
+			    ],
 			'name' => __('Income report'),
 			'fa_class' => 'fa-save',
 			'class' => '',
 			'dataset' => [
 				'method' => 'GET',
-				'header' => __('Export action'),
-				'reload' => 1,
 			],
 		])
-		{{-- Export --}}
+		{{-- Outcome report --}}
 		@include('common.buttons.save', [
 			'route' => 'export',
 			'id' => 'outcome',
-			'route_params' => ['income' => \App\Models\ActionLog::OUTOME, 'has_parent' => true, 'date_from' => $currentDay, 'date_to' => $currentDay],
+			'route_params' => [
+			    'income'     => \App\Models\ActionLog::OUTOME,
+			    'has_parent' => true,
+			    'date_from'  => $currentDay,
+			    'date_to'    => $currentDay
+			],
 			'name' => __('Outcome report'),
 			'fa_class' => 'fa-save',
 			'class' => '',
 			'dataset' => [
 				'method' => 'GET',
-				'header' => __('Export action'),
-				'reload' => 1,
 			],
 		])
-		{{-- Export --}}
+		{{-- Stock state report --}}
 		@include('common.buttons.save', [
 			'route' => 'export',
 			'id' => 'stock',
-			'route_params' => ['has_parent' => false, 'date_from' => $currentDay, 'date_to' => $currentDay],
+			'route_params' => [
+			    'has_parent' => false,
+			    'date_from' => $currentDay,
+			    'date_to' => $currentDay
+			],
 			'name' => __('Stock state report'),
 			'fa_class' => 'fa-save',
 			'class' => '',
 			'dataset' => [
 				'method' => 'GET',
-				'header' => __('Export action'),
-				'reload' => 1,
 			],
 		])
 	</div>
@@ -88,7 +96,6 @@
 			'class' => 'ajax-modal-action show-form',
 			'dataset' => [
 				'header' => __('Create action'),
-				'reload' => 1,
 			],
 		])
 	</div>
@@ -170,7 +177,8 @@
 
 		$(document)
 			.on('change', '[name="date_range"]', function () {
-				// $('#income').
-			});
+                console.log(window.URLSearchParams($('#income').attr('href')));
+                console.log($('#income').attr('href'));
+            });
 	</script>
 @endpush
