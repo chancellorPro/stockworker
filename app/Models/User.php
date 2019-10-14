@@ -25,7 +25,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
  */
 class User extends AbstractBaseModel implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable, Notifiable, SoftDeletes;
+    use Authenticatable, Authorizable, Notifiable; // SoftDeletes
 
     /**
      * The table associated with the model.

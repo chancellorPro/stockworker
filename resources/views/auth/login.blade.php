@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.pages.config')
 
 @section('main_container')
 <div class="login_wrapper">

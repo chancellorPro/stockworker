@@ -5,6 +5,7 @@
 ])
 
 @section('controls')
+    <div class="col-sm-1">
     {{-- Create --}}
     @include('common.buttons.create', [
         'route' => 'action-log.create',
@@ -15,11 +16,73 @@
             'reload' => 1,
         ],
     ])
+    </div>
+    <div class="col-sm-2">
+        @php
+            $field = 'date';
+            $selected = request()->get('date_range') ?? '';
+            $inputsStyle = 'style="visibility: hidden; height: 0"';
+        @endphp
+        @include('layouts.form-fields.select', [
+            'fieldId'     => 'date-range-select',
+            'label'       => false,
+            'name'        => 'date_range',
+            'collection'  => arrayToCollection(config('presets.date_ranges')),
+            'selected'    => $selected,
+            'id'          => 'id',
+            'value'       => 'name',
+            'class'       => 'filter',
+            'addempty'    => true
+        ])
+        <div id="date-range-inputs" {!! $inputsStyle !!}>
+            <input
+                    type="text"
+                    class="form-control filter datepicker filter-from"
+                    name="{{$field}}[from]"
+                    autocomplete="off"
+                    placeholder="from"
+            >
+            <input
+                    type="text"
+                    class="form-control filter datepicker filter-to"
+                    name="{{$field}}[to]"
+                    autocomplete="off"
+                    placeholder="to"
+            >
+        </div>
+    </div>
 
     {{-- Export --}}
     @include('common.buttons.save', [
         'route' => 'export',
-        'name' => __('Export'),
+        'route_params' => ['income' => \App\Models\ActionLog::INCOME, 'has_parent' => false],
+        'name' => __('Income report'),
+        'fa_class' => 'fa-save',
+        'class' => '',
+        'dataset' => [
+            'method' => 'GET',
+            'header' => __('Export action'),
+            'reload' => 1,
+        ],
+    ])
+    {{-- Export --}}
+    @include('common.buttons.save', [
+        'route' => 'export',
+        'route_params' => ['income' => \App\Models\ActionLog::OUTOME, 'has_parent' => true],
+        'name' => __('Outcome report'),
+        'fa_class' => 'fa-save',
+        'class' => '',
+        'dataset' => [
+            'method' => 'GET',
+            'header' => __('Export action'),
+            'reload' => 1,
+        ],
+    ])
+    {{-- Export --}}
+    @include('common.buttons.save', [
+        'route' => 'export',
+        'route_params' => ['has_parent' => false],
+        'name' => __('Stock state report'),
         'fa_class' => 'fa-save',
         'class' => '',
         'dataset' => [
@@ -98,6 +161,11 @@
 
 @push('scripts')
     <script src="{{ asset("js/filter-col.js") }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            init_filter_col("{{ route('action-log.index') }}");
+        })
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
             init_filter_col("{{ route('action-log.index') }}");

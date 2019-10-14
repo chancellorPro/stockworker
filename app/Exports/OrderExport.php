@@ -15,7 +15,7 @@ class OrderExport implements FromCollection, WithHeadings
     protected $income;
     protected $hasParent;
 
-    public function __construct($from, $to, $income, $hasParent)
+    public function __construct($from, $to, $income, $hasParent = null)
     {
         $this->from = $from;
         $this->to = $to;
@@ -37,15 +37,14 @@ class OrderExport implements FromCollection, WithHeadings
             ->leftJoin('products AS p', 'p.id', '=', 'action_log.product_id')
             ->leftJoin('plan AS pl', 'pl.product_id', '=', 'action_log.product_id')
             ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id')
-//            ->whereBetween('action_log.date', [$this->from, $this->to])
-//            ->where(['income' => $this->income])
-        ;
+            ->whereBetween('action_log.date', [$this->from, $this->to])
+            ->where(['income' => $this->income]);
 
-//        if($this->hasParent > 0) {
-//            $builder->where('p.parent_product', '>', 0);
-//        } else {
-//            $builder->where('p.parent_product', '=', 0);
-//        }
+        if($this->hasParent) {
+            $builder->whereNotNull('p.parent_product');
+        } else {
+            $builder->whereNull('p.parent_product');
+        }
 
         return $builder->orderBy('pl_count')->groupBy('action_log.product_id')->get();
     }

@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::middleware(['auth'])->group(function () {
+//Route::middleware(['auth'])->group(function () {
 
     Route::resource('product', 'Product\IndexController');
     Route::resource('action-log', 'ActionLog\IndexController');
@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', 'User\IndexController');
 
     Route::get('export', 'ActionLog\IndexController@getExportData')->name('export');
-});
+//});
 
 Auth::routes();
 
