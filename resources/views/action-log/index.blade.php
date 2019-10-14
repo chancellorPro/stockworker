@@ -5,7 +5,7 @@
 ])
 
 @section('controls')
-	<div class="pull-right col-sm-8">
+	<div class="pull-right col-sm-10">
 		@php
 			use Carbon\Carbon;
 			$field = 'today';
