@@ -176,7 +176,7 @@ class IndexController extends Controller
         $entity = new OrderExport($from, $to, $income, $hasParent);
 
         try {
-            $excel  = App::make('excel'); //TODO: autoloader fix
+            $excel  = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
             Mail::send('emails.mail', [
