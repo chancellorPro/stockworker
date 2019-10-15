@@ -127,7 +127,7 @@
             </thead>
             <tbody class="fast-save-page-container">
             @foreach($data as $item)
-                <tr style="{{ (int)$item->product->parent_product > 0 ? 'background:#000' : '' }}">
+                <tr style="{{ isset($item->product) ? (int)$item->product->parent_product > 0 ? 'background:#000' : '' : '' }}">
                     <td style="background: #1abb9c;text-align: left;color: #fff;font-size: 17px;font-weight: bold;vertical-align: middle;{{ $item->income ? 'background:#ff897b' : 'background:#1abb9c' }}"
                         title="{{ $item->income ? __('Outcome') : __('Income') }}">
                         {{ $item->income ? __('Outcome') : __('Income') }}
