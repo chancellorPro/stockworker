@@ -30,8 +30,8 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'id'         => 'equal',
-        'name'       => 'like_right',
+        'id' => 'equal',
+        'name' => 'like_right',
         'page_limit' => 'manual'
     ];
 
@@ -46,15 +46,16 @@ class IndexController extends Controller
     {
         $data = $this->applyFilter(
             $request,
-            ActionLog::with('product', 'customer')->oldest('id')
+            ActionLog::with('product', 'customer')
+                ->orderBy('date', 'desc')
         )->paginate($this->perPage);
 
         return view('action-log.index', [
-            'data'             => $data,
-            'filter'           => $this->getFilter(),
+            'data' => $data,
+            'filter' => $this->getFilter(),
             'transaction_type' => config('presets.transaction_type'),
-            'dateFrom'         => $request->get('dateFrom'),
-            'dateTo'           => $request->get('dateTo')
+            'dateFrom' => $request->get('dateFrom'),
+            'dateTo' => $request->get('dateTo')
         ]);
     }
 
@@ -67,8 +68,8 @@ class IndexController extends Controller
     {
         return view('action-log.create', [
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::all(),
-            'customers'        => Customer::all(),
+            'products' => Product::all(),
+            'customers' => Customer::all(),
         ]);
     }
 
@@ -82,9 +83,11 @@ class IndexController extends Controller
     {
         $plan = Plan::where(['product_id' => (int)$request->get('product_id')])->first();
         $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
+        $product = Product::whereId((int)$request->get('product_id'))->first();
 
-        if($request->has('box_count')) {
-            //TODO: implement box count
+        if ($request->has('box_count')) {
+            $request->merge(['count' => (int)$request->get('box_count') * $product->box_size]);
+            $request->offsetUnset('box_count');
         }
 
         if ((int)$request->get('income') === ActionLog::INCOME) {
@@ -104,7 +107,6 @@ class IndexController extends Controller
         }
 
         ActionLog::create($request->all());
-
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));
 
         return $this->success();
@@ -120,10 +122,10 @@ class IndexController extends Controller
     public function edit(int $id)
     {
         return view('action-log.edit', [
-            'model'            => ActionLog::find($id),
+            'model' => ActionLog::find($id),
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::all(),
-            'customers'        => Customer::all(),
+            'products' => Product::all(),
+            'customers' => Customer::all(),
         ]);
     }
 
@@ -182,9 +184,9 @@ class IndexController extends Controller
         $emailData = [
             'boxes' => config('presets.boxes'),
             'orderType' => $orderType,
-            'data'      => $entity->collection(),
-            'dateFrom'  => $request->get('from'),
-            'dateTo'    => $request->get('to'),
+            'data' => $entity->collection(),
+            'dateFrom' => $request->get('from'),
+            'dateTo' => $request->get('to'),
         ];
 
         $template = 'stock';
@@ -199,26 +201,26 @@ class IndexController extends Controller
             }
         }
 
-//        try {
-//            $excel = App::make('excel');
-//            $attach = $excel->raw($entity, Excel::XLSX);
-//
-//            Mail::send('emails.mail', $emailData, function($message) use ($attach, $orderType) {
-//                $message->subject($orderType);
-//                $message->from('stockworker100@gmail.com', 'Stock-worker');
-//                $message->to('pavel@zolotarev.pp.ua');
-//                $message->cc(['alexander@zolotarev.pp.ua']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
-//                $message->attachData($attach, 'report.xlsx', $options = []);
-//            });
-//        } catch (Swift_TransportException $e) {
-            return view('emails.' . $template, $emailData);
-//        }
+        try {
+            $excel = App::make('excel');
+            $attach = $excel->raw($entity, Excel::XLSX);
 
-//        pushNotify('success', __('Report sent!'));
-//        return response()->json([
-//            'dateFrom' => $request->get('from'),
-//            'dateTo'   => $request->get('to'),
-//            'success'  => __('Report sent!'),
-//        ]);
+            Mail::send('emails.' . $template, $emailData, function ($message) use ($attach, $orderType) {
+                $message->subject($orderType);
+                $message->from('stockworker100@gmail.com', 'Stock-worker');
+                $message->to('pavel@zolotarev.pp.ua');
+                $message->cc(['alexander@zolotarev.pp.ua']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
+                $message->attachData($attach, 'report.xlsx', $options = []);
+            });
+        } catch (Swift_TransportException $e) {
+            return view('emails.' . $template, $emailData);
+        }
+
+        pushNotify('success', __('Report sent!'));
+        return response()->json([
+            'dateFrom' => $request->get('from'),
+            'dateTo' => $request->get('to'),
+            'success' => __('Report sent!'),
+        ]);
     }
 }
