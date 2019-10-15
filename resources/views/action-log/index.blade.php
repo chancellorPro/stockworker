@@ -177,8 +177,9 @@
         $(document)
             .on('click', '.reports', function (e) {
                 e.preventDefault();
-
-                var data = {from: $('[name="today[from]"]').val(), to: $('[name="today[to]"]').val()};
+                var dateFrom = $('[name="today[from]"]').val();
+                var dateTo = $('[name="today[from]"]').val();
+                var data = {from: dateFrom, to: dateTo};
 
                 if (Object.keys(data).length) {
                     $.ajax({
@@ -192,7 +193,8 @@
                         },
                         success: function (r) {
                             if(r.hasOwnProperty('success')) {
-                                window.location.reload();
+                                window.location.href = location.protocol + "//" + location.host + location.pathname +
+                                    '?dateFrom=' + r.dateFrom + '&dateTo=' + r.dateTo
                             } else {
                                 console.log(r);
                             }

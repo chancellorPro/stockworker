@@ -53,6 +53,8 @@ class IndexController extends Controller
             'data'             => $data,
             'filter'           => $this->getFilter(),
             'transaction_type' => config('presets.transaction_type'),
+            'dateFrom'         => $request->get('dateFrom'),
+            'dateTo'           => $request->get('dateTo')
         ]);
     }
 
@@ -198,7 +200,9 @@ class IndexController extends Controller
 
         pushNotify('success', __('Report sent!'));
         return response()->json([
-            'success' => __('Report sent!'),
+            'dateFrom' => $request->get('dateFrom'),
+            'dateTo'   => $request->get('dateTo'),
+            'success'  => __('Report sent!'),
         ]);
     }
 }
