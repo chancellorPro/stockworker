@@ -82,6 +82,11 @@ class IndexController extends Controller
     {
         $plan = Plan::where(['product_id' => (int)$request->get('product_id')])->first();
         $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
+
+        if($request->has('box_count')) {
+            //TODO: implement box count
+        }
+
         if ((int)$request->get('income') === ActionLog::INCOME) {
             if (!empty($stock)) {
                 $stock->update([
@@ -175,32 +180,45 @@ class IndexController extends Controller
 
         $entity = new OrderExport($from, $to, $income, $hasParent);
         $emailData = [
+            'boxes' => config('presets.boxes'),
             'orderType' => $orderType,
             'data'      => $entity->collection(),
             'dateFrom'  => $request->get('from'),
             'dateTo'    => $request->get('to'),
         ];
 
-        try {
-            $excel = App::make('excel');
-            $attach = $excel->raw($entity, Excel::XLSX);
-
-            Mail::send('emails.mail', $emailData, function($message) use ($attach, $orderType) {
-                $message->subject($orderType);
-                $message->from('stockworker100@gmail.com', 'Stock-worker');
-                $message->to('pavel@zolotarev.pp.ua');
-                $message->cc(['alexander@zolotarev.pp.ua']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
-                $message->attachData($attach, 'report.xlsx', $options = []);
-            });
-        } catch (Swift_TransportException $e) {
-            return view('emails.mail', $emailData);
+        $template = 'stock';
+        if ($request->has('income')) {
+            switch ($request->get('income')) {
+                case 0:
+                    $template = 'income';
+                    break;
+                case 1:
+                    $template = 'outcome';
+                    break;
+            }
         }
 
-        pushNotify('success', __('Report sent!'));
-        return response()->json([
-            'dateFrom' => $request->get('from'),
-            'dateTo'   => $request->get('to'),
-            'success'  => __('Report sent!'),
-        ]);
+//        try {
+//            $excel = App::make('excel');
+//            $attach = $excel->raw($entity, Excel::XLSX);
+//
+//            Mail::send('emails.mail', $emailData, function($message) use ($attach, $orderType) {
+//                $message->subject($orderType);
+//                $message->from('stockworker100@gmail.com', 'Stock-worker');
+//                $message->to('pavel@zolotarev.pp.ua');
+//                $message->cc(['alexander@zolotarev.pp.ua']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
+//                $message->attachData($attach, 'report.xlsx', $options = []);
+//            });
+//        } catch (Swift_TransportException $e) {
+            return view('emails.' . $template, $emailData);
+//        }
+
+//        pushNotify('success', __('Report sent!'));
+//        return response()->json([
+//            'dateFrom' => $request->get('from'),
+//            'dateTo'   => $request->get('to'),
+//            'success'  => __('Report sent!'),
+//        ]);
     }
 }

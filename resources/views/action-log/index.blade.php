@@ -19,22 +19,22 @@
             </div>
             <div class="col-sm-5">
                 <input
-                        type="text"
-                        class="form-control filter datepicker filter-from"
-                        name="{{$field}}[from]"
-                        autocomplete="off"
-                        placeholder="from"
-                        value="{{ $dateFrom ?? $currentDay }}"
+                    type="text"
+                    class="form-control filter datepicker filter-from"
+                    name="{{$field}}[from]"
+                    autocomplete="off"
+                    placeholder="from"
+                    value="{{ $dateFrom ?? $currentDay }}"
                 >
             </div>
             <div class="col-sm-5">
                 <input
-                        type="text"
-                        class="form-control filter datepicker filter-to"
-                        name="{{$field}}[to]"
-                        autocomplete="off"
-                        placeholder="to"
-                        value="{{ $dateTo?? $currentDay }}"
+                    type="text"
+                    class="form-control filter datepicker filter-to"
+                    name="{{$field}}[to]"
+                    autocomplete="off"
+                    placeholder="to"
+                    value="{{ $dateTo?? $currentDay }}"
                 >
             </div>
         </div>
@@ -175,6 +175,23 @@
         });
 
         $(document)
+            .on('input', '[name="count"]', function (e) {
+                if($(this).val().length > 0) {
+                    $('[name="box_count"]').attr('disabled', true);
+                } else {
+                    $('[name="box_count"]').attr('disabled', false);
+                }
+            });
+        $(document)
+            .on('input', '[name="box_count"]', function (e) {
+                if($(this).val().length > 0) {
+                    $('[name="count"]').attr('disabled', true);
+                } else {
+                    $('[name="count"]').attr('disabled', false);
+                }
+            });
+
+        $(document)
             .on('click', '.reports', function (e) {
                 e.preventDefault();
                 var dateFrom = $('[name="today[from]"]').val();
@@ -192,7 +209,7 @@
                             }
                         },
                         success: function (r) {
-                            if(r.hasOwnProperty('success')) {
+                            if (r.hasOwnProperty('success')) {
                                 window.location.href = location.protocol + "//" + location.host + location.pathname +
                                     '?dateFrom=' + r.dateFrom + '&dateTo=' + r.dateTo
                             } else {
