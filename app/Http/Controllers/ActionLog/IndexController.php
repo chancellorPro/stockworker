@@ -177,8 +177,8 @@ class IndexController extends Controller
         $emailData = [
             'orderType' => $orderType,
             'data'      => $entity->collection(),
-            'dateFrom'  => $request->get('dateFrom'),
-            'dateTo'    => $request->get('dateTo'),
+            'dateFrom'  => $request->get('from'),
+            'dateTo'    => $request->get('to'),
         ];
 
         try {
@@ -200,8 +200,8 @@ class IndexController extends Controller
 
         pushNotify('success', __('Report sent!'));
         return response()->json([
-            'dateFrom' => $request->get('dateFrom'),
-            'dateTo'   => $request->get('dateTo'),
+            'dateFrom' => $request->get('from'),
+            'dateTo'   => $request->get('to'),
             'success'  => __('Report sent!'),
         ]);
     }
