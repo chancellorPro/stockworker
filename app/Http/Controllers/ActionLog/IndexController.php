@@ -48,6 +48,7 @@ class IndexController extends Controller
             $request,
             ActionLog::with('product', 'customer')
                 ->orderBy('date', 'desc')
+                ->orderBy('id', 'desc')
         )->paginate($this->perPage);
 
         return view('action-log.index', [

@@ -14,10 +14,10 @@
             $currentDay = Carbon::now()->startOfDay()->format('Y-m-d');
         @endphp
         <div class="col-sm-7">
-            <div class="col-sm-2">
-                <label>@lang('Create report'): </label>
+            <div class="col-sm-4">
+                <label class="pull-right">@lang('Create report'): </label>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <input
                     type="text"
                     class="form-control filter datepicker filter-from"
@@ -27,7 +27,7 @@
                     value="{{ $dateFrom ?? $currentDay }}"
                 >
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <input
                     type="text"
                     class="form-control filter datepicker filter-to"
