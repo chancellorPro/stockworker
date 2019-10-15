@@ -165,6 +165,7 @@ class IndexController extends Controller
         $to = $date_to->endOfDay()->format('Y-m-d H:i:s');
         $income = $request->get('income') == ActionLog::INCOME ? ActionLog::INCOME : ActionLog::OUTOME;
         $hasParent = null;
+        $orderType = $request->get('orderType');
 
         if ($request->has('has_parent')) {
             $hasParent = $request->get('has_parent');
@@ -172,16 +173,18 @@ class IndexController extends Controller
 
         $entity = new OrderExport($from, $to, $income, $hasParent);
         $emailData = [
-            'orderType' => $request->get('orderType'),
-            'data'      => $entity->collection()
+            'orderType' => $orderType,
+            'data'      => $entity->collection(),
+            'dateFrom'  => $request->get('dateFrom'),
+            'dateTo'    => $request->get('dateTo'),
         ];
 
         try {
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.mail', $emailData, function($message) use ($attach) {
-                $message->subject('Состояние склада');
+            Mail::send('emails.mail', $emailData, function($message) use ($attach, $orderType) {
+                $message->subject($orderType);
                 $message->from('stockworker100@gmail.com', 'Stock-worker');
                 $message->to('alexander@zolotarev.pp.ua');
                 $message->cc(['cyr@zolotarev.pp.ua', 'pavel@zolotarev.pp.ua']); // garantpak@gmail.com, korreks@meta.ua

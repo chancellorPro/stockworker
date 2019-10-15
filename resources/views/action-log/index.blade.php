@@ -24,7 +24,7 @@
                         name="{{$field}}[from]"
                         autocomplete="off"
                         placeholder="from"
-                        value="{{ $currentDay }}"
+                        value="{{ $dateFrom ?? $currentDay }}"
                 >
             </div>
             <div class="col-sm-5">
@@ -34,7 +34,7 @@
                         name="{{$field}}[to]"
                         autocomplete="off"
                         placeholder="to"
-                        value="{{ $currentDay }}"
+                        value="{{ $dateTo?? $currentDay }}"
                 >
             </div>
         </div>
