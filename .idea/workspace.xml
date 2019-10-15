@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/larapa.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/app/modules/users/listeners/submitUserPartForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/app/modules/users/listeners/submitUserPartForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/action-log/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/action-log/index.blade.php" afterDir="false" />
-    </list>
     <list id="10e0d690-025d-40e9-a979-1f0f28ac23f3" name="Never" comment="Never" />
+    <list default="true" id="b7a6c625-5f6d-4a98-ac3a-8fe832758551" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,23 +48,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="457">
-              <caret line="176" column="10" lean-forward="true" selection-start-line="176" selection-start-column="10" selection-end-line="176" selection-end-column="10" />
-              <folding>
-                <element signature="e#1790#1998#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderExport.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Exports/OrderExport.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="656">
-              <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+            <state relative-caret-position="649">
+              <caret line="188" column="51" selection-start-line="188" selection-start-column="51" selection-end-line="188" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -78,8 +60,8 @@
       <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/action-log/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="47" column="37" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="37" />
+            <state relative-caret-position="317">
+              <caret line="26" column="62" lean-forward="true" selection-start-line="26" selection-start-column="62" selection-end-line="26" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -87,8 +69,8 @@
       <file leaf-file-name="mail.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/emails/mail.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="3" column="21" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="21" />
+            <state relative-caret-position="96">
+              <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -121,6 +103,8 @@
       <find>notif</find>
       <find>$orderType</find>
       <find>date_from</find>
+      <find>$dateTo</find>
+      <find>$dateFrom</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/resources/views</dir>
@@ -148,9 +132,10 @@
         <option value="$PROJECT_DIR$/resources/lang/ru.json" />
         <option value="$PROJECT_DIR$/resources/views/layouts/form-fields/select.blade.php" />
         <option value="$PROJECT_DIR$/docker-compose.yml" />
-        <option value="$PROJECT_DIR$/resources/views/action-log/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" />
         <option value="$PROJECT_DIR$/app/Exports/OrderExport.php" />
+        <option value="$PROJECT_DIR$/resources/views/action-log/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/emails/mail.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php" />
       </list>
     </option>
   </component>
@@ -292,6 +277,11 @@
             <path>
               <item name="stockworker" type="b2602c69:ProjectViewProjectNode" />
               <item name="stockworker" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stockworker" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stockworker" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -368,7 +358,7 @@
       <workItem from="1570632833320" duration="7656000" />
       <workItem from="1570792646460" duration="87000" />
       <workItem from="1571041244657" duration="19207000" />
-      <workItem from="1571127068233" duration="4801000" />
+      <workItem from="1571127068233" duration="5281000" />
     </task>
     <task id="LOCAL-00001" summary="init app">
       <created>1570630197968</created>
@@ -440,11 +430,25 @@
       <option name="project" value="LOCAL" />
       <updated>1571069184516</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="init app">
+      <created>1571140271424</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1571140271424</updated>
+    </task>
+    <task id="LOCAL-00012" summary="init app">
+      <created>1571140709863</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1571140709863</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23794000" />
+    <option name="totallyTimeSpent" value="24274000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
@@ -845,34 +849,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/emails/mail.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Exports/OrderExport.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="21" />
+        <state relative-caret-position="656">
+          <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/emails/mail.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="176" column="10" lean-forward="true" selection-start-line="176" selection-start-column="10" selection-end-line="176" selection-end-column="10" />
-          <folding>
-            <element signature="e#1790#1998#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="96">
+          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/action-log/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="47" column="37" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="37" />
+        <state relative-caret-position="317">
+          <caret line="26" column="62" lean-forward="true" selection-start-line="26" selection-start-column="62" selection-end-line="26" selection-end-column="62" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Exports/OrderExport.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ActionLog/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+        <state relative-caret-position="649">
+          <caret line="188" column="51" selection-start-line="188" selection-start-column="51" selection-end-line="188" selection-end-column="51" />
         </state>
       </provider>
     </entry>
