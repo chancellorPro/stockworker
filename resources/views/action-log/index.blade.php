@@ -126,18 +126,25 @@
             </tr>
             </thead>
             <tbody class="fast-save-page-container">
+            @php
+                use Carbon\Carbon as Carbonara;
+                $currentDate = Carbonara::now()->format('Y-m-d');
+            @endphp
             @foreach($data as $item)
-                <tr style="{{ isset($item->product) ? (int)$item->product->parent_product > 0 ? 'background:#000' : '' : '' }}">
+                <tr>
                     <td style="background: #1abb9c;text-align: left;color: #fff;font-size: 17px;font-weight: bold;vertical-align: middle;{{ $item->income ? 'background:#ff897b' : 'background:#1abb9c' }}"
                         title="{{ $item->income ? __('Outcome') : __('Income') }}">
                         {{ $item->income ? __('Outcome') : __('Income') }}
                     </td>
                     <td>{{ $item->product ? $item->product->name : '' }}</td>
-                    <td>{{ $item->date }}</td>
+                    <td style="{{ $currentDate != $item->date ? 'background:#a95454' : '' }}">{{ $item->date }}</td>
                     <td>{{ $item->count }}</td>
                     <td>{{ $item->partition }}</td>
                     <td>{{ $item->customer ? $item->customer->name : '' }}</td>
-                    <td>{{ $item->description }}</td>
+                    <td>
+                        {{ $item->description }}
+                        {{ isset($item->product) ? (int)$item->product->parent_product > 0 ? 'Зависимый товар' : '' : '' }}
+                    </td>
                     <td>
                         @include('common.buttons.edit', [
                             'route' => 'action-log.edit',
