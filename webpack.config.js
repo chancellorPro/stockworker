@@ -24,6 +24,10 @@ const PUBLIC_PATH = path.join(__dirname, './public/app');
  */
 const PRODUCTION = process.env.APP_ENV == 'prod';
 
+console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+console.log('!!!!!!!!!!!!!!!!!!!!!!!!! WEBPACK BUILD !!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+
 /**
  * WebPack configuration body
  */
