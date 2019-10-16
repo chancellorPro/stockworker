@@ -1,7 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "build": "webpack --mode development --config webpack.mix.js --bail",
+        "build": "webpack --mode production --config webpack.mix.js --bail",
+        "start": "webpack --mode development --watch --bail",
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "npm run development -- --watch",

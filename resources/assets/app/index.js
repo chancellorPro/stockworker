@@ -5,10 +5,10 @@ import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 
-/**
- * Bootstrap
- */
-import './vendor/bootstrap';
+// /**
+//  * Bootstrap
+//  */
+// import './vendor/bootstrap';
 
 /**
  * Bootstrap Ccolorpicker
@@ -54,6 +54,7 @@ import Raven from 'raven-js';
  * Modules loader
  */
 const path = location.pathname.split('/');
+console.log(123);
 if (path.length > 1) {
     /**
      * To creating different files for each module
