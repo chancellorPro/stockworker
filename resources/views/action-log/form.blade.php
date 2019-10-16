@@ -82,3 +82,8 @@
     'label' => false,
     'inputType' => 'hidden',
 ])
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.modal-content').find('select.select2').select2();
+    });
+</script>
