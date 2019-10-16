@@ -36,9 +36,11 @@ class HistoryController extends Controller
             PlanHistory::orderBy('plan_history.updated_at', 'desc')
         )->paginate($this->perPage);
 
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('plan.history', [
             'data'     => $data,
-            'products' => Product::all(),
+            'products' => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'filter'   => $this->getFilter(),
         ]);
     }

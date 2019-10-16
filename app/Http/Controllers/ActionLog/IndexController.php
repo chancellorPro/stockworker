@@ -63,7 +63,7 @@ class IndexController extends Controller
             'transaction_type' => config('presets.transaction_type'),
             'dateFrom'         => $request->get('dateFrom'),
             'dateTo'           => $request->get('dateTo'),
-            'products'         => Product::whereNotIn('id', $parentIds)->get(),
+            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'customers'        => Customer::all(),
         ]);
     }
@@ -115,9 +115,11 @@ class IndexController extends Controller
      */
     public function create()
     {
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('action-log.create', [
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::all(),
+            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'customers'        => Customer::all(),
         ]);
     }
@@ -180,10 +182,12 @@ class IndexController extends Controller
      */
     public function edit(int $id)
     {
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('action-log.edit', [
             'model'            => ActionLog::find($id),
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::all(),
+            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'customers'        => Customer::all(),
         ]);
     }

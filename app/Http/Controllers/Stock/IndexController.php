@@ -45,9 +45,11 @@ class IndexController extends Controller
                 ->groupBy('a.product_id', 'stock.product_id', 'p.product_id')
         )->paginate($this->perPage);
 
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('stock.index', [
             'data'     => $data,
-            'products' => Product::all(),
+            'products' => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'filter'   => $this->getFilter(),
         ]);
     }

@@ -13,6 +13,11 @@ class Product extends Model
 {
 
     /**
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
      * Fillable
      *
      * @var array
@@ -34,6 +39,16 @@ class Product extends Model
     public function product_ref()
     {
         return $this->belongsTo(Product::class, 'parent_product');
+    }
+
+    /**
+     * Product relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function childProducts()
+    {
+        return $this->hasMany(Product::class, 'parent_product', 'id');
     }
 
 }

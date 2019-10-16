@@ -38,9 +38,11 @@ class IndexController extends Controller
             Plan::orderBy('plan.updated_at', 'desc')
         )->paginate($this->perPage);
 
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('plan.index', [
             'data'     => $data,
-            'products' => Product::all(),
+            'products' => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'filter'   => $this->getFilter(),
         ]);
     }
@@ -72,8 +74,10 @@ class IndexController extends Controller
      */
     public function create()
     {
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('plan.create', [
-            'products'  => Product::all(),
+            'products'  => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'customers' => Customer::all(),
         ]);
     }
@@ -103,9 +107,11 @@ class IndexController extends Controller
      */
     public function edit(int $id)
     {
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('plan.edit', [
             'model'     => Plan::find($id),
-            'products'  => Product::all(),
+            'products'  => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'customers' => Customer::all(),
         ]);
     }

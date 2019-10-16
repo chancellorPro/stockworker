@@ -45,7 +45,7 @@ class OrderExport implements FromCollection, WithHeadings
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
 
         if($this->hasParent) {
-            $builder->whereNull('p.parent_product');
+//            $builder->whereNull('p.parent_product');
         } else {
             $builder->whereNotIn('p.id', array_filter($parentIds));
         }

@@ -73,8 +73,10 @@ class IndexController extends Controller
      */
     public function create()
     {
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('product.create', [
-            'products'  => Product::all(),
+            'products'  => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'boxes'     => config('presets.boxes'),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
@@ -106,9 +108,11 @@ class IndexController extends Controller
      */
     public function edit(int $id)
     {
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('product.edit', [
             'model'     => Product::find($id),
-            'products'  => Product::all(),
+            'products'  => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'boxes'     => config('presets.boxes'),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
