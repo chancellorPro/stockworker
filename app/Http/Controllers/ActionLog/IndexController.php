@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActionLog;
 use App\Models\Customer;
 use App\Models\Plan;
+use App\Models\PlanHistory;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Traits\FilterBuilder;
@@ -51,7 +52,7 @@ class IndexController extends Controller
         $data = $this->applyFilter(
             $request,
             ActionLog::with('product', 'customer')
-                ->whereNotIn('id', $parentIds)
+                ->whereNotIn('id', array_filter($parentIds))
                 ->orderBy('action_log.date', 'desc')
                 ->orderBy('action_log.id', 'desc')
         )->paginate($this->perPage);
@@ -146,6 +147,16 @@ class IndexController extends Controller
             }
             if (!empty($plan)) {
                 $plan->progress += (int)$request->get('count');
+                if($plan->progress >= $plan->count) {
+                    PlanHistory::create([
+                        'product_id' => (int)$request->get('product_id'),
+                        'count' => $plan->count,
+                        'updated_at' => Carbon::now()->format('Y-m-d'),
+                        'created_at' => $plan->created_at
+                    ]);
+                    $plan->progress = 0;
+                    $plan->count = 0;
+                }
                 $plan->save();
             }
         } else {

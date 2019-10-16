@@ -18,7 +18,6 @@ class CreatePlanHistoryTable extends Migration
 
             $table->unsignedInteger('product_id')->unique()->index();
             $table->unsignedInteger('count');
-            $table->unsignedInteger('progress')->default(0);
 
             $table->timestamps();
         });

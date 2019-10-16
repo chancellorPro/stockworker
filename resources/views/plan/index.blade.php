@@ -41,8 +41,8 @@
                         <td>{{ $item->product->name ?? '' }}</td>
                         <td>
                           <div style="height: 40px;background: #d9534f">
-                            <div class="progress-bar" style="width: {{ $item->progress / $item->count * 100 }}%">
-                              {{ $item->progress / $item->count * 100 }}%
+                            <div class="progress-bar" style="width: {{ $item->count > 0 ? $item->progress / $item->count * 100 : 0 }}%">
+                              {{ $item->count > 0 ? $item->progress / $item->count * 100 : '' }}%
                             </div>
                           </div>
                           <div class="pull-right">{{ $item->count }}</div>
