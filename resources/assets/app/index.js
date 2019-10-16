@@ -5,10 +5,10 @@ import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 
-// /**
-//  * Bootstrap
-//  */
-// import './vendor/bootstrap';
+/**
+ * Bootstrap
+ */
+import './vendor/bootstrap';
 
 /**
  * Bootstrap Ccolorpicker
