@@ -135,7 +135,6 @@ module.exports = {
                         comments: false,
                     },
                     compress: {
-                        warnings: false,
                         drop_console: true,
                     },
                 },
