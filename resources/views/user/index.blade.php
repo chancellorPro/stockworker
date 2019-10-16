@@ -29,13 +29,13 @@
                     <th>@lang('Created At')</th>
                     <th class="actions">@lang('Actions')</th>
                 </tr>
-                <tr>
-                    <th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'id'])</th>
-                    <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'name'])</th>
-                    <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'email'])</th>
-                    <th>@include('layouts.filter-col', ['filterType' => 'date_range', 'field' => 'created_at'])</th>
-                    <th class="filter-actions">@include('layouts.filter-col', ['filterType' => 'actions'])</th>
-                </tr>
+                {{--<tr>--}}
+                    {{--<th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'id'])</th>--}}
+                    {{--<th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'name'])</th>--}}
+                    {{--<th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'email'])</th>--}}
+                    {{--<th>@include('layouts.filter-col', ['filterType' => 'date_range', 'field' => 'created_at'])</th>--}}
+                    {{--<th class="filter-actions">@include('layouts.filter-col', ['filterType' => 'actions'])</th>--}}
+                {{--</tr>--}}
             </thead>
             <tbody class="fast-save-page-container">
                 @foreach($data as $item)

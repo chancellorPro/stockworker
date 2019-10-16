@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Stock;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Stock;
 use App\Traits\FilterBuilder;
 use Illuminate\Contracts\View\Factory;
@@ -18,9 +19,9 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'id'   => 'equal',
-        'name' => 'like_right',
-        'page_limit'  => 'manual'
+        'id'         => 'equal',
+        'product'    => 'manual',
+        'page_limit' => 'manual'
     ];
 
     /**
@@ -45,9 +46,30 @@ class IndexController extends Controller
         )->paginate($this->perPage);
 
         return view('stock.index', [
-            'data'         => $data,
-            'filter'       => $this->getFilter(),
+            'data'     => $data,
+            'products' => Product::all(),
+            'filter'   => $this->getFilter(),
         ]);
+    }
+
+    /**
+     * Product filter
+     *
+     * @param Request $request
+     * @param $builder
+     * @return mixed
+     */
+    private function applyProductFilter(Request $request, $builder)
+    {
+        $product_id = $request->get('product');
+
+        if (!empty($product_id)) {
+            $builder
+                ->leftJoin('products', 'stock.product_id', '=', 'products.id')
+                ->where('products.id', $product_id);
+        }
+
+        return $builder;
     }
 
     /**

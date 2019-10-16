@@ -19,9 +19,10 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'id'   => 'equal',
-        'name' => 'like_right',
-        'page_limit'  => 'manual'
+        'id'         => 'equal',
+        'name'       => 'like_right',
+        'parent_id'  => 'manual',
+        'page_limit' => 'manual'
     ];
 
     /**
@@ -35,7 +36,7 @@ class IndexController extends Controller
     {
         $data = $this->applyFilter(
             $request,
-            Product::with('product_ref')->oldest('id')
+            Product::with('product_ref')->oldest('products.id')
         )->get();
 
         return view('product.index', [
@@ -46,6 +47,26 @@ class IndexController extends Controller
     }
 
     /**
+     * Product filter
+     *
+     * @param Request $request
+     * @param $builder
+     * @return mixed
+     */
+    private function applyParentIdFilter(Request $request, $builder)
+    {
+        $product_id = $request->get('parent_id');
+
+        if (!empty($product_id)) {
+            $builder
+                ->leftJoin('products as p', 'products.id', '=', 'p.parent_product')
+                ->where('p.id', $product_id);
+        }
+
+        return $builder;
+    }
+
+    /**
      * Create new product view
      *
      * @return Factory|View
@@ -53,8 +74,8 @@ class IndexController extends Controller
     public function create()
     {
         return view('product.create', [
-            'products' => Product::all(),
-            'boxes'    => config('presets.boxes'),
+            'products'  => Product::all(),
+            'boxes'     => config('presets.boxes'),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
         ]);
@@ -86,9 +107,9 @@ class IndexController extends Controller
     public function edit(int $id)
     {
         return view('product.edit', [
-            'model' => Product::find($id),
-            'products' => Product::all(),
-            'boxes'    => config('presets.boxes'),
+            'model'     => Product::find($id),
+            'products'  => Product::all(),
+            'boxes'     => config('presets.boxes'),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
         ]);
@@ -98,7 +119,7 @@ class IndexController extends Controller
      * Update product
      *
      * @param ProductRequest $request Request
-     * @param integer        $id      ID
+     * @param integer $id ID
      *
      * @return JsonResponse
      */

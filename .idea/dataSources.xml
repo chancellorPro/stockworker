@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="homestead@localhost" uuid="c459fa9c-0fae-4d0c-8987-aa8cce29b1ff">
-      <driver-ref>mysql.8</driver-ref>
+    <data-source source="LOCAL" name="homestead@localhost" uuid="6af59f62-3056-40ac-96b4-37b6c09cb09f">
+      <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:33060/homestead</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />

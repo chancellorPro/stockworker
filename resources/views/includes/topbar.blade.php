@@ -3,10 +3,12 @@
     <div class="nav_menu">
         <nav>
             <div class="nav toggle">
-                {{--<a id="menu" class="wide-lightbox" href="{{ route('menu') }}">--}}
+                {{--<img src="./logo.png" style="margin: -10px 0 0 20px;height: 45px;">--}}
+
+            {{--<a id="menu" class="wide-lightbox" href="{{ route('menu') }}">--}}
                     {{--<i class="fa fa-cog"></i>--}}
                 {{--</a>--}}
-<!--                <a id="menu_toggle"><i class="fa fa-bars"></i></a>-->
+               {{--<a id="menu_toggle"><i class="fa fa-bars"></i></a>--}}
             </div>
 
             <div class="nav top-menu">

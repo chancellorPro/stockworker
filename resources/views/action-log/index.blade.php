@@ -115,12 +115,12 @@
                 <th class="actions">@lang('Actions')</th>
             </tr>
             <tr>
-                <th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'income'])</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'product'])</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'date_range', 'field' => 'created_at'])</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'count'])</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'partition'])</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'customer'])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'income', 'filterCollection' => $transaction_type])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'product', 'filterCollection' => $products])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'date_range', 'field' => 'date'])</th>
+                <th></th>
+                <th></th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'customer', 'filterCollection' => $customers])</th>
                 <th></th>
                 <th class="filter-actions">@include('layouts.filter-col', ['filterType' => 'actions'])</th>
             </tr>

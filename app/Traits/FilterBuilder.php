@@ -63,7 +63,7 @@ trait FilterBuilder
                                 $builder->whereIn($field, $numbers);
                             }
                             break;
-                        case 'date_range':
+                        case 'date_range_pst':
                             if(!empty($filterValue['from'])) {
                                 $dateFrom = fromPacificToUTC($filterValue['from'] . ' 00:00:00');
                                 $where[] = [$field, '>=', $dateFrom];
@@ -73,7 +73,7 @@ trait FilterBuilder
                                 $where[] = [$field, '<=', $dateTo];
                             }
                             break;
-                        case 'date_range_pst':
+                        case 'date_range':
                             if(!empty($filterValue['from'])) {
                                 $dateFrom = $filterValue['from'] . ' 00:00:00';
                                 $where[] = [$field, '>=', $dateFrom];

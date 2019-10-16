@@ -30,8 +30,10 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'id' => 'equal',
-        'name' => 'like_right',
+        'income'     => 'equal',
+        'product'    => 'manual',
+        'date'       => 'date_range',
+        'customer'   => 'manual',
         'page_limit' => 'manual'
     ];
 
@@ -47,17 +49,59 @@ class IndexController extends Controller
         $data = $this->applyFilter(
             $request,
             ActionLog::with('product', 'customer')
-                ->orderBy('date', 'desc')
-                ->orderBy('id', 'desc')
+                ->orderBy('action_log.date', 'desc')
+                ->orderBy('action_log.id', 'desc')
         )->paginate($this->perPage);
 
         return view('action-log.index', [
-            'data' => $data,
-            'filter' => $this->getFilter(),
+            'data'             => $data,
+            'filter'           => $this->getFilter(),
             'transaction_type' => config('presets.transaction_type'),
-            'dateFrom' => $request->get('dateFrom'),
-            'dateTo' => $request->get('dateTo')
+            'dateFrom'         => $request->get('dateFrom'),
+            'dateTo'           => $request->get('dateTo'),
+            'products'         => Product::all(),
+            'customers'        => Customer::all(),
         ]);
+    }
+
+    /**
+     * Product filter
+     *
+     * @param Request $request
+     * @param $builder
+     * @return mixed
+     */
+    private function applyProductFilter(Request $request, $builder)
+    {
+        $product_id = $request->get('product');
+
+        if (!empty($product_id)) {
+            $builder
+                ->leftJoin('products', 'action_log.product_id', '=', 'products.id')
+                ->where('products.id', $product_id);
+        }
+
+        return $builder;
+    }
+
+    /**
+     * Customer filter
+     *
+     * @param Request $request
+     * @param $builder
+     * @return mixed
+     */
+    private function applyCustomerFilter(Request $request, $builder)
+    {
+        $customer_id = $request->get('customer');
+
+        if (!empty($product_id)) {
+            $builder
+                ->leftJoin('customers', 'action_log.customer_id', '=', 'customers.id')
+                ->where('customers.id', $customer_id);
+        }
+
+        return $builder;
     }
 
     /**
@@ -69,8 +113,8 @@ class IndexController extends Controller
     {
         return view('action-log.create', [
             'transaction_type' => config('presets.transaction_type'),
-            'products' => Product::all(),
-            'customers' => Customer::all(),
+            'products'         => Product::all(),
+            'customers'        => Customer::all(),
         ]);
     }
 
@@ -123,10 +167,10 @@ class IndexController extends Controller
     public function edit(int $id)
     {
         return view('action-log.edit', [
-            'model' => ActionLog::find($id),
+            'model'            => ActionLog::find($id),
             'transaction_type' => config('presets.transaction_type'),
-            'products' => Product::all(),
-            'customers' => Customer::all(),
+            'products'         => Product::all(),
+            'customers'        => Customer::all(),
         ]);
     }
 
@@ -183,11 +227,11 @@ class IndexController extends Controller
 
         $entity = new OrderExport($from, $to, $income, $hasParent);
         $emailData = [
-            'boxes' => config('presets.boxes'),
+            'boxes'     => config('presets.boxes'),
             'orderType' => $orderType,
-            'data' => $entity->collection(),
-            'dateFrom' => $request->get('from'),
-            'dateTo' => $request->get('to'),
+            'data'      => $entity->collection(),
+            'dateFrom'  => $request->get('from'),
+            'dateTo'    => $request->get('to'),
         ];
 
         $template = 'stock';
@@ -206,7 +250,7 @@ class IndexController extends Controller
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.' . $template, $emailData, function ($message) use ($attach, $orderType) {
+            Mail::send('emails.' . $template, $emailData, function($message) use ($attach, $orderType) {
                 $message->subject($orderType);
                 $message->from('stockworker100@gmail.com', 'Stock-worker');
                 $message->to('pavel@zolotarev.pp.ua');
@@ -220,8 +264,8 @@ class IndexController extends Controller
         pushNotify('success', __('Report sent!'));
         return response()->json([
             'dateFrom' => $request->get('from'),
-            'dateTo' => $request->get('to'),
-            'success' => __('Report sent!'),
+            'dateTo'   => $request->get('to'),
+            'success'  => __('Report sent!'),
         ]);
     }
 }

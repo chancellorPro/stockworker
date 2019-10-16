@@ -20,9 +20,8 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'id'   => 'equal',
-        'name' => 'like_right',
-        'page_limit'  => 'manual'
+        'product'    => 'manual',
+        'page_limit' => 'manual'
     ];
 
     /**
@@ -36,13 +35,34 @@ class IndexController extends Controller
     {
         $data = $this->applyFilter(
             $request,
-            Plan::oldest('id')
+            Plan::orderBy('plan.updated_at', 'desc')
         )->paginate($this->perPage);
 
         return view('plan.index', [
-            'data'         => $data,
-            'filter'       => $this->getFilter(),
+            'data'     => $data,
+            'products' => Product::all(),
+            'filter'   => $this->getFilter(),
         ]);
+    }
+
+    /**
+     * Product filter
+     *
+     * @param Request $request
+     * @param $builder
+     * @return mixed
+     */
+    private function applyProductFilter(Request $request, $builder)
+    {
+        $product_id = $request->get('product');
+
+        if (!empty($product_id)) {
+            $builder
+                ->leftJoin('products', 'plan.product_id', '=', 'products.id')
+                ->where('products.id', $product_id);
+        }
+
+        return $builder;
     }
 
     /**
@@ -53,8 +73,8 @@ class IndexController extends Controller
     public function create()
     {
         return view('plan.create', [
-            'products'   => Product::all(),
-            'customers'  => Customer::all(),
+            'products'  => Product::all(),
+            'customers' => Customer::all(),
         ]);
     }
 
@@ -84,7 +104,7 @@ class IndexController extends Controller
     public function edit(int $id)
     {
         return view('plan.edit', [
-            'model' => Plan::find($id),
+            'model'     => Plan::find($id),
             'products'  => Product::all(),
             'customers' => Customer::all(),
         ]);
