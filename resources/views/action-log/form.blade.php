@@ -31,12 +31,27 @@
     'attrs' => ['autocomplete' => 'off'],
 ])
 
-@include('layouts.form-fields.input', [
-    'model' => $currentModel,
-    'name'  => 'count',
-    'inputType' => 'number',
-    'label' => __('Count'),
-])
+<div class="row form-group">
+    <label class="control-label col-md-4 col-sm-12">{{ __('Count') }}</label>
+    <div class="col-md-3">
+        @include('layouts.form-fields.input', [
+            'model' => $currentModel,
+            'name'  => 'box_count',
+            'inputType' => 'number',
+            'placeholder' => 'Кол-во ящиков',
+            'label' => false,
+        ])
+    </div>
+    <div class="col-md-3">
+        @include('layouts.form-fields.input', [
+            'model' => $currentModel,
+            'name'  => 'count',
+            'inputType' => 'number',
+            'placeholder' => 'Единицы товара',
+            'label' => false,
+        ])
+    </div>
+</div>
 
 @include('layouts.form-fields.input', [
     'model' => $currentModel,
@@ -67,3 +82,8 @@
     'label' => false,
     'inputType' => 'hidden',
 ])
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.modal-content').find('select.select2').select2();
+    });
+</script>

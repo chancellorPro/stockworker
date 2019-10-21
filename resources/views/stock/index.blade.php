@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'id'])</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'name'])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'product', 'filterCollection' => $products])</th>
                 <th></th>
                 <th></th>
                 <th></th>

@@ -48,18 +48,6 @@ import './handlers';
  */
 import './styles/index.scss';
 
-import Raven from 'raven-js';
-
-if (SENTRY_DSN && SENTRY_DSN.length) {
-    Raven.config(SENTRY_DSN, {
-        xhr: true,
-        console: true,
-        dom: true,
-        location: false,
-        sentry: true
-    }).install();
-}
-
 /**
  * Modules loader
  */

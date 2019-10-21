@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('action-log', 'ActionLog\IndexController');
     Route::resource('stock', 'Stock\IndexController');
     Route::resource('plan', 'Plan\IndexController');
+    Route::get('history', 'Plan\HistoryController@index')->name('history');
     Route::resource('customer', 'Customer\IndexController');
     Route::resource('user', 'User\IndexController');
 

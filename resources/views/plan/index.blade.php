@@ -23,13 +23,15 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>@lang('Product')</th>
-                    <th>@lang('Count')</th>
+                    <th class="col-sm-3">@lang('Product')</th>
+                    <th class="col-sm-5">@lang('Count')</th>
+                    <th class="col-sm-1">@lang('Created At')</th>
                     <th class="actions">@lang('Actions')</th>
                 </tr>
                 <tr>
-                    <th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'id'])</th>
-                    <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'name'])</th>
+                    <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'product', 'filterCollection' => $products])</th>
+                    <th></th>
+                    <th></th>
                     <th class="filter-actions">@include('layouts.filter-col', ['filterType' => 'actions'])</th>
                 </tr>
             </thead>
@@ -39,13 +41,14 @@
                         <td>{{ $item->product->name ?? '' }}</td>
                         <td>
                           <div style="height: 40px;background: #d9534f">
-                            <div class="progress-bar" style="width: {{ $item->progress / $item->count * 100 }}%">
-                              {{ $item->progress / $item->count * 100 }}%
+                            <div class="progress-bar" style="width: {{ $item->count > 0 ? $item->progress / $item->count * 100 : 0 }}%">
+                              {{ $item->count > 0 ? $item->progress / $item->count * 100 : '' }}%
                             </div>
                           </div>
                           <div class="pull-right">{{ $item->count }}</div>
                           <div class="pull-left">{{ $item->progress }}</div>
                         </td>
+                        <td>{{ $item->updated_at }}</td>
                         <td>
                             @include('common.buttons.edit', [
                                 'route' => 'plan.edit',

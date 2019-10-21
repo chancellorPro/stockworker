@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActionLog;
 use App\Models\Customer;
 use App\Models\Plan;
+use App\Models\PlanHistory;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Traits\FilterBuilder;
@@ -30,8 +31,10 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'id'         => 'equal',
-        'name'       => 'like_right',
+        'income'     => 'equal',
+        'product'    => 'manual',
+        'date'       => 'date_range',
+        'customer'   => 'manual',
         'page_limit' => 'manual'
     ];
 
@@ -44,16 +47,65 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         $data = $this->applyFilter(
             $request,
-            ActionLog::with('product', 'customer')->oldest('id')
+            ActionLog::with('product', 'customer')
+                ->whereNotIn('id', array_filter($parentIds))
+                ->orderBy('action_log.date', 'desc')
+                ->orderBy('action_log.id', 'desc')
         )->paginate($this->perPage);
 
         return view('action-log.index', [
             'data'             => $data,
             'filter'           => $this->getFilter(),
             'transaction_type' => config('presets.transaction_type'),
+            'dateFrom'         => $request->get('dateFrom'),
+            'dateTo'           => $request->get('dateTo'),
+            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'customers'        => Customer::all(),
         ]);
+    }
+
+    /**
+     * Product filter
+     *
+     * @param Request $request
+     * @param $builder
+     * @return mixed
+     */
+    private function applyProductFilter(Request $request, $builder)
+    {
+        $product_id = $request->get('product');
+
+        if (!empty($product_id)) {
+            $builder
+                ->leftJoin('products', 'action_log.product_id', '=', 'products.id')
+                ->where('products.id', $product_id);
+        }
+
+        return $builder;
+    }
+
+    /**
+     * Customer filter
+     *
+     * @param Request $request
+     * @param $builder
+     * @return mixed
+     */
+    private function applyCustomerFilter(Request $request, $builder)
+    {
+        $customer_id = $request->get('customer');
+
+        if (!empty($product_id)) {
+            $builder
+                ->leftJoin('customers', 'action_log.customer_id', '=', 'customers.id')
+                ->where('customers.id', $customer_id);
+        }
+
+        return $builder;
     }
 
     /**
@@ -63,9 +115,11 @@ class IndexController extends Controller
      */
     public function create()
     {
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('action-log.create', [
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::all(),
+            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'customers'        => Customer::all(),
         ]);
     }
@@ -75,32 +129,45 @@ class IndexController extends Controller
      *
      * @param Request $request
      * @return JsonResponse
-     * // return response()->json([
-     * //     'response' => json_encode($request->all()),
-     * // ]);
      */
     public function store(Request $request)
     {
         $plan = Plan::where(['product_id' => (int)$request->get('product_id')])->first();
         $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
+        $product = Product::whereId((int)$request->get('product_id'))->first();
+
+        if ($request->has('box_count')) {
+            $request->merge(['count' => (int)$request->get('box_count') * $product->box_size]);
+            $request->offsetUnset('box_count');
+        }
+
         if ((int)$request->get('income') === ActionLog::INCOME) {
-            if(!empty($stock)) {
+            if (!empty($stock)) {
                 $stock->update([
                     'count' => $stock->count + (int)$request->get('count')
                 ]);
             }
             if (!empty($plan)) {
                 $plan->progress += (int)$request->get('count');
+                if($plan->progress >= $plan->count) {
+                    PlanHistory::create([
+                        'product_id' => (int)$request->get('product_id'),
+                        'count' => $plan->count,
+                        'updated_at' => Carbon::now()->format('Y-m-d'),
+                        'created_at' => $plan->created_at
+                    ]);
+                    $plan->progress = 0;
+                    $plan->count = 0;
+                }
                 $plan->save();
             }
         } else {
-            if(!empty($stock)) {
+            if (!empty($stock)) {
                 $stock->count -= (int)$request->get('count');
             }
         }
 
         ActionLog::create($request->all());
-
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));
 
         return $this->success();
@@ -115,10 +182,12 @@ class IndexController extends Controller
      */
     public function edit(int $id)
     {
+        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+
         return view('action-log.edit', [
             'model'            => ActionLog::find($id),
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::all(),
+            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
             'customers'        => Customer::all(),
         ]);
     }
@@ -162,98 +231,59 @@ class IndexController extends Controller
      */
     public function getExportData(Request $request)
     {
-        $date_from = $request->has('date_from') ? Carbon::createFromFormat('Y-m-d', $request->get('date_from')) : Carbon::now();
-        $date_to   = $request->has('date_to') ? Carbon::createFromFormat('Y-m-d', $request->get('date_to')) : Carbon::now();
-        $from      = $date_from->startOfDay()->format('Y-m-d H:i:s');
-        $to        = $date_to->endOfDay()->format('Y-m-d H:i:s');
-        $income    = $request->get('income') == ActionLog::INCOME ? ActionLog::INCOME : ActionLog::OUTOME;
+        $date_from = $request->has('from') ? Carbon::createFromFormat('Y-m-d', $request->get('from')) : Carbon::now();
+        $date_to = $request->has('to') ? Carbon::createFromFormat('Y-m-d', $request->get('to')) : Carbon::now();
+        $from = $date_from->startOfDay()->format('Y-m-d H:i:s');
+        $to = $date_to->endOfDay()->format('Y-m-d H:i:s');
+        $income = $request->get('income') == ActionLog::INCOME ? ActionLog::INCOME : ActionLog::OUTOME;
         $hasParent = null;
+        $orderType = $request->get('orderType');
 
-        if($request->has('has_parent')) {
+        if ($request->has('has_parent')) {
             $hasParent = $request->get('has_parent');
         }
 
         $entity = new OrderExport($from, $to, $income, $hasParent);
+        $emailData = [
+            'boxes'     => config('presets.boxes'),
+            'orderType' => $orderType,
+            'data'      => $entity->collection(),
+            'dateFrom'  => $request->get('from'),
+            'dateTo'    => $request->get('to'),
+        ];
+
+        $template = 'stock';
+        if ($request->has('income')) {
+            switch ($request->get('income')) {
+                case 0:
+                    $template = 'income';
+                    break;
+                case 1:
+                    $template = 'outcome';
+                    break;
+            }
+        }
 
         try {
-            $excel  = App::make('excel');
+            $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.mail', [
-                'orderType' => 'Состояние склада',
-                'data' => $entity->collection()
-            ], function ($message) use ($attach) {
-                $message->subject('Состояние склада');
+            Mail::send('emails.' . $template, $emailData, function($message) use ($attach, $orderType) {
+                $message->subject($orderType);
                 $message->from('stockworker100@gmail.com', 'Stock-worker');
-                $message->to('alexander@zolotarev.pp.ua');
-                $message->cc(['stockworker100@gmail.com','cyr@zolotarev.pp.ua','pavel@zolotarev.pp.ua']); // garantpak@gmail.com, korreks@meta.ua
+                $message->to('pavel@zolotarev.pp.ua');
+                $message->cc(['alexander@zolotarev.pp.ua']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
                 $message->attachData($attach, 'report.xlsx', $options = []);
             });
         } catch (Swift_TransportException $e) {
-            return view('emails.mail', [
-                'orderType' => 'Состояние склада',
-                'data' => $entity->collection()
-            ]);
+            return view('emails.' . $template, $emailData);
         }
 
         pushNotify('success', __('Report sent!'));
-        return redirect('/action-log');
-    }
-
-    /**
-     * getCsv
-     *
-     * @param $data
-     * @param $headers
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
-     */
-    public function getCsv($data, $headers): \Symfony\Component\HttpFoundation\StreamedResponse
-    {
-        $data = array_merge([$headers], $data);
-
-//        return (new \LaravelCsvGenerator\LaravelCsvGenerator())
-//            ->setData($data)
-//            ->renderStream();
-    }
-
-
-    /**
-     * googleSheetsCloud
-     *
-     * @param $data
-     * @param $headers
-     */
-    public function googleSheetsCloud($data, $headers)
-    {
-//        $client = new Google_Client();
-//        putenv('GOOGLE_APPLICATION_CREDENTIALS=..path/to/your/json/file.json');
-//        $client->useApplicationDefaultCredentials();
-//        $client->addScope(Google_Service_Drive::DRIVE);
-//
-//        $driveService = new Google_Service_Drive($client);
-//
-//        // List Files
-//        // $response = $driveService->files->listFiles();
-//
-//        // Set File ID and get the contents of your Google Sheet
-//        $fileID = 'YOUR-FILE-ID';
-//        $response = $driveService->files->export($fileID, 'text/csv', array(
-//            'alt' => 'media'
-//        ));
-//        $content = $response->getBody()->getContents();
-//
-//        // Create CSV from String
-//        $csv = Reader::createFromString($content, 'r');
-//        $csv->setHeaderOffset(0);
-//        $records = $csv->getRecords();
-//
-//        // Create an Empty Array and Loop through the Records
-//        $newarray = array();
-//        foreach ($records as $value) {
-//            $newarray[] = $value;
-//        }
-//
-//        // Dump and Die
-//        dd($newarray);
+        return response()->json([
+            'dateFrom' => $request->get('from'),
+            'dateTo'   => $request->get('to'),
+            'success'  => __('Report sent!'),
+        ]);
     }
 }

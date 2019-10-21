@@ -167,7 +167,7 @@ export default class {
         }
 
         let html = $(`
-            <div id="${ this._getID() }" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" ${dataset.join(' ')}>
+            <div id="${ this._getID() }" class="modal fade" role="dialog" aria-hidden="true" ${dataset.join(' ')}>
                 <div class="modal-dialog modal-dialog-centered ${this._getSize()}">
                     <div class="modal-content"></div>
                 </div>

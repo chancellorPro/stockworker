@@ -22,19 +22,19 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>@lang('Id')</th>
-                <th>@lang('Name')</th>
+                <th class="id">@lang('Id')</th>
+                <th class="col-sm-2">@lang('Name')</th>
+                <th class="col-sm-2">@lang('Parent product')</th>
                 <th class="id">@lang('Box size')</th>
                 <th class="id">@lang('Box')</th>
                 <th class="id">@lang('Box weight')</th>
-                <th>@lang('Parent product')</th>
-                <th>@lang('Description')</th>
+                <th class="col-sm-3">@lang('Description')</th>
                 <th class="actions">@lang('Actions')</th>
             </tr>
             <tr>
-                <th>#</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'name'])</th>
-                <th></th>
+                <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'id'])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'id', 'filterCollection' => $rows])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'parent_id', 'filterCollection' => $rows])</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -47,10 +47,10 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
+                    <td>{{ $item->product_ref->name ?? '' }}</td>
                     <td>{{ $item->box_size }}</td>
                     <td>{{ $item->box_id !== null ? $boxes[$item->box_id] : '' }}</td>
                     <td>{{ $item->box_weight }}</td>
-                    <td>{{ $item->product_ref->name ?? '' }}</td>
                     <td>{{ $item->description ?? '' }}</td>
                     <td>
                         @include('common.buttons.edit', [

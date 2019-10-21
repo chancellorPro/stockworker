@@ -11,6 +11,6 @@ export default function () {
 
         $('#' + resp.container).replaceWith(form);
         form.find('.select2').select2();
-        notifySuccess('User data updated');
-    });
+`        notifySuccess('User data updated');
+`    });
 }
