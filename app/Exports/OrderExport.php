@@ -42,8 +42,8 @@ class OrderExport implements FromCollection, WithHeadings
             ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id')
             ->leftJoin('stock AS s', 'p.id', '=', 's.product_id')
             ->whereBetween('action_log.date', [$this->from, $this->to])
-            ->where(['income' => $this->income])
-            ->groupBy('c.id');
+            ->where(['income' => $this->income]);
+
 
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
 
@@ -53,6 +53,6 @@ class OrderExport implements FromCollection, WithHeadings
             $builder->whereNotIn('p.id', array_filter($parentIds));
         }
 
-        return $builder->orderBy('pl_count')->groupBy('action_log.product_id')->get();
+        return $builder->orderBy('c.id')->groupBy('c.id', 'action_log.product_id')->get();
     }
 }
