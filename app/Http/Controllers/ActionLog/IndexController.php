@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\ActionLog;
 
-use App\Exports\OrderExport;
+use App\Exports\IncomeReport;
+use App\Exports\OutcomeReport;
+use App\Exports\StockReport;
 use App\Http\Controllers\Controller;
 use App\Models\ActionLog;
 use App\Models\Customer;
@@ -31,10 +33,10 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'income'     => 'equal',
-        'product'    => 'manual',
-        'date'       => 'date_range',
-        'customer'   => 'manual',
+        'income' => 'equal',
+        'product' => 'manual',
+        'date' => 'date_range',
+        'customer' => 'manual',
         'page_limit' => 'manual'
     ];
 
@@ -58,13 +60,13 @@ class IndexController extends Controller
         )->paginate($this->perPage);
 
         return view('action-log.index', [
-            'data'             => $data,
-            'filter'           => $this->getFilter(),
+            'data' => $data,
+            'filter' => $this->getFilter(),
             'transaction_type' => config('presets.transaction_type'),
-            'dateFrom'         => $request->get('dateFrom'),
-            'dateTo'           => $request->get('dateTo'),
-            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
-            'customers'        => Customer::all(),
+            'dateFrom' => $request->get('dateFrom'),
+            'dateTo' => $request->get('dateTo'),
+            'products' => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'customers' => Customer::all(),
         ]);
     }
 
@@ -119,8 +121,8 @@ class IndexController extends Controller
 
         return view('action-log.create', [
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
-            'customers'        => Customer::all(),
+            'products' => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'customers' => Customer::all(),
         ]);
     }
 
@@ -149,7 +151,7 @@ class IndexController extends Controller
             }
             if (!empty($plan)) {
                 $plan->progress += (int)$request->get('count');
-                if($plan->progress >= $plan->count) {
+                if ($plan->progress >= $plan->count) {
                     PlanHistory::create([
                         'product_id' => (int)$request->get('product_id'),
                         'count' => $plan->count,
@@ -185,10 +187,10 @@ class IndexController extends Controller
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
 
         return view('action-log.edit', [
-            'model'            => ActionLog::find($id),
+            'model' => ActionLog::find($id),
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
-            'customers'        => Customer::all(),
+            'products' => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'customers' => Customer::all(),
         ]);
     }
 
@@ -243,13 +245,20 @@ class IndexController extends Controller
             $hasParent = $request->get('has_parent');
         }
 
-        $entity = new OrderExport($from, $to, $income, $hasParent);
+        if ($request->get('income') == ActionLog::INCOME) {
+            $entity = new IncomeReport($from, $to, $income, $hasParent);
+        } elseif ($request->get('income') == ActionLog::OUTOME) {
+            $entity = new OutcomeReport($from, $to, $income, $hasParent);
+        } else {
+            $entity = new StockReport($from, $to, $income, $hasParent);
+        }
+
         $emailData = [
-            'boxes'     => config('presets.boxes'),
+            'boxes' => config('presets.boxes'),
             'orderType' => $orderType,
-            'data'      => $entity->collection(),
-            'dateFrom'  => $request->get('from'),
-            'dateTo'    => $request->get('to'),
+            'data' => $entity->collection(),
+            'dateFrom' => $request->get('from'),
+            'dateTo' => $request->get('to'),
         ];
 
         $template = 'stock';
@@ -268,7 +277,7 @@ class IndexController extends Controller
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.' . $template, $emailData, function($message) use ($attach, $orderType) {
+            Mail::send('emails.' . $template, $emailData, function ($message) use ($attach, $orderType) {
                 $message->subject($orderType);
                 $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
                 $message->to('pavel@zolotarev.pp.ua');
@@ -282,8 +291,8 @@ class IndexController extends Controller
         pushNotify('success', __('Report sent!'));
         return response()->json([
             'dateFrom' => $request->get('from'),
-            'dateTo'   => $request->get('to'),
-            'success'  => __('Report sent!'),
+            'dateTo' => $request->get('to'),
+            'success' => __('Report sent!'),
         ]);
     }
 }

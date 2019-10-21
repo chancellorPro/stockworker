@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class OrderExport implements FromCollection, WithHeadings
+class IncomeReport implements FromCollection, WithHeadings
 {
 
     protected $from;
@@ -26,7 +26,7 @@ class OrderExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['№', 'Товар', 'План', 'Выполнено', 'Заказчик'];
+        return ['#', 'Наименование', 'Количество', 'На складе', 'План', 'Заказчик'];
     }
 
     /**
@@ -34,9 +34,13 @@ class OrderExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        $builder = ActionLog::selectRaw('action_log.product_id, max(p.box_id) as box_id, max(p.box_size) as box_size, 
-        max(p.box_weight) as box_weight, max(p.name) as p_name, max(s.count) as s_count, max(pl.count) as pl_count, 
-        sum(action_log.count) as al_count, max(c.name) as c_name')
+        $builder = ActionLog::selectRaw('
+        action_log.product_id, 
+        max(p.name) as p_name, 
+        sum(action_log.count) as al_count,
+        max(s.count) as s_count, 
+        max(pl.count) as pl_count,
+        max(c.name) as c_name')
             ->leftJoin('products AS p', 'p.id', '=', 'action_log.product_id')
             ->leftJoin('plan AS pl', 'pl.product_id', '=', 'action_log.product_id')
             ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id')

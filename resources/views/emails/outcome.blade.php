@@ -1,11 +1,6 @@
 @extends('layouts.pages.mail')
 
 @section('main_container')
-    <style>
-        td.count {
-            text-align: right;
-        }
-    </style>
     <h3>За {{ $dateFrom }} - {{ $dateTo }}</h3>
     <table>
         <thead>
@@ -58,9 +53,9 @@
 
         @foreach($data as $row)
             <tr>
-                <td class="count"> {{ $row->product_id ?? '' }} </td>
+                <td style="text-align: right;"> {{ $row->product_id ?? '' }} </td>
                 <td> {{ $row->p_name ?? '' }} </td>
-                <td class="count"> {{ number_format($row->al_count, 0, ',', ' ') ?? '' }} </td>
+                <td style="text-align: right;"> {{ number_format($row->al_count, 0, ',', ' ') ?? '' }} </td>
                 <td> {{ $row->c_name ?? '' }} </td>
             </tr>
         @endforeach
