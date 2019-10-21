@@ -186,7 +186,7 @@ class IndexController extends Controller
                 $message->subject('Состояние склада');
                 $message->from('stockworker100@gmail.com', 'Stock-worker');
                 $message->to('alexander@zolotarev.pp.ua');
-                $message->cc(['cyr@zolotarev.pp.ua','pavel@zolotarev.pp.ua']); // garantpak@gmail.com, korreks@meta.ua
+                $message->cc(['stockworker100@gmail.com','cyr@zolotarev.pp.ua','pavel@zolotarev.pp.ua']); // garantpak@gmail.com, korreks@meta.ua
                 $message->attachData($attach, 'report.xlsx', $options = []);
             });
         } catch (Swift_TransportException $e) {
