@@ -21,7 +21,7 @@
                 <td> {{ $row->p_name ?? '' }} </td>
                 <td> {{ $row->s_count ?? '' }} </td>
                 <td> {{ $row->pl_count ?? '' }} </td>
-                <td> {{ $row->s_count / $row->box_size ?? '' }} </td>
+                <td> {{ ($row->box_size > 0) ? $row->s_count / $row->box_size : '' }} </td>
                 <td> {{ $row->box_weight ?? '' }} </td>
                 <td> {{ isset($boxes[$row->box_id]) ? $boxes[$row->box_id]['name'] : '' }} </td>
                 <td> {{ $row->c_name ?? '' }} </td>

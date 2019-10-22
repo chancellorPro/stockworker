@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\ActionLog;
 
-use App\Exports\OrderExport;
+use App\Exports\IncomeReport;
+use App\Exports\OutcomeReport;
+use App\Exports\StockReport;
 use App\Http\Controllers\Controller;
 use App\Models\ActionLog;
 use App\Models\Customer;
@@ -149,7 +151,7 @@ class IndexController extends Controller
             }
             if (!empty($plan)) {
                 $plan->progress += (int)$request->get('count');
-                if($plan->progress >= $plan->count) {
+                if ($plan->progress >= $plan->count) {
                     PlanHistory::create([
                         'product_id' => (int)$request->get('product_id'),
                         'count' => $plan->count,
@@ -245,7 +247,14 @@ class IndexController extends Controller
             $hasParent = $request->get('has_parent');
         }
 
-        $entity = new OrderExport($from, $to, $income, $hasParent);
+        if ($request->get('income') == ActionLog::INCOME) {
+            $entity = new IncomeReport($from, $to, $income, $hasParent);
+        } elseif ($request->get('income') == ActionLog::OUTOME) {
+            $entity = new OutcomeReport($from, $to, $income, $hasParent);
+        } else {
+            $entity = new StockReport($from, $to, $income, $hasParent);
+        }
+
         $emailData = [
             'boxes'     => config('presets.boxes'),
             'orderType' => $orderType,
@@ -270,7 +279,7 @@ class IndexController extends Controller
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.' . $template, $emailData, function($message) use ($attach, $orderType) {
+            Mail::send('emails.' . $template, $emailData, function ($message) use ($attach, $orderType) {
                 $message->subject($orderType);
                 $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
                 $message->to('pavel@zolotarev.pp.ua');
