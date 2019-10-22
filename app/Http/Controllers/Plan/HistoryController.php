@@ -40,7 +40,7 @@ class HistoryController extends Controller
 
         return view('plan.history', [
             'data'     => $data,
-            'products' => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products' => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'filter'   => $this->getFilter(),
         ]);
     }

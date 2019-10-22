@@ -63,7 +63,7 @@ class IndexController extends Controller
             'transaction_type' => config('presets.transaction_type'),
             'dateFrom'         => $request->get('dateFrom'),
             'dateTo'           => $request->get('dateTo'),
-            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products'         => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'customers'        => Customer::all(),
         ]);
     }
@@ -119,7 +119,7 @@ class IndexController extends Controller
 
         return view('action-log.create', [
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products'         => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'customers'        => Customer::all(),
         ]);
     }
@@ -163,7 +163,9 @@ class IndexController extends Controller
             }
         } else {
             if (!empty($stock)) {
-                $stock->count -= (int)$request->get('count');
+                $stock->update([
+                    'count' => $stock->count -= (int)$request->get('count')
+                ]);
             }
         }
 
@@ -187,7 +189,7 @@ class IndexController extends Controller
         return view('action-log.edit', [
             'model'            => ActionLog::find($id),
             'transaction_type' => config('presets.transaction_type'),
-            'products'         => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products'         => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'customers'        => Customer::all(),
         ]);
     }

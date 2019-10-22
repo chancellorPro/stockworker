@@ -76,7 +76,7 @@ class IndexController extends Controller
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
 
         return view('product.create', [
-            'products'  => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'boxes'     => config('presets.boxes'),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
@@ -112,7 +112,7 @@ class IndexController extends Controller
 
         return view('product.edit', [
             'model'     => Product::find($id),
-            'products'  => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'boxes'     => config('presets.boxes'),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),

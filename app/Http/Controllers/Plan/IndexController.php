@@ -42,7 +42,7 @@ class IndexController extends Controller
 
         return view('plan.index', [
             'data'     => $data,
-            'products' => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products' => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'filter'   => $this->getFilter(),
         ]);
     }
@@ -77,7 +77,7 @@ class IndexController extends Controller
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
 
         return view('plan.create', [
-            'products'  => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'customers' => Customer::all(),
         ]);
     }
@@ -111,7 +111,7 @@ class IndexController extends Controller
 
         return view('plan.edit', [
             'model'     => Plan::find($id),
-            'products'  => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'customers' => Customer::all(),
         ]);
     }

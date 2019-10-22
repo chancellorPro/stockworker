@@ -54,7 +54,7 @@ class IndexController extends Controller
 
         return view('stock.index', [
             'data'     => $data,
-            'products' => Product::whereNotIn('id', array_filter($parentIds))->get(),
+            'products' => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'filter'   => $this->getFilter(),
         ]);
     }
