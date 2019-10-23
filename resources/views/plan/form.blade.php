@@ -20,3 +20,11 @@
     'inputType' => 'number',
     'label' => __('Count'),
 ])
+
+@include('layouts.form-fields.input', [
+    'model' => $currentModel,
+    'name'  => 'start',
+    'class'  => 'datepicker',
+    'label' => __('Date'),
+    'attrs' => ['autocomplete' => 'off'],
+])

@@ -18,6 +18,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Excel;
@@ -221,12 +222,12 @@ class IndexController extends Controller
         if ((int)$request->get('income') === ActionLog::INCOME) {
             if (!empty($stock)) {
                 $stock->update([
-                    'count' => $stock->count + ($action->count - (int)$request->get('count'))
+                    'count' => $stock->count + ((int)$request->get('count') - $action->count)
                 ]);
             }
 
             if (!empty($plan)) {
-                $plan->progress += $plan->progress + ($action->count - (int)$request->get('count'));
+                $plan->progress += $plan->progress + ((int)$request->get('count') - $action->count);
                 if ($plan->progress >= $plan->count) {
                     PlanHistory::create([
                         'product_id' => (int)$request->get('product_id'),
@@ -241,7 +242,7 @@ class IndexController extends Controller
             /** OUTCOME */
             if (!empty($stock)) {
                 $stock->update([
-                    'count' => $stock->count + ($action->count - (int)$request->get('count'))
+                    'count' => $stock->count + ((int)$request->get('count') - $action->count)
                 ]);
             }
         }

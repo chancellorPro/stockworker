@@ -41,14 +41,18 @@
                         <td>{{ $item->product->name ?? '' }}</td>
                         <td>
                           <div style="height: 40px;background: #d9534f">
-                            <div class="progress-bar" style="width: {{ $item->count > 0 ? $item->progress / $item->count * 100 : 0 }}%">
-                              {{ $item->count > 0 ? $item->progress / $item->count * 100 : '' }}%
+                              @php
+                                  $progress = round($item->count > 0 ? $item->progress / $item->count * 100 : 0);
+                                  $progress > 100 ? $progress = 100 : null;
+                              @endphp
+                            <div class="progress-bar" style="width: {{ $progress }}%">
+                              {{ $progress }}%
                             </div>
                           </div>
                           <div class="pull-right">{{ $item->count }}</div>
                           <div class="pull-left">{{ $item->progress }}</div>
                         </td>
-                        <td>{{ $item->updated_at }}</td>
+                        <td>{{ $item->start }}</td>
                         <td>
                             @include('common.buttons.edit', [
                                 'route' => 'plan.edit',

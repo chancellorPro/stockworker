@@ -39,14 +39,18 @@
                             <div class="clearfix"></div>
                             <div style="height: 23px;background: #d9534f">
                                 <div class="progress-bar" style="background:#1abb9c;width: {{ ($item->progress - $item->count) / $item->plan_count * 100 }}%">
-                                    <div style="padding:2px 5px">{{ ($item->progress - $item->count) / $item->plan_count * 100 }}%</div>
+                                    <div style="padding:2px 5px">{{ round(($item->progress - $item->count) / $item->plan_count * 100) }}%</div>
                                 </div>
-                                <div class="progress-bar" style="width: {{ $item->count / $item->plan_count * 100 }}%">
-                                    <div style="padding:2px 5px">{{ $item->count / $item->plan_count * 100 }}%</div>
+                                @php
+                                    $progress = round($item->count / $item->plan_count * 100);
+                                    $progress > 100 ? $progress = 100 : null;
+                                @endphp
+                                <div class="progress-bar" style="width: {{ $progress }}%">
+                                    <div style="padding:2px 5px">{{ $progress }}%</div>
                                 </div>
                             </div>
                             <div class="pull-right" style="background:#d9534f;color:#fff;padding:2px 5px">@lang('Plan'): {{ $item->plan_count }}</div>
-                            <div class="pull-left" style="background:#1abb9c;color:#fff;padding:2px 5px">@lang('Sent'): {{ $item->progress - $item->count }}</div>
+                            <div class="pull-left" style="background:#1abb9c;color:#fff;padding:2px 5px">@lang('Sent'): {{ $item->outcome_sum }}</div>
                         @else
                             {{ $item->count }}
                         @endif

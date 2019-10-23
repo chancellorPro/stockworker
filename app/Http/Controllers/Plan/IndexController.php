@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Plan;
 use App\Models\Product;
+use App\Models\Stock;
 use App\Traits\FilterBuilder;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 /**
@@ -91,6 +93,11 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
+        $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
+        if($stock->count > 0) {
+            $request->merge(['progress' => $stock->count]);
+        }
+
         Plan::create($request->all());
 
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));

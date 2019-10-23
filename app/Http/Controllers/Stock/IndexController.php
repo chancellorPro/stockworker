@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 /**
@@ -35,21 +36,19 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->applyFilter(
-            $request,
-            Stock::selectRaw('count(a.count) as aggregate, stock.product_id, max(stock.partition) as partition_number, max(stock.count) as count, max(stock.description) as description, max(p.count) as plan_count, max(p.progress) as progress')
-                ->leftJoin('plan AS p', 'p.product_id', '=', 'stock.product_id')
-                ->leftJoin('action_log AS a', function($join) {
-                    $join->on('a.product_id', '=', 'stock.product_id')
-                        ->where('a.income', '=', ActionLog::INCOME)
-                        ->where(['date' => Carbon::now()->format('Y-m-d')]);
-                })
-                ->join('products AS pr', 'pr.id', '=', 'stock.product_id')
-                ->orderBy('p.product_id', 'desc')
-                ->orderBy('aggregate', 'desc')
-                ->groupBy('a.product_id', 'stock.product_id', 'p.product_id')
-        )->paginate($this->perPage);
+        $builder = Stock::selectRaw('sum(a.count) as outcome_sum, stock.product_id, max(stock.partition) as partition_number, max(stock.count) as count, max(stock.description) as description, max(p.count) as plan_count, max(p.progress) as progress')
+            ->leftJoin('plan AS p', 'p.product_id', '=', 'stock.product_id')
+            ->leftJoin('action_log AS a', function($join) {
+                $join->on('a.product_id', '=', 'stock.product_id')
+                    ->where('a.income', '=', ActionLog::OUTOME)
+                    ->where('date', '>', DB::raw('p.start'));
+            })
+            ->join('products AS pr', 'pr.id', '=', 'stock.product_id')
+            ->orderBy('p.product_id', 'desc')
+            ->orderBy('outcome_sum', 'desc')
+            ->groupBy('a.product_id', 'stock.product_id', 'p.product_id');
 
+        $data = $this->applyFilter($request,$builder)->paginate($this->perPage);
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
 
         return view('stock.index', [

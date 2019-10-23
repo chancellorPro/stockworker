@@ -7,7 +7,7 @@
 @section('controls')
     <div class="pull-right col-sm-10">
         @php
-            use Carbon\Carbon;
+            use Carbon\Carbon as Carbon;
             $field = 'today';
             $selected = request()->get('date_range') ?? '';
             $inputsStyle = 'style="visibility: hidden; height: 0"';
@@ -127,8 +127,7 @@
             </thead>
             <tbody class="fast-save-page-container">
             @php
-                use Carbon\Carbon as Carbonara;
-                $currentDate = Carbonara::now()->format('Y-m-d');
+                $currentDate = Carbon::now();
             @endphp
             @foreach($data as $item)
                 <tr>
@@ -137,7 +136,7 @@
                         {{ $item->income ? __('Outcome') : __('Income') }}
                     </td>
                     <td>{{ $item->product ? $item->product->name : '' }}</td>
-                    <td style="{{ $currentDate != $item->date ? 'background:#a95454' : '' }}">{{ $item->date }}</td>
+                    <td style="{{ $currentDate > Carbon::createFromFormat('Y-m-d', $item->date) ? 'background:silver' : '' }}">{{ $item->date }}</td>
                     <td>{{ $item->count }}</td>
                     <td>{{ $item->partition }}</td>
                     <td>{{ $item->customer ? $item->customer->name : '' }}</td>

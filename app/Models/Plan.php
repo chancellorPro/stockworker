@@ -26,6 +26,7 @@ class Plan extends Model
     protected $fillable = [
         'product_id',
         'count',
+        'progress',
     ];
 
     /**
