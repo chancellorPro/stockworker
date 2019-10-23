@@ -164,6 +164,7 @@ class IndexController extends Controller
                 $plan->save();
             }
         } else {
+            /** OUTCOME */
             if (!empty($stock)) {
                 $stock->update([
                     'count' => $stock->count -= (int)$request->get('count')
@@ -206,8 +207,46 @@ class IndexController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $resource = ActionLog::findOrFail($id);
-        $resource->update($request->all());
+        // TODO: ADD STOCK PRODUCTS BY 200
+        $action = ActionLog::findOrFail($id);
+
+        if ($request->has('box_count')) {
+            $request->merge(['count' => (int)$request->get('box_count') * $action->product->box_size]);
+            $request->offsetUnset('box_count');
+        }
+
+        $plan = Plan::where(['product_id' => $action->product->id])->first();
+        $stock = Stock::where(['product_id' => $action->product->id])->first();
+
+        if ((int)$request->get('income') === ActionLog::INCOME) {
+            if (!empty($stock)) {
+                $stock->update([
+                    'count' => $stock->count + ($action->count - (int)$request->get('count'))
+                ]);
+            }
+
+            if (!empty($plan)) {
+                $plan->progress += $plan->progress + ($action->count - (int)$request->get('count'));
+                if ($plan->progress >= $plan->count) {
+                    PlanHistory::create([
+                        'product_id' => (int)$request->get('product_id'),
+                        'count' => $plan->count,
+                        'updated_at' => Carbon::now()->format('Y-m-d'),
+                        'created_at' => $plan->created_at
+                    ]);
+                }
+                $plan->destroy();
+            }
+        } else {
+            /** OUTCOME */
+            if (!empty($stock)) {
+                $stock->update([
+                    'count' => $stock->count + ($action->count - (int)$request->get('count'))
+                ]);
+            }
+        }
+
+        $action->update($request->all());
 
         return $this->success();
     }
