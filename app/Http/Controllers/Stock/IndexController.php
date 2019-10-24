@@ -45,7 +45,7 @@ class IndexController extends Controller
             })
             ->join('products AS pr', 'pr.id', '=', 'stock.product_id')
             ->orderBy('p.product_id', 'desc')
-            ->orderBy('outcome_sum', 'desc')
+            ->orderBy('stock.updated_at', 'desc')
             ->groupBy('a.product_id', 'stock.product_id', 'p.product_id');
 
         $data = $this->applyFilter($request,$builder)->paginate($this->perPage);
