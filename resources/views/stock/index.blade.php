@@ -18,8 +18,8 @@
                 <th class="actions">@lang('Actions')</th>
             </tr>
             <tr>
-                <th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'id'])</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'product', 'filterCollection' => $products])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'stock_product_id'])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'stock_product_id', 'filterCollection' => $products])</th>
                 <th></th>
                 <th></th>
                 <th></th>

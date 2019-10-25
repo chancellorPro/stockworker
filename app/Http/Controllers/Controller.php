@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class Controller
@@ -25,7 +26,12 @@ abstract class Controller extends BaseController
      */
     public function __construct()
     {
-        $this->perPage = request()->get('page_limit') ?? $this->perPage ?? config('presets.default_page_limit');
+        if(Session::has(request()->path())) {
+            $this->perPage = request()->get('page_limit') ?? Session::get(request()->path());
+        } else {
+            $this->perPage = request()->get('page_limit') ?? $this->perPage ?? config('presets.default_page_limit');
+        }
+        Session::put(request()->path(), $this->perPage);
 
         View::share('env', environment());
     }

@@ -22,9 +22,13 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'id'         => 'equal',
-        'product'    => 'manual',
-        'page_limit' => 'manual'
+        'stock_product_id' => 'equal',
+        'page_limit'       => 'manual'
+    ];
+
+    const FILTER_FIELDS_ALIAS = [
+        'stock.product_id' => 'stock_product_id',
+        'stock.product'    => 'stock_product',
     ];
 
     /**

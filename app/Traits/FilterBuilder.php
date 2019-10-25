@@ -36,9 +36,13 @@ trait FilterBuilder
 
         foreach (self::FILTER_FIELDS as $field => $condition) {
             $filterValue = isset($requestData[$field]) ? $requestData[$field] : false;
-
             if ($filterValue !== false) {
                 $this->appliedFilter[$field] = $filterValue;
+
+                if(defined('self::FILTER_FIELDS_ALIAS') && in_array($field, self::FILTER_FIELDS_ALIAS)) {
+                    $field = array_search($field, self::FILTER_FIELDS_ALIAS);
+                }
+
                 if (!in_array($field, $queryIgnore)) {
                     switch ($condition) {
                         case 'equal':
@@ -58,12 +62,12 @@ trait FilterBuilder
                             break;
 
                         case 'numbers':
-                            $numbers = array_filter(preg_split('/\D+/', $filterValue));
+                            $numbers = array_map('intval', array_filter(preg_split('/\D+/', $filterValue)));
                             if ($numbers) {
                                 $builder->whereIn($field, $numbers);
                             }
                             break;
-                        case 'date_range_pst':
+                        case 'date_range':
                             if(!empty($filterValue['from'])) {
                                 $dateFrom = fromPacificToUTC($filterValue['from'] . ' 00:00:00');
                                 $where[] = [$field, '>=', $dateFrom];
@@ -73,7 +77,17 @@ trait FilterBuilder
                                 $where[] = [$field, '<=', $dateTo];
                             }
                             break;
-                        case 'date_range':
+                        case 'int_range':
+                            if(!empty($filterValue['from'])) {
+                                $intFrom = $filterValue['from'];
+                                $where[] = [$field, '>=', $intFrom];
+                            }
+                            if(!empty($filterValue['to'])) {
+                                $intTo = $filterValue['to'];
+                                $where[] = [$field, '<=', $intTo];
+                            }
+                            break;
+                        case 'date_range_pst':
                             if(!empty($filterValue['from'])) {
                                 $dateFrom = $filterValue['from'] . ' 00:00:00';
                                 $where[] = [$field, '>=', $dateFrom];
@@ -86,8 +100,8 @@ trait FilterBuilder
 
                         case 'manual':
                             $methodName = 'apply'
-                            . str_replace('_', '', mb_convert_case($field, MB_CASE_TITLE, "UTF-8"))
-                            . 'Filter';
+                                . str_replace('_', '', mb_convert_case($field, MB_CASE_TITLE, "UTF-8"))
+                                . 'Filter';
                             if (method_exists($this, $methodName)) {
                                 $builder = $this->{$methodName}($request, $builder);
                             }
@@ -96,9 +110,9 @@ trait FilterBuilder
                 }
             }
         }
-        
+
 //        session([$request->route()->getName() . 'filter' => $this->appliedFilter]); // отключено хранение фильтра в сессии
-        
+
         if ($where) {
             $builder->where($where);
         }
