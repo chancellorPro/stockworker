@@ -13,7 +13,7 @@
             <th>Заказчик</th>
         </tr>
         </thead>
-        @foreach($data as $row)
+        @foreach($data->collection() as $row)
             <tr>
                 <td> {{ $row->product_id ?? '' }} </td>
                 <td> {{ $row->p_name ?? '' }} </td>

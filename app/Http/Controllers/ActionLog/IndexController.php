@@ -22,9 +22,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Excel;
+use Matrix\Exception;
 use Swift_TransportException;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Revolution\Google\Sheets\Sheets;
 
 /**
  * Class IndexController
@@ -135,47 +134,52 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
-        $plan = Plan::where(['product_id' => (int)$request->get('product_id')])->first();
-        $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
-        $product = Product::whereId((int)$request->get('product_id'))->first();
+        try {
+            $plan = Plan::where(['product_id' => (int)$request->get('product_id')])->first();
+            $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
+            $product = Product::whereId((int)$request->get('product_id'))->first();
 
-        if ($request->has('box_count')) {
-            $request->merge(['count' => (int)$request->get('box_count') * $product->box_size]);
-            $request->offsetUnset('box_count');
-        }
-
-        if ((int)$request->get('income') === ActionLog::INCOME) {
-            if (!empty($stock)) {
-                $stock->update([
-                    'count' => $stock->count + (int)$request->get('count')
-                ]);
+            if ($request->has('box_count')) {
+                $request->merge(['count' => (int)$request->get('box_count') * $product->box_size]);
+                $request->offsetUnset('box_count');
             }
-            if (!empty($plan)) {
-                $plan->progress += (int)$request->get('count');
-                if ($plan->progress >= $plan->count) {
-                    PlanHistory::create([
-                        'product_id' => (int)$request->get('product_id'),
-                        'count' => $plan->count,
-                        'updated_at' => Carbon::now()->format('Y-m-d'),
-                        'created_at' => $plan->created_at
+
+            if ((int)$request->get('income') === ActionLog::INCOME) {
+                if (!empty($stock)) {
+                    $stock->update([
+                        'count' => $stock->count + (int)$request->get('count')
                     ]);
-                    $plan->progress = 0;
-                    $plan->count = 0;
                 }
-                $plan->save();
+                if (!empty($plan)) {
+                    $plan->progress += (int)$request->get('count');
+                    if ($plan->progress >= $plan->count) {
+                        PlanHistory::create([
+                            'product_id' => (int)$request->get('product_id'),
+                            'count'      => $plan->count,
+                            'updated_at' => Carbon::now()->format('Y-m-d'),
+                            'created_at' => $plan->created_at
+                        ]);
+                        $plan->progress = 0;
+                        $plan->count = 0;
+                    }
+                    $plan->save();
+                }
+            } else {
+                /** OUTCOME */
+                if (!empty($stock)) {
+                    $stock->update([
+                        'count' => $stock->count -= (int)$request->get('count')
+                    ]);
+                }
             }
-        } else {
-            /** OUTCOME */
-            if (!empty($stock)) {
-                $stock->update([
-                    'count' => $stock->count -= (int)$request->get('count')
-                ]);
-            }
+
+            ActionLog::create($request->all());
+        } catch (Exception $e) {
+            Log::info(json_encode($e->getMessage()));
+            return $this->error($e->getMessage());
         }
 
-        ActionLog::create($request->all());
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));
-
         return $this->success();
     }
 
@@ -208,7 +212,6 @@ class IndexController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        // TODO: ADD STOCK PRODUCTS BY 200
         $action = ActionLog::findOrFail($id);
 
         if ($request->has('box_count')) {
@@ -219,31 +222,38 @@ class IndexController extends Controller
         $plan = Plan::where(['product_id' => $action->product->id])->first();
         $stock = Stock::where(['product_id' => $action->product->id])->first();
 
-        if ((int)$request->get('income') === ActionLog::INCOME) {
-            if (!empty($stock)) {
-                $stock->update([
-                    'count' => $stock->count + ((int)$request->get('count') - $action->count)
-                ]);
-            }
+        if ($request->get('count') == 0) {
+            $request->offsetUnset('count');
+        } else {
 
-            if (!empty($plan)) {
-                $plan->progress += $plan->progress + ((int)$request->get('count') - $action->count);
-                if ($plan->progress >= $plan->count) {
-                    PlanHistory::create([
-                        'product_id' => (int)$request->get('product_id'),
-                        'count' => $plan->count,
-                        'updated_at' => Carbon::now()->format('Y-m-d'),
-                        'created_at' => $plan->created_at
+            if ((int)$request->get('income') === ActionLog::INCOME) {
+                Log::info(json_encode($request->all()));
+
+                if (!empty($stock)) {
+                    $stock->update([
+                        'count' => $stock->count + ((int)$request->get('count') - $action->count)
                     ]);
                 }
-                $plan->destroy();
-            }
-        } else {
-            /** OUTCOME */
-            if (!empty($stock)) {
-                $stock->update([
-                    'count' => $stock->count + ((int)$request->get('count') - $action->count)
-                ]);
+
+                if (!empty($plan)) {
+                    $plan->progress += $plan->progress + ((int)$request->get('count') - $action->count);
+                    if ($plan->progress >= $plan->count) {
+                        PlanHistory::create([
+                            'product_id' => (int)$request->get('product_id'),
+                            'count'      => $plan->count,
+                            'updated_at' => Carbon::now()->format('Y-m-d'),
+                            'created_at' => $plan->created_at
+                        ]);
+                    }
+                    $plan->destroy();
+                }
+            } else {
+                /** OUTCOME */
+                if (!empty($stock)) {
+                    $stock->update([
+                        'count' => $stock->count + ((int)$request->get('count') - $action->count)
+                    ]);
+                }
             }
         }
 
@@ -298,7 +308,7 @@ class IndexController extends Controller
         $emailData = [
             'boxes'     => arrayToKeyValue(config('presets.boxes'), 'id', 'name'),
             'orderType' => $orderType,
-            'data'      => $entity->collection(),
+            'data'      => $entity,
             'dateFrom'  => $request->get('from'),
             'dateTo'    => $request->get('to'),
         ];
@@ -315,11 +325,17 @@ class IndexController extends Controller
             }
         }
 
+        return view('emails.' . $template, $emailData);
+    }
+
+
+    public function orderSend(Request $request)
+    {
         try {
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.' . $template, $emailData, function ($message) use ($attach, $orderType) {
+            Mail::send('emails.' . $template, $emailData, function($message) use ($attach, $orderType) {
                 $message->subject($orderType);
                 $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
                 $message->to('pavel@zolotarev.pp.ua');
