@@ -44,10 +44,7 @@ class StockReport implements FromCollection, WithHeadings
         max(c.name) as c_name')
             ->leftJoin('products AS p', 'p.id', '=', 'action_log.product_id')
             ->leftJoin('plan AS pl', 'pl.product_id', '=', 'action_log.product_id')
-            ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id')
-            ->whereBetween('action_log.date', [$this->from, $this->to])
-            ->where(['income' => $this->income]);
-
+            ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id');
 
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
 
