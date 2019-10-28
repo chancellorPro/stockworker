@@ -12,7 +12,6 @@
             <th>Кол-во ящиков</th>
             <th>Вес ящика</th>
             <th>Объём ящиков</th>
-            <th>Заказчик</th>
         </tr>
         </thead>
         @foreach($data as $row)
@@ -21,10 +20,9 @@
                 <td> {{ $row->p_name ?? '' }} </td>
                 <td> {{ $row->s_count ?? '' }} </td>
                 <td> {{ $row->pl_count ?? '' }} </td>
-                <td> {{ ($row->box_size > 0) ? $row->s_count / $row->box_size : '' }} </td>
+                <td> {{ $row->boxes_count }} </td>
                 <td> {{ $row->box_weight ?? '' }} </td>
-                <td> {{ isset($boxes[$row->box_id]) ? $boxes[$row->box_id]['name'] : '' }} </td>
-                <td> {{ $row->c_name ?? '' }} </td>
+                <td> {{ isset($boxes[$row->box_id]) ? $boxes[$row->box_id] : '' }} </td>
             </tr>
         @endforeach
     </table>

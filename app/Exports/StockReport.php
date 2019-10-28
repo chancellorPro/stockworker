@@ -26,7 +26,7 @@ class StockReport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['#', 'Наименование', 'На складе', 'План', 'Кол-во ящиков', 'Вес ящика', 'Заказчик'];
+        return ['#', 'Наименование', 'На складе', 'План', 'Кол-во ящиков', 'Вес ящика'];
     }
 
     /**
@@ -37,14 +37,14 @@ class StockReport implements FromCollection, WithHeadings
         $builder = Stock::selectRaw('
         stock.product_id,
         max(p.name) as p_name,
-        max(s.count) as s_count, 
+        max(stock.count) as s_count, 
         max(pl.count) as pl_count, 
-        (max(s.count) as s_count / max(p.box_size) as box_size) as boxes_count, 
-        max(p.box_weight) as box_weight, 
-        max(c.name) as c_name')
-            ->leftJoin('products AS p', 'p.id', '=', 'action_log.product_id')
-            ->leftJoin('plan AS pl', 'pl.product_id', '=', 'action_log.product_id')
-            ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id');
+        round(max(stock.count) / max(p.box_size)) as boxes_count, 
+        max(p.box_weight) as box_weight,
+        max(stock.updated_at) as s_updated_at,
+        max(p.box_id) as box_id')
+            ->leftJoin('products AS p', 'p.id', '=', 'stock.product_id')
+            ->leftJoin('plan AS pl', 'pl.product_id', '=', 'stock.product_id');
 
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
 
@@ -54,6 +54,6 @@ class StockReport implements FromCollection, WithHeadings
             $builder->whereNotIn('p.id', array_filter($parentIds));
         }
 
-        return $builder->orderBy('c.id')->groupBy('c.id', 'action_log.product_id')->get();
+        return $builder->orderBy('s_updated_at', 'desc')->groupBy('stock.product_id')->get();
     }
 }

@@ -287,16 +287,16 @@ class IndexController extends Controller
             $hasParent = $request->get('has_parent');
         }
 
-        if ($request->get('income') == ActionLog::INCOME) {
+        if ($request->get('income') === ActionLog::INCOME) {
             $entity = new IncomeReport($from, $to, $income, $hasParent);
-        } elseif ($request->get('income') == ActionLog::OUTOME) {
+        } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
             $entity = new OutcomeReport($from, $to, $income, $hasParent);
         } else {
             $entity = new StockReport($from, $to, $income, $hasParent);
         }
 
         $emailData = [
-            'boxes'     => config('presets.boxes'),
+            'boxes'     => arrayToKeyValue(config('presets.boxes'), 'id', 'name'),
             'orderType' => $orderType,
             'data'      => $entity->collection(),
             'dateFrom'  => $request->get('from'),
@@ -305,7 +305,7 @@ class IndexController extends Controller
 
         $template = 'stock';
         if ($request->has('income')) {
-            switch ($request->get('income')) {
+            switch ((int)$request->get('income')) {
                 case 0:
                     $template = 'income';
                     break;
