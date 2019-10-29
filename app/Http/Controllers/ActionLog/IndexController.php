@@ -367,7 +367,7 @@ class IndexController extends Controller
                 $message->subject($orderType);
                 $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
                 $message->to('pavel@zolotarev.pp.ua');
-//                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
+                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
                 $message->attachData($attach, 'report.xlsx', $options = []);
             });
         } catch (Swift_TransportException $e) {
