@@ -195,6 +195,7 @@ export default class {
                 autoclose: true,
                 minView: '2'
         });
+        $('.tablestickyheader').stickyTableHeaders();
 
         modalsContainer.append(html);
 
