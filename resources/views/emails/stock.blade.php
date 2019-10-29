@@ -22,7 +22,7 @@
                     <td> {{ $row->pl_count ?? '' }} </td>
                     <td> {{ $row->boxes_count }} </td>
                     <td> {{ $row->box_weight ?? '' }} </td>
-                    <td> {{ isset($boxes[$row->box_id]) ? $boxes[$row->box_id] : '' }} </td>
+                    <td> {{ (isset($row->product) && isset($boxes[$row->product->box_id])) ? $boxes[$row->product->box_id] : '' }} </td>
                 </tr>
             @endforeach
         </table>

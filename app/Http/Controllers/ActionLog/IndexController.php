@@ -357,6 +357,7 @@ class IndexController extends Controller
                 $entity = new StockReport($dateFrom, $dateTo, $direction, $hasParent);
             }
             $request->merge(['data' => $entity->collection()]);
+            $request->merge(['boxes' => arrayToKeyValue(config('presets.boxes'), 'id', 'name')]);
 
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
