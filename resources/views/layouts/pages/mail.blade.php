@@ -23,8 +23,6 @@
 <body>
 <div class="container body">
     <div class="main_container">
-        @yield('main_container')
-        <br>
         {{-- Send report --}}
         @include('common.buttons.save', [
             'route' => 'send',
@@ -44,6 +42,8 @@
                 'method' => 'GET',
             ],
         ])
+        <br><br>
+        @yield('main_container')
     </div>
 </div>
 </body>

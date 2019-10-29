@@ -26,7 +26,7 @@ class StockReport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['#', 'Наименование', 'На складе', 'План', 'Кол-во ящиков', 'Вес ящика', 'Последние изменение'];
+        return ['#', 'Наименование', 'На складе', 'План', 'Кол-во ящиков', 'Вес ящика', 'Последнее изменение'];
     }
 
     /**
@@ -36,13 +36,12 @@ class StockReport implements FromCollection, WithHeadings
     {
         $builder = Stock::selectRaw('
         stock.product_id,
-        max(p.name) as p_name,
-        max(stock.count) as s_count, 
-        max(pl.count) as pl_count, 
-        round(max(stock.count) / max(p.box_size)) as boxes_count, 
-        max(p.box_weight) as box_weight,
-        max(stock.updated_at) as s_updated_at,
-        max(p.box_id) as box_id')
+        p.name as p_name,
+        stock.count as s_count, 
+        pl.count as pl_count, 
+        round(stock.count / p.box_size) as boxes_count, 
+        p.box_weight as box_weight,
+        p.box_id as box_id')
             ->join('products AS p', 'p.id', '=', 'stock.product_id')
             ->leftJoin('plan AS pl', 'pl.product_id', '=', 'stock.product_id');
 
@@ -54,6 +53,6 @@ class StockReport implements FromCollection, WithHeadings
             $builder->whereNotIn('p.id', array_filter($parentIds));
         }
 
-        return $builder->orderBy('s_updated_at', 'desc')->groupBy('stock.product_id')->get();
+        return $builder->orderBy('stock.updated_at', 'desc')->get();
     }
 }
