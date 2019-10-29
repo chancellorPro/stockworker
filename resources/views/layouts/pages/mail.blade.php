@@ -24,6 +24,26 @@
 <div class="container body">
     <div class="main_container">
         @yield('main_container')
+        <br>
+        {{-- Send report --}}
+        @include('common.buttons.save', [
+            'route' => 'send',
+            'id' => 'send',
+            'route_params' => [
+                'has_parent' => false,
+                'orderType' => $orderType,
+                'dateFrom' => $dateFrom,
+                'dateTo' => $dateTo,
+                'direction' => $direction,
+                'template' => $template,
+            ],
+            'name' => __('Send report'),
+            'fa_class' => 'fa-save',
+            'class' => 'reports',
+            'dataset' => [
+                'method' => 'GET',
+            ],
+        ])
     </div>
 </div>
 </body>

@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', 'User\IndexController');
 
     Route::get('export', 'ActionLog\IndexController@getExportData')->name('export');
+    Route::get('send', 'ActionLog\IndexController@orderSend')->name('send');
 });
 
 Auth::routes();

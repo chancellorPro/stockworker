@@ -51,7 +51,7 @@
 {{--        @endforeach--}}
 
 
-        @foreach($data->collection() as $row)
+        @foreach($data as $row)
             <tr>
                 <td style="text-align: right;"> {{ $row->product_id ?? '' }} </td>
                 <td> {{ $row->p_name ?? '' }} </td>

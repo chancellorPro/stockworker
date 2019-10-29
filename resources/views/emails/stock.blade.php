@@ -1,7 +1,6 @@
 @extends('layouts.pages.mail')
 
 @section('main_container')
-    <h3>За {{ $dateFrom }} - {{ $dateTo }}</h3>
     <table>
         <thead>
         <tr>
@@ -14,7 +13,7 @@
             <th>Объём ящиков</th>
         </tr>
         </thead>
-        @foreach($data->collection() as $row)
+        @foreach($data as $row)
             <tr>
                 <td> {{ $row->product_id ?? '' }} </td>
                 <td> {{ $row->p_name ?? '' }} </td>
@@ -27,4 +26,4 @@
         @endforeach
     </table>
 @endsection
-`
+

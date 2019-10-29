@@ -26,7 +26,7 @@ class StockReport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['#', 'Наименование', 'На складе', 'План', 'Кол-во ящиков', 'Вес ящика'];
+        return ['#', 'Наименование', 'На складе', 'План', 'Кол-во ящиков', 'Вес ящика', 'Последние изменение'];
     }
 
     /**
@@ -43,7 +43,7 @@ class StockReport implements FromCollection, WithHeadings
         max(p.box_weight) as box_weight,
         max(stock.updated_at) as s_updated_at,
         max(p.box_id) as box_id')
-            ->leftJoin('products AS p', 'p.id', '=', 'stock.product_id')
+            ->join('products AS p', 'p.id', '=', 'stock.product_id')
             ->leftJoin('plan AS pl', 'pl.product_id', '=', 'stock.product_id');
 
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();

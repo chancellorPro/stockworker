@@ -6,6 +6,7 @@ use App\Exports\IncomeReport;
 use App\Exports\OutcomeReport;
 use App\Exports\StockReport;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ActionLog\ActionLogRequest;
 use App\Models\ActionLog;
 use App\Models\Customer;
 use App\Models\Plan;
@@ -132,7 +133,7 @@ class IndexController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(ActionLogRequest $request)
     {
         try {
             $plan = Plan::where(['product_id' => (int)$request->get('product_id')])->first();
@@ -290,7 +291,6 @@ class IndexController extends Controller
      *
      * @param Request $request
      * @return void //return Excel::download(new OrderExport($from, $to, $income, $hasParent), 'file.xlsx');
-     * //return Excel::download(new OrderExport($from, $to, $income, $hasParent), 'file.xlsx');
      */
     public function getExportData(Request $request)
     {
@@ -314,14 +314,6 @@ class IndexController extends Controller
             $entity = new StockReport($from, $to, $income, $hasParent);
         }
 
-        $emailData = [
-            'boxes'     => arrayToKeyValue(config('presets.boxes'), 'id', 'name'),
-            'orderType' => $orderType,
-            'data'      => $entity,
-            'dateFrom'  => $request->get('from'),
-            'dateTo'    => $request->get('to'),
-        ];
-
         $template = 'stock';
         if ($request->has('income')) {
             switch ((int)$request->get('income')) {
@@ -334,32 +326,60 @@ class IndexController extends Controller
             }
         }
 
-        return view('emails.' . $template, $emailData);
+        return view('emails.' . $template, [
+            'boxes'     => arrayToKeyValue(config('presets.boxes'), 'id', 'name'),
+            'orderType' => $orderType,
+            'data'      => $entity->collection(),
+            'dateFrom'  => $request->get('from'),
+            'dateTo'    => $request->get('to'),
+            'direction' => $income,
+            'template' => $template,
+            'hasParent' => $hasParent
+        ]);
     }
 
 
     public function orderSend(Request $request)
     {
+        $dateFrom = $request->get('dateFrom');
+        $dateTo = $request->get('dateTo');
+        $direction = $request->get('direction');
+        $template = $request->get('template');
+        $hasParent = $request->get('hasParent');
+        $orderType = $request->get('orderType');
+
         try {
+            if ($request->get('income') === ActionLog::INCOME) {
+                $entity = new IncomeReport($dateFrom, $dateTo, $direction, $hasParent);
+            } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
+                $entity = new OutcomeReport($dateFrom, $dateTo, $direction, $hasParent);
+            } else {
+                $entity = new StockReport($dateFrom, $dateTo, $direction, $hasParent);
+            }
+            $request->merge(['data' => $entity->collection()]);
+
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.' . $template, $emailData, function($message) use ($attach, $orderType) {
+            Mail::send('emails.' . $template, $request->all(), function($message) use ($attach, $orderType) {
                 $message->subject($orderType);
                 $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
                 $message->to('pavel@zolotarev.pp.ua');
-                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
+//                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
                 $message->attachData($attach, 'report.xlsx', $options = []);
             });
         } catch (Swift_TransportException $e) {
-            return view('emails.' . $template, $emailData);
+            pushNotify('error', __('Mail service is not supported!'));
+            return response()->json([
+                'error'  => __('Mail service is not supported!'),
+            ]);
         }
 
         pushNotify('success', __('Report sent!'));
         return response()->json([
             'dateFrom' => $request->get('from'),
             'dateTo'   => $request->get('to'),
-            'success'  => __('Report sent!'),
+            'success'  => __('Отчет отправлен!'),
         ]);
     }
 }
