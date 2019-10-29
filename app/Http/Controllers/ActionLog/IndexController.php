@@ -147,7 +147,8 @@ class IndexController extends Controller
             if ((int)$request->get('income') === ActionLog::INCOME) {
                 if (!empty($stock)) {
                     $stock->update([
-                        'count' => $stock->count + (int)$request->get('count')
+                        'count' => $stock->count + (int)$request->get('count'),
+                        'description' => $request->get('description')
                     ]);
                 }
                 if (!empty($plan)) {
@@ -168,7 +169,8 @@ class IndexController extends Controller
                 /** OUTCOME */
                 if (!empty($stock)) {
                     $stock->update([
-                        'count' => $stock->count -= (int)$request->get('count')
+                        'count' => $stock->count -= (int)$request->get('count'),
+                        'description' => $request->get('description')
                     ]);
                 }
             }
@@ -223,6 +225,11 @@ class IndexController extends Controller
         $stock = Stock::where(['product_id' => $action->product->id])->first();
 
         if ($request->get('count') == 0) {
+            if ($request->has('description')) {
+                $stock->update([
+                    'description' => $request->get('description')
+                ]);
+            }
             $request->offsetUnset('count');
         } else {
 
@@ -231,7 +238,8 @@ class IndexController extends Controller
 
                 if (!empty($stock)) {
                     $stock->update([
-                        'count' => $stock->count + ((int)$request->get('count') - $action->count)
+                        'count' => $stock->count + ((int)$request->get('count') - $action->count),
+                        'description' => $request->get('description')
                     ]);
                 }
 
@@ -251,7 +259,8 @@ class IndexController extends Controller
                 /** OUTCOME */
                 if (!empty($stock)) {
                     $stock->update([
-                        'count' => $stock->count + ((int)$request->get('count') - $action->count)
+                        'count' => $stock->count + ((int)$request->get('count') - $action->count),
+                        'description' => $request->get('description')
                     ]);
                 }
             }
