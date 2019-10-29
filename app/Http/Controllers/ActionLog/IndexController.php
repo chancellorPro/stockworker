@@ -358,6 +358,7 @@ class IndexController extends Controller
             }
             $request->merge(['data' => $entity->collection()]);
             $request->merge(['boxes' => arrayToKeyValue(config('presets.boxes'), 'id', 'name')]);
+            $request->merge(['hide_button' => true]);
 
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
@@ -366,7 +367,7 @@ class IndexController extends Controller
                 $message->subject($orderType);
                 $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
                 $message->to('pavel@zolotarev.pp.ua');
-                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
+//                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
                 $message->attachData($attach, 'report.xlsx', $options = []);
             });
         } catch (Swift_TransportException $e) {
