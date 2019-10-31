@@ -354,7 +354,7 @@ class IndexController extends Controller
 
         try {
             $currentDate = Carbon::now()->format('Y-m-d');
-            if ($request->get('income') === ActionLog::INCOME) {
+            if ($request->get('income') == ActionLog::INCOME) {
                 $reportName = $currentDate . '_Отчет_о_прибытии';
                 $entity = new IncomeReport($dateFrom, $dateTo, $direction, $hasParent);
             } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
