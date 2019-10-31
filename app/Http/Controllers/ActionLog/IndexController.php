@@ -356,11 +356,11 @@ class IndexController extends Controller
 
         try {
             $currentDate = Carbon::now()->format('Y-m-d');
-            if ($request->has('income')) {
-                if ($request->get('income') == ActionLog::INCOME) {
+            if ($direction !== null) {
+                if ($direction == ActionLog::INCOME) {
                     $reportName = $currentDate . '_Отчет_о_прибытии';
                     $entity = new IncomeReport($dateFrom, $dateTo, $direction, $hasParent);
-                } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
+                } elseif ((int)$direction === ActionLog::OUTOME) {
                     $reportName = $currentDate . '_Отчет_об_отгрузке';
                     $entity = new OutcomeReport($dateFrom, $dateTo, $direction, $hasParent);
                 }
