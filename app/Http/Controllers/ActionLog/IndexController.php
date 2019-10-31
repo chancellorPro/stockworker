@@ -149,7 +149,7 @@ class IndexController extends Controller
             if ((int)$request->get('income') === ActionLog::INCOME) {
                 if (!empty($stock)) {
                     $stock->update([
-                        'count' => $stock->count + (int)$request->get('count'),
+                        'count'       => $stock->count + (int)$request->get('count'),
                         'description' => $request->get('description')
                     ]);
                 }
@@ -171,7 +171,7 @@ class IndexController extends Controller
                 /** OUTCOME */
                 if (!empty($stock)) {
                     $stock->update([
-                        'count' => $stock->count -= (int)$request->get('count'),
+                        'count'       => $stock->count -= (int)$request->get('count'),
                         'description' => $request->get('description')
                     ]);
                 }
@@ -240,7 +240,7 @@ class IndexController extends Controller
 
                 if (!empty($stock)) {
                     $stock->update([
-                        'count' => $stock->count + ((int)$request->get('count') - $action->count),
+                        'count'       => $stock->count + ((int)$request->get('count') - $action->count),
                         'description' => $request->get('description')
                     ]);
                 }
@@ -261,7 +261,7 @@ class IndexController extends Controller
                 /** OUTCOME */
                 if (!empty($stock)) {
                     $stock->update([
-                        'count' => $stock->count + ((int)$request->get('count') - $action->count),
+                        'count'       => $stock->count + ((int)$request->get('count') - $action->count),
                         'description' => $request->get('description')
                     ]);
                 }
@@ -307,10 +307,12 @@ class IndexController extends Controller
             $hasParent = $request->get('has_parent');
         }
 
-        if ($request->get('income') == ActionLog::INCOME) {
-            $entity = new IncomeReport($from, $to, $income, $hasParent);
-        } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
-            $entity = new OutcomeReport($from, $to, $income, $hasParent);
+        if ($request->has('income')) {
+            if ($request->get('income') == ActionLog::INCOME) {
+                $entity = new IncomeReport($from, $to, $income, $hasParent);
+            } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
+                $entity = new OutcomeReport($from, $to, $income, $hasParent);
+            }
         } else {
             $entity = new StockReport($from, $to, $income, $hasParent);
         }
@@ -334,7 +336,7 @@ class IndexController extends Controller
             'dateFrom'  => $request->get('from'),
             'dateTo'    => $request->get('to'),
             'direction' => $income,
-            'template' => $template,
+            'template'  => $template,
             'hasParent' => $hasParent
         ]);
     }
@@ -354,12 +356,14 @@ class IndexController extends Controller
 
         try {
             $currentDate = Carbon::now()->format('Y-m-d');
-            if ($request->get('income') == ActionLog::INCOME) {
-                $reportName = $currentDate . '_Отчет_о_прибытии';
-                $entity = new IncomeReport($dateFrom, $dateTo, $direction, $hasParent);
-            } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
-                $reportName = $currentDate . '_Отчет_об_отгрузке';
-                $entity = new OutcomeReport($dateFrom, $dateTo, $direction, $hasParent);
+            if ($request->has('income')) {
+                if ($request->get('income') == ActionLog::INCOME) {
+                    $reportName = $currentDate . '_Отчет_о_прибытии';
+                    $entity = new IncomeReport($dateFrom, $dateTo, $direction, $hasParent);
+                } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
+                    $reportName = $currentDate . '_Отчет_об_отгрузке';
+                    $entity = new OutcomeReport($dateFrom, $dateTo, $direction, $hasParent);
+                }
             } else {
                 $reportName = $currentDate . '_Отчет_о_состоянии_склада';
                 $entity = new StockReport($dateFrom, $dateTo, $direction, $hasParent);
@@ -371,7 +375,7 @@ class IndexController extends Controller
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.' . $template, $request->all(), function($message) use ($attach, $orderType) {
+            Mail::send('emails.' . $template, $request->all(), function ($message) use ($attach, $orderType) {
                 $message->subject($orderType);
                 $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
                 $message->to('pavel@zolotarev.pp.ua');
@@ -383,16 +387,16 @@ class IndexController extends Controller
         } catch (Swift_TransportException $e) {
             pushNotify('error', __('Mail service is not supported!'));
             return response()->json([
-                'error'  => __('Mail service is not supported!'),
+                'error' => __('Mail service is not supported!'),
             ]);
         }
 
         pushNotify('success', __('Report sent!'));
         return response()->json([
             'telegramResponse' => $telegramResponse,
-            'dateFrom' => $request->get('from'),
-            'dateTo'   => $request->get('to'),
-            'success'  => __('Отчет отправлен!'),
+            'dateFrom'         => $request->get('from'),
+            'dateTo'           => $request->get('to'),
+            'success'          => __('Отчет отправлен!'),
         ]);
     }
 
@@ -403,7 +407,8 @@ class IndexController extends Controller
      * @param $reportName
      * @return bool|string
      */
-    function sendMessage($binary, $reportName) {
+    function sendMessage($binary, $reportName)
+    {
         $file_path = "/reports/$reportName.xlsx";
         $file = fopen(public_path() . $file_path, 'wb');
         fwrite($file, $binary);
@@ -413,7 +418,7 @@ class IndexController extends Controller
         $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $file_path;
         $ch = curl_init();
         $optArray = array(
-            CURLOPT_URL => $url,
+            CURLOPT_URL            => $url,
             CURLOPT_RETURNTRANSFER => true,
         );
         curl_setopt_array($ch, $optArray);
