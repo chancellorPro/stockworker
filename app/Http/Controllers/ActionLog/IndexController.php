@@ -407,7 +407,7 @@ class IndexController extends Controller
         fwrite($file, $binary);
         fclose($file);
 
-        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?parse_mode=html&chat_id=" . env('CHAT_ID');
+        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
         $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $file_path;
         $ch = curl_init();
         $optArray = array(
