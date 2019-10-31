@@ -126,7 +126,7 @@
             </thead>
             <tbody class="fast-save-page-container">
             @php
-                $currentDate = Carbon::now();
+                $currentDate = Carbon::now()->setTimezone('UTC');
             @endphp
             @foreach($data as $item)
                 <tr>
