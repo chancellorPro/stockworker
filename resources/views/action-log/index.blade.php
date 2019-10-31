@@ -38,16 +38,6 @@
                 >
             </div>
         </div>
-
-        {{-- Income report --}}
-        @include('common.buttons.save', [
-            'route' => 'telegram',
-            'name' => __('telegram'),
-            'class' => 'reports',
-            'dataset' => [
-                'method' => 'GET',
-            ],
-        ])
         {{-- Income report --}}
         @include('common.buttons.save', [
             'route' => 'export',

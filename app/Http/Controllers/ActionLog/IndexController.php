@@ -402,14 +402,12 @@ class IndexController extends Controller
      * @return bool|string
      */
     function sendMessage($binary, $reportName) {
-        $chatID = env('CHAT_ID');
-        $token = env('TELEGRAM_TOKEN');
         $file_path = "/reports/$reportName.xlsx";
         $file = fopen(public_path() . $file_path, 'wb');
         fwrite($file, $binary);
         fclose($file);
 
-        $url = "https://api.telegram.org/bot" . $token . "/sendMessage?parse_mode=html&chat_id=" . $chatID; // parse_mode='HTML'&
+        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?parse_mode=html&chat_id=" . env('CHAT_ID');
         $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $file_path;
         $ch = curl_init();
         $optArray = array(
