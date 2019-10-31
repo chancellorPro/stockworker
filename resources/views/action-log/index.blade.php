@@ -126,7 +126,7 @@
             </thead>
             <tbody class="fast-save-page-container">
             @php
-                $currentDate = Carbon::now()->setTimezone('Europe/Kiev');
+                $currentDate = Carbon::now()->setTimezone('Europe/Kiev')->format('Y-m-d');
             @endphp
             @foreach($data as $item)
                 <tr>
@@ -135,7 +135,7 @@
                         {{ $item->income ? __('Outcome') : __('Income') }}
                     </td>
                     <td>{{ $item->product ? $item->product->name : '' }}</td>
-                    <td style="{{ $currentDate > Carbon::createFromFormat('Y-m-d', $item->date) ? 'background:silver' : '' }}">{{ $item->date }}</td>
+                    <td style="{{ $currentDate > Carbon::createFromFormat('Y-m-d', $item->date)->setTimezone('Europe/Kiev') ? 'background:silver' : '' }}">{{ $item->date }}</td>
                     <td>{{ $item->count }}</td>
                     <td>{{ $item->partition }}</td>
                     <td>{{ $item->customer ? $item->customer->name : '' }}</td>
