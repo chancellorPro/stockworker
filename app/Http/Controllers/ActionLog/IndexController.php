@@ -307,7 +307,7 @@ class IndexController extends Controller
             $hasParent = $request->get('has_parent');
         }
 
-        if ($request->get('income') === ActionLog::INCOME) {
+        if ($request->get('income') == ActionLog::INCOME) {
             $entity = new IncomeReport($from, $to, $income, $hasParent);
         } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
             $entity = new OutcomeReport($from, $to, $income, $hasParent);
