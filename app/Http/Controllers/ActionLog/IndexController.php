@@ -131,7 +131,7 @@ class IndexController extends Controller
     /**
      * Save new action
      *
-     * @param Request $request
+     * @param ActionLogRequest $request
      * @return JsonResponse
      */
     public function store(ActionLogRequest $request)
@@ -339,7 +339,10 @@ class IndexController extends Controller
         ]);
     }
 
-
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function orderSend(Request $request)
     {
         $dateFrom = $request->get('dateFrom');
