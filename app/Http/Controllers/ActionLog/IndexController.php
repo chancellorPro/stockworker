@@ -418,6 +418,6 @@ class IndexController extends Controller
         $result = curl_exec($ch);
         curl_close($ch);
 
-        return $result;
+        return [$result,$url];
     }
 }
