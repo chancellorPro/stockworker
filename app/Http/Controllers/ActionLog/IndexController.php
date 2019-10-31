@@ -396,7 +396,6 @@ class IndexController extends Controller
     /**
      * Send Telegram message
      *
-     * @param $message
      * @param $binary
      * @param $reportName
      * @return bool|string
@@ -418,6 +417,6 @@ class IndexController extends Controller
         $result = curl_exec($ch);
         curl_close($ch);
 
-        return [$result,$url];
+        return $result;
     }
 }
