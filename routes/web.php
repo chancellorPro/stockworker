@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('telegram', 'ActionLog\IndexController@sendMessage')->name('telegram');
+    Route::resource('box', 'Box\IndexController');
     Route::resource('product', 'Product\IndexController');
     Route::resource('action-log', 'ActionLog\IndexController');
     Route::resource('stock', 'Stock\IndexController');

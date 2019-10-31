@@ -15,6 +15,7 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Traits\FilterBuilder;
 use Carbon\Carbon;
+use CURLFile;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -349,11 +350,15 @@ class IndexController extends Controller
         $orderType = $request->get('orderType');
 
         try {
+            $currentDate = Carbon::now()->format('Y-m-d');
             if ($request->get('income') === ActionLog::INCOME) {
+                $reportName = $currentDate . '_Отчет_о_прибытии';
                 $entity = new IncomeReport($dateFrom, $dateTo, $direction, $hasParent);
             } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
+                $reportName = $currentDate . '_Отчет_об_отгрузке';
                 $entity = new OutcomeReport($dateFrom, $dateTo, $direction, $hasParent);
             } else {
+                $reportName = $currentDate . '_Отчет_о_состоянии_склада';
                 $entity = new StockReport($dateFrom, $dateTo, $direction, $hasParent);
             }
             $request->merge(['data' => $entity->collection()]);
@@ -363,13 +368,15 @@ class IndexController extends Controller
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.' . $template, $request->all(), function($message) use ($attach, $orderType) {
-                $message->subject($orderType);
-                $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
-                $message->to('pavel@zolotarev.pp.ua');
-                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
-                $message->attachData($attach, 'report.xlsx', $options = []);
-            });
+//            Mail::send('emails.' . $template, $request->all(), function($message) use ($attach, $orderType) {
+//                $message->subject($orderType);
+//                $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
+//                $message->to('pavel@zolotarev.pp.ua');
+//                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
+//                $message->attachData($attach, 'report.xlsx', $options = []);
+//            });
+
+            $telegramResponse = $this->sendMessage($attach, $reportName);
         } catch (Swift_TransportException $e) {
             pushNotify('error', __('Mail service is not supported!'));
             return response()->json([
@@ -379,9 +386,40 @@ class IndexController extends Controller
 
         pushNotify('success', __('Report sent!'));
         return response()->json([
+            'telegramResponse' => $telegramResponse,
             'dateFrom' => $request->get('from'),
             'dateTo'   => $request->get('to'),
             'success'  => __('Отчет отправлен!'),
         ]);
+    }
+
+    /**
+     * Send Telegram message
+     *
+     * @param $message
+     * @param $binary
+     * @param $reportName
+     * @return bool|string
+     */
+    function sendMessage($binary, $reportName) {
+        $chatID = env('CHAT_ID');
+        $token = env('TELEGRAM_TOKEN');
+        $file_path = "/reports/$reportName.xlsx";
+        $file = fopen(public_path() . $file_path, 'wb');
+        fwrite($file, $binary);
+        fclose($file);
+
+        $url = "https://api.telegram.org/bot" . $token . "/sendMessage?parse_mode=html&chat_id=" . $chatID; // parse_mode='HTML'&
+        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $file_path;
+        $ch = curl_init();
+        $optArray = array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+        );
+        curl_setopt_array($ch, $optArray);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
     }
 }
