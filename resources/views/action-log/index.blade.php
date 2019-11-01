@@ -75,6 +75,7 @@
             'route' => 'export',
             'id' => 'stock',
             'route_params' => [
+                'income' => \App\Models\ActionLog::STOCK,
                 'has_parent' => false,
                 'orderType' => __('Stock state report'),
             ],

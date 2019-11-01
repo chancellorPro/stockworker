@@ -13,6 +13,7 @@ class ActionLog extends Model
 
     const INCOME = 0;
     const OUTOME = 1;
+    const STOCK = 3;
 
     /**
      * Custom table name

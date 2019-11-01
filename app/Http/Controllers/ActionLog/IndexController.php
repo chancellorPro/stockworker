@@ -299,7 +299,6 @@ class IndexController extends Controller
         $date_to = $request->has('to') ? Carbon::createFromFormat('Y-m-d', $request->get('to')) : Carbon::now();
         $from = $date_from->startOfDay()->format('Y-m-d H:i:s');
         $to = $date_to->endOfDay()->format('Y-m-d H:i:s');
-        $income = $request->get('income') == ActionLog::INCOME ? ActionLog::INCOME : ActionLog::OUTOME;
         $hasParent = null;
         $orderType = $request->get('orderType');
 
@@ -307,14 +306,12 @@ class IndexController extends Controller
             $hasParent = $request->get('has_parent');
         }
 
-        if ($request->has('income')) {
-            if ($request->get('income') == ActionLog::INCOME) {
-                $entity = new IncomeReport($from, $to, $income, $hasParent);
-            } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
-                $entity = new OutcomeReport($from, $to, $income, $hasParent);
-            }
-        } else {
-            $entity = new StockReport($from, $to, $income, $hasParent);
+        if ($request->get('income') == ActionLog::INCOME) {
+            $entity = new IncomeReport($from, $to, $request->get('income'), $hasParent);
+        } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
+            $entity = new OutcomeReport($from, $to, $request->get('income'), $hasParent);
+        } elseif ((int)$request->get('income') === ActionLog::STOCK) {
+            $entity = new StockReport($from, $to, $request->get('income'), $hasParent);
         }
 
         $template = 'stock';
@@ -335,7 +332,7 @@ class IndexController extends Controller
             'data'      => $entity->collection(),
             'dateFrom'  => $request->get('from'),
             'dateTo'    => $request->get('to'),
-            'direction' => $income,
+            'direction' => $request->get('income'),
             'template'  => $template,
             'hasParent' => $hasParent
         ]);
@@ -356,18 +353,18 @@ class IndexController extends Controller
 
         try {
             $currentDate = Carbon::now()->format('Y-m-d');
-            if ($direction !== null) {
-                if ($direction == ActionLog::INCOME) {
-                    $reportName = $currentDate . '_Отчет_о_прибытии';
-                    $entity = new IncomeReport($dateFrom, $dateTo, $direction, $hasParent);
-                } elseif ((int)$direction === ActionLog::OUTOME) {
-                    $reportName = $currentDate . '_Отчет_об_отгрузке';
-                    $entity = new OutcomeReport($dateFrom, $dateTo, $direction, $hasParent);
-                }
-            } else {
+
+            if ($direction == ActionLog::INCOME) {
+                $reportName = $currentDate . '_Отчет_о_прибытии';
+                $entity = new IncomeReport($dateFrom, $dateTo, $direction, $hasParent);
+            } elseif ((int)$direction === ActionLog::OUTOME) {
+                $reportName = $currentDate . '_Отчет_об_отгрузке';
+                $entity = new OutcomeReport($dateFrom, $dateTo, $direction, $hasParent);
+            } elseif ((int)$direction === ActionLog::STOCK) {
                 $reportName = $currentDate . '_Отчет_о_состоянии_склада';
                 $entity = new StockReport($dateFrom, $dateTo, $direction, $hasParent);
             }
+
             $request->merge(['data' => $entity->collection()]);
             $request->merge(['boxes' => arrayToKeyValue(config('presets.boxes'), 'id', 'name')]);
             $request->merge(['hide_button' => true]);
@@ -393,7 +390,7 @@ class IndexController extends Controller
 
         pushNotify('success', __('Report sent!'));
         return response()->json([
-            'telegramResponse' => $telegramResponse,
+            'telegramResponse' => $direction,
             'dateFrom'         => $request->get('from'),
             'dateTo'           => $request->get('to'),
             'success'          => __('Отчет отправлен!'),
