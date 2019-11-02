@@ -163,7 +163,7 @@ class IndexController extends Controller
                             'created_at' => $plan->created_at
                         ]);
                     }
-                    $plan->destroy();
+                    $plan->delete();
                     pushNotify('success', __('План по товару #' . $request->get('product_id') . ' закрыт'));
 
                 }
