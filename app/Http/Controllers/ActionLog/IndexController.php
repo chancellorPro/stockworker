@@ -162,10 +162,10 @@ class IndexController extends Controller
                             'updated_at' => Carbon::now()->format('Y-m-d'),
                             'created_at' => $plan->created_at
                         ]);
-                        $plan->progress = 0;
-                        $plan->count = 0;
                     }
-                    $plan->save();
+                    $plan->destroy();
+                    pushNotify('success', __('План по товару #' . $request->get('product_id') . ' закрыт'));
+
                 }
             } else {
                 /** OUTCOME */
@@ -246,7 +246,7 @@ class IndexController extends Controller
                 }
 
                 if (!empty($plan)) {
-                    $plan->progress += $plan->progress + ((int)$request->get('count') - $action->count);
+                    $plan->progress += ((int)$request->get('count') - $action->count);
                     if ($plan->progress >= $plan->count) {
                         PlanHistory::create([
                             'product_id' => (int)$request->get('product_id'),
