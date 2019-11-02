@@ -88,15 +88,17 @@
         ])
     </div>
     <div class="col-sm-1">
-        {{-- Create --}}
-        @include('common.buttons.create', [
-            'route' => 'action-log.create',
-            'name' => __('Create action'),
-            'class' => 'ajax-modal-action show-form',
-            'dataset' => [
-                'header' => __('Create action'),
-            ],
-        ])
+        @if(auth()->id() < 3)
+            {{-- Create --}}
+            @include('common.buttons.create', [
+                'route' => 'action-log.create',
+                'name' => __('Create action'),
+                'class' => 'ajax-modal-action show-form',
+                'dataset' => [
+                    'header' => __('Create action'),
+                ],
+            ])
+        @endif
     </div>
 @endsection
 
@@ -145,25 +147,27 @@
                         {{ isset($item->product) ? (int)$item->product->parent_product > 0 ? 'Зависимый товар' : '' : '' }}
                     </td>
                     <td>
-                        @include('common.buttons.edit', [
-                            'route' => 'action-log.edit',
-                            'route_params' => [
-                                'id' => $item->id,
-                            ],
-                            'class' => 'ajax-modal-action show-form',
-                            'dataset' => [
-                                'header' => $item->name,
-                            ],
-                        ])
-                        @include('common.buttons.delete', [
-                            'route' => 'action-log.destroy',
-                            'route_params' => [
-                                'id' => $item->id,
-                            ],
-                            'dataset' => [
-                                'header' => $item->name,
-                            ],
-                        ])
+                        @if(auth()->id() < 3)
+                            @include('common.buttons.edit', [
+                                'route' => 'action-log.edit',
+                                'route_params' => [
+                                    'id' => $item->id,
+                                ],
+                                'class' => 'ajax-modal-action show-form',
+                                'dataset' => [
+                                    'header' => $item->name,
+                                ],
+                            ])
+                            @include('common.buttons.delete', [
+                                'route' => 'action-log.destroy',
+                                'route_params' => [
+                                    'id' => $item->id,
+                                ],
+                                'dataset' => [
+                                    'header' => $item->name,
+                                ],
+                            ])
+                        @endif
                     </td>
                 </tr>
             @endforeach
