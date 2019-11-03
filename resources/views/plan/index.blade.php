@@ -89,7 +89,7 @@
             init_filter_col("{{ route('plan.index') }}");
         });
 
-        const products = JSON.parse((new DOMParser).parseFromString('{{ json_encode($products->toArray()) }}', 'text/html').body.textContent);
+        const products = JSON.parse((new DOMParser).parseFromString('{{ addslashes(json_encode($products->toArray())) }}', 'text/html').body.textContent);
 
         $(document)
             .on('change', '[name="product_id"]', function () {
@@ -100,11 +100,15 @@
 
                 $('#box_size').val(product_item.box_size);
                 $('#recommend').text(product_item.box_size);
+                $('.advice').show();
             })
 
             .on('input', '[name="count"]', function () {
                 let box_size = $('#box_size').val();
                 let recommendSize = Math.ceil($(this).val() / box_size) * box_size;
+                if(recommendSize === 0) {
+                    recommendSize = box_size;
+                }
                 if (recommendSize !== $(this).val()) {
                     $('#recommend').text(recommendSize).show();
                 }

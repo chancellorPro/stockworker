@@ -13,7 +13,7 @@
     'addempty' => true,
 ])
 
-<div class="row form-group ">
+<div class="row form-group advice" style="display: none;">
     <label class="control-label col-md-4 col-sm-12">
         Рекомендация:
     </label>
