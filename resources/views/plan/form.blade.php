@@ -18,7 +18,10 @@
         Рекомендация:
     </label>
     <div class=" col-md-6  col-sm-12">
-        <span id="recommend" class="btn btn-primary"></span>
+        <div class="btn btn-primary">
+            <i class="fa fa-copy"></i>
+            <span id="recommend"></span>
+        </div>
     </div>
 </div>
 
