@@ -15,7 +15,7 @@
 
 <div class="row form-group advice" style="display: none;">
     <label class="control-label col-md-4 col-sm-12">
-        Рекомендация:
+        Рекомендация
     </label>
     <div class=" col-md-6  col-sm-12">
         <div class="btn btn-primary">
