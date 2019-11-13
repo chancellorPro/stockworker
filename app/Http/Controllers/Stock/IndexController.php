@@ -45,7 +45,7 @@ class IndexController extends Controller
             ->leftJoin('action_log AS a', function($join) {
                 $join->on('a.product_id', '=', 'stock.product_id')
                     ->where('a.income', '=', ActionLog::OUTOME)
-                    ->where('date', '>', DB::raw('p.start'));
+                    ->where('a.date', '>', DB::raw('p.start'));
             })
             ->join('products AS pr', 'pr.id', '=', 'stock.product_id')
             ->orderBy('p.product_id', 'desc')
