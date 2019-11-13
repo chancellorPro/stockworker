@@ -16,6 +16,7 @@
         <div class="col-sm-7">
             <div class="col-sm-4">
                 <label class="pull-right">@lang('Create report'): </label>
+                {{ $token }}
             </div>
             <div class="col-sm-4">
                 <input

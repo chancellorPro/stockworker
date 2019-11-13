@@ -62,6 +62,7 @@ class IndexController extends Controller
         )->paginate($this->perPage);
 
         return view('action-log.index', [
+            'token' => env('TELEGRAM_TOKEN'),
             'data'             => $data,
             'filter'           => $this->getFilter(),
             'transaction_type' => config('presets.transaction_type'),
