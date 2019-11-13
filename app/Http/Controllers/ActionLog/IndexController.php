@@ -17,6 +17,7 @@ use App\Traits\FilterBuilder;
 use Carbon\Carbon;
 use CURLFile;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -170,6 +171,13 @@ class IndexController extends Controller
             } else {
                 /** OUTCOME */
                 if (!empty($stock)) {
+                    $count = $stock->count -= (int)$request->get('count');
+//                    if($count < 0) {
+//                        Log::info(json_encode(['message' => 'Такого количества нет на складе!']));
+//                        pushNotify('danger', 'Такого количества нет на складе!');
+//
+//                        return $this->error(['message' => 'Такого количества нет на складе!']);
+//                    }
                     $stock->update([
                         'count'       => $stock->count -= (int)$request->get('count'),
                         'description' => $request->get('description')
@@ -178,9 +186,9 @@ class IndexController extends Controller
             }
 
             ActionLog::create($request->all());
-        } catch (Exception $e) {
+        } catch (QueryException $e) {
             Log::info(json_encode($e->getMessage()));
-            return $this->error($e->getMessage());
+            return $this->error(['message' => 'Такого количества нет на складе!']);
         }
 
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));
