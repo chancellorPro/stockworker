@@ -21,24 +21,24 @@
         <br />
 
         <!-- sidebar menu -->
-{{--        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">--}}
-{{--            <div class="menu-section">--}}
-{{--                <ul class="nav side-menu">--}}
-{{--                    @foreach(config('menu') as $menuItem)--}}
-{{--                        @if (isset($menuItem['child']))--}}
-{{--                            @foreach($menuItem['child'] as $childItem)--}}
-{{--                                <li>--}}
-{{--                                    <a href="{{ route($childItem['route'], (array)@$childItem['route_params']) }}">--}}
-{{--                                        <i class="fa {{ $childItem['icon'] }}"></i>--}}
-{{--                                        {{ $childItem['name'] }}--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                            @endforeach--}}
-{{--                        @endif--}}
-{{--                    @endforeach--}}
-{{--                </ul>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu-section">
+                <ul class="nav side-menu">
+                    @foreach(config('menu') as $menuItem)
+                        @if (isset($menuItem['child']))
+                            @foreach($menuItem['child'] as $childItem)
+                                <li>
+                                    <a href="{{ route($childItem['route'], (array)@$childItem['route_params']) }}">
+                                        <i class="fa {{ $childItem['icon'] }}"></i>
+                                        {{ $childItem['name'] }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        @endif
+                    @endforeach
+                </ul>
+            </div>
+        </div>
         <!-- /sidebar menu -->
 
         <!-- /menu footer buttons -->
