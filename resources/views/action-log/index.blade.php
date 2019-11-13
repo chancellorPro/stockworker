@@ -16,7 +16,7 @@
         <div class="col-sm-7">
             <div class="col-sm-4">
                 <label class="pull-right">@lang('Create report'): </label>
-                {{ $token }}
+                {{$_ENV['CHAT_ID']}}
             </div>
             <div class="col-sm-4">
                 <input
