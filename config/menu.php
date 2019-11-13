@@ -28,5 +28,4 @@ return [
             ['name' => 'Менеджеры', 'route' => 'user.index', 'icon' => 'fa-users'],
         ],
     ],
-
 ];
