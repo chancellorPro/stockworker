@@ -173,8 +173,7 @@ class IndexController extends Controller
                 if (!empty($stock)) {
                     $count = $stock->count -= (int)$request->get('count');
                     if($count < 0) {
-                        Log::info(json_encode(['message' => 'Такого количества нет на складе!']));
-                        pushNotify('danger', 'Такого количества нет на складе!');
+                        return $this->error(['message' => 'Такого количества нет на складе!']);
                     }
                     $stock->update([
                         'count'       => $count,
