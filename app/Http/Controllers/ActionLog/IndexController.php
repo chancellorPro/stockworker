@@ -172,7 +172,7 @@ class IndexController extends Controller
                 /** OUTCOME */
                 if (!empty($stock)) {
                     $count = $stock->count -= (int)$request->get('count');
-                    if($count < 0) {
+                    if ($count < 0) {
                         return $this->error(['message' => 'Такого количества нет на складе!']);
                     }
                     $stock->update([
@@ -416,6 +416,14 @@ class IndexController extends Controller
         fwrite($file, $binary);
         fclose($file);
 
+        $viberReceiverIDs = [
+            'VCvoJZRu3ZC9F24LosVBOw==', // я
+//            'xzfQLEg4r8ElRtwwi8zenw==', // кир
+        ];
+        foreach ($viberReceiverIDs as $user_id) {
+            $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $file_path);
+        }
+
         $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN', '949058805:AAFSTcX3WAeLnXamodAY3GvqrQUjfA7CBcM') . "/sendMessage?chat_id=" . env('CHAT_ID', '@stock_reports');
         $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $file_path;
         $ch = curl_init();
@@ -429,4 +437,51 @@ class IndexController extends Controller
 
         return $result;
     }
+
+    function send_message($receiverID, $TextMessage)
+    {
+        $curl = curl_init();
+        $json_data = '{
+"receiver":"' . $receiverID . '",
+"min_api_version":1,
+"sender":{
+"name":"stockReport",
+"avatar":"avatar.example.com"
+},
+"tracking_data":"tracking data",
+"type":"text",
+"text":"' . $TextMessage . '"
+}
+';
+        $data = json_decode($json_data);
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL            => "https://chatapi.viber.com/pa/send_message",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING       => "",
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_TIMEOUT        => 30,
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST  => "POST",
+            CURLOPT_POSTFIELDS     => json_encode($data),
+
+            CURLOPT_HTTPHEADER => array(
+                "Cache-Control: no-cache",
+                "Content-Type: application/JSON",
+                "X-Viber-Auth-Token: " . env('VIBER_AUTH_TOKEN')
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
+    }
+
 }

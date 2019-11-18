@@ -38,6 +38,15 @@
                 >
             </div>
         </div>
+        {{-- viber-send --}}
+        @include('common.buttons.save', [
+            'route' => 'viber-send',
+            'name' => __('viber-send'),
+            'class' => 'reports',
+            'dataset' => [
+                'method' => 'GET',
+            ],
+        ])
         {{-- Income report --}}
         @include('common.buttons.save', [
             'route' => 'export',

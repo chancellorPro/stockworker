@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('export', 'ActionLog\IndexController@getExportData')->name('export');
     Route::get('send', 'ActionLog\IndexController@orderSend')->name('send');
+    Route::get('viber-send', 'ActionLog\IndexController@send_message')->name('viber-send');
 });
 
 Auth::routes();
