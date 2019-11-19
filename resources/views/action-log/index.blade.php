@@ -38,6 +38,8 @@
                 >
             </div>
         </div>
+        <div id="canvas_handler"></div>
+
         {{-- Income report --}}
         @include('common.buttons.save', [
             'route' => 'export',

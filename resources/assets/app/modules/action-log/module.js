@@ -10,10 +10,17 @@ $(document)
     .on('click', '.reports', function () {
         setTimeout(function () {
             let element = $("#html-content-holder"); // global variable
+            let canvas_handler = $("#canvas_handler"); // global variable
 
-            html2canvas(element.get(0), {
+            const copy_ele = element.get(0).cloneNode(true);
+            canvas_handler.append(copy_ele);
+            canvas_handler.css('height', element.scrollHeight + 20);
+            canvas_handler.css('width', element.scrollWidth + 10);
+
+            html2canvas(copy_ele, {
                 scrollX: 0,
-                scrollY: -184
+                scrollY: -1,
+                useCORS: true,
             }).then(function (canvas) {
                 let imageData = canvas.toDataURL("image/png");
                 let newData = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
