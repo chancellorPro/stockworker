@@ -1,7 +1,7 @@
 @extends('layouts.pages.mail')
 
 @section('main_container')
-    <div>
+    <div style="position: relative">
         <h3>За {{ $dateFrom }} - {{ $dateTo }}</h3>
         <table id="html-content-holder">
             <thead>
