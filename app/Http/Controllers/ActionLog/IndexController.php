@@ -418,6 +418,7 @@ class IndexController extends Controller
 
         $viberReceiverIDs = [
             'VCvoJZRu3ZC9F24LosVBOw==', // я
+            'Lm9+v/ecMk90fl7tHAStjA==', // я
 //            'xzfQLEg4r8ElRtwwi8zenw==', // кир
         ];
         foreach ($viberReceiverIDs as $user_id) {
