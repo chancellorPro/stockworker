@@ -13,7 +13,7 @@ $(document)
 
             html2canvas(element.get(0), {
                 scrollX: 0,
-                scrollY: -1
+                scrollY: -184
             }).then(function (canvas) {
                 let imageData = canvas.toDataURL("image/png");
                 let newData = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
