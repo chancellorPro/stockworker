@@ -17,7 +17,7 @@
         }
 
         table, th, td {
-            border: 1px solid silver;
+            border: 1px solid black;
             padding: 5px;
         }
     </style>
@@ -45,6 +45,7 @@
                     'method' => 'POST',
                 ],
             ])
+            <textarea id="canvas-data" style="display:none;"></textarea>
             <br><br>
         @endif
         @yield('main_container')
