@@ -2,7 +2,7 @@
 
 @section('main_container')
     <div style="position: relative">
-        <table class="tablestickyheader">
+        <table class="tablestickyheader" id="html-content-holder">
             <thead>
             <tr>
                 <th>#</th>

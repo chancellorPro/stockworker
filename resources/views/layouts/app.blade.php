@@ -52,6 +52,7 @@
         </script>
         <script src="{{ asset("app/js/vendor.js") }}"></script>
         <script src="{{ asset("app/js/main.js") }}"></script>
+        <script src="{{ asset("app/js/html2canvas.js") }}"></script>
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {

@@ -38,15 +38,6 @@
                 >
             </div>
         </div>
-        {{-- viber-send --}}
-        @include('common.buttons.save', [
-            'route' => 'viber-send',
-            'name' => __('viber-send'),
-            'class' => 'reports',
-            'dataset' => [
-                'method' => 'GET',
-            ],
-        ])
         {{-- Income report --}}
         @include('common.buttons.save', [
             'route' => 'export',
@@ -61,6 +52,7 @@
             'class' => 'reports',
             'dataset' => [
                 'method' => 'GET',
+                'event' => 'REPORT_SHOW_FORM',
             ],
         ])
         {{-- Outcome report --}}
@@ -77,6 +69,7 @@
             'class' => 'reports',
             'dataset' => [
                 'method' => 'GET',
+                'event' => 'REPORT_SHOW_FORM',
             ],
         ])
         {{-- Stock state report --}}
@@ -93,6 +86,7 @@
             'class' => 'reports',
             'dataset' => [
                 'method' => 'GET',
+                'event' => 'REPORT_SHOW_FORM',
             ],
         ])
     </div>
@@ -214,14 +208,15 @@
             .on('click', '.reports', function (e) {
                 e.preventDefault();
 
-                var dateFrom = $('[name="today[from]"]').val();
-                var dateTo = $('[name="today[to]"]').val();
-                var data = {from: dateFrom, to: dateTo};
+                let dateFrom = $('[name="today[from]"]').val();
+                let dateTo = $('[name="today[to]"]').val();
+                let canvas = $('#canvas-data').val();
+                let data = {from: dateFrom, to: dateTo, canvas: canvas};
 
                 if (Object.keys(data).length) {
                     $.ajax({
                         url: $(this).attr('href'),
-                        type: 'GET',
+                        type: 'POST',
                         data: data,
                         error: response => {
                             if (!!response.responseJSON) {

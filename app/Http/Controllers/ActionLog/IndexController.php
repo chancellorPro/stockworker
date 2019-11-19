@@ -351,6 +351,7 @@ class IndexController extends Controller
     {
         $dateFrom = $request->get('dateFrom');
         $dateTo = $request->get('dateTo');
+        $canvas = $request->get('canvas');
         $direction = $request->get('direction');
         $template = $request->get('template');
         $hasParent = $request->get('hasParent');
@@ -385,7 +386,7 @@ class IndexController extends Controller
                 $message->attachData($attach, 'report.xlsx', $options = []);
             });
 
-            $telegramResponse = $this->sendMessage($attach, $reportName);
+            $telegramResponse = $this->sendMessage($attach, $canvas, $reportName);
         } catch (Swift_TransportException $e) {
             pushNotify('error', __('Mail service is not supported!'));
             return response()->json([
@@ -405,28 +406,37 @@ class IndexController extends Controller
     /**
      * Send Telegram message
      *
-     * @param $binary
+     * @param $attach binary
+     * @param $canvas binary
      * @param $reportName
      * @return bool|string
      */
-    function sendMessage($binary, $reportName)
+    function sendMessage($attach, $canvas, $reportName)
     {
-        $file_path = "/reports/$reportName.xlsx";
-        $file = fopen(public_path() . $file_path, 'wb');
-        fwrite($file, $binary);
+//        $xls_file_path = "/reports/$reportName.xlsx";
+//        $file = fopen(public_path() . $xls_file_path, 'wb');
+//        fwrite($file, $attach);
+//        fclose($file);
+
+        $png_file_path = "/reports/$reportName.png";
+        $file = fopen(public_path() . $png_file_path, 'wb');
+        $img = str_replace(['data:image/png;base64,', 'data:application/octet-stream;base64,'], [''], $canvas);
+        $img = str_replace(' ', '+', $img);
+        $fileData = base64_decode($img);
+        fwrite($file, $fileData);
         fclose($file);
 
         $viberReceiverIDs = [
             'VCvoJZRu3ZC9F24LosVBOw==', // я
-            'Lm9+v/ecMk90fl7tHAStjA==', // я
-//            'xzfQLEg4r8ElRtwwi8zenw==', // кир
+            'Lm9+v/ecMk90fl7tHAStjA==', // ,fnz
+            'xzfQLEg4r8ElRtwwi8zenw==', // кир
         ];
         foreach ($viberReceiverIDs as $user_id) {
-            $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $file_path);
+            $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
         }
 
         $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN', '949058805:AAFSTcX3WAeLnXamodAY3GvqrQUjfA7CBcM') . "/sendMessage?chat_id=" . env('CHAT_ID', '@stock_reports');
-        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $file_path;
+        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path;
         $ch = curl_init();
         $optArray = array(
             CURLOPT_URL            => $url,

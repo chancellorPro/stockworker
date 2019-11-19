@@ -29,7 +29,7 @@
             {{-- Send report --}}
             @include('common.buttons.save', [
                 'route' => 'send',
-                'id' => 'send',
+                'id' => 'send-report',
                 'route_params' => [
                     'has_parent' => false,
                     'orderType' => $orderType,
@@ -42,9 +42,10 @@
                 'fa_class' => 'fa-save',
                 'class' => 'reports',
                 'dataset' => [
-                    'method' => 'GET',
+                    'method' => 'POST',
                 ],
             ])
+            <textarea id="canvas-data" style="display:none;"></textarea>
             <br><br>
         @endif
         @yield('main_container')
