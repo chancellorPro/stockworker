@@ -435,7 +435,7 @@ class IndexController extends Controller
             $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
         }
 
-        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN', '949058805:AAFSTcX3WAeLnXamodAY3GvqrQUjfA7CBcM') . "/sendMessage?chat_id=" . env('CHAT_ID', '@stock_reports');
+        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
         $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path;
         $ch = curl_init();
         $optArray = array(
