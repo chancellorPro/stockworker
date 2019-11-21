@@ -1,5 +1,4 @@
 import html2canvas from 'html2canvas';
-import http from "components/http/RequestBuilder";
 
 $(document)
 
@@ -9,8 +8,9 @@ $(document)
 
     .on('click', '.reports', function () {
         setTimeout(function () {
-            let element = $("#html-content-holder"); // global variable
-            let canvas_handler = $("#canvas_handler"); // global variable
+            let element = $("#html-content-holder");
+            let canvas_handler = $("#canvas_handler");
+            canvas_handler.empty();
 
             const copy_ele = element.get(0).cloneNode(true);
             canvas_handler.append(copy_ele);

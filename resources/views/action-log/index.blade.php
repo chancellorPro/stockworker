@@ -214,6 +214,7 @@
                 let dateTo = $('[name="today[to]"]').val();
                 let canvas = $('#canvas-data').val();
                 let data = {from: dateFrom, to: dateTo, canvas: canvas};
+                let canvas_handler = $("#canvas_handler");
 
                 if (Object.keys(data).length) {
                     $.ajax({
@@ -226,6 +227,7 @@
                             }
                         },
                         success: function (r) {
+                            canvas_handler.empty();
                             if (r.hasOwnProperty('success')) {
                                 $('.modal-title').text(r.success);
                                 $('.modal-header').css('background', '#a7ff83');
