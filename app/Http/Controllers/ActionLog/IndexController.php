@@ -413,18 +413,18 @@ class IndexController extends Controller
      */
     function sendMessage($attach, $canvas, $reportName)
     {
-//        $xls_file_path = "/reports/$reportName.xlsx";
-//        $file = fopen(public_path() . $xls_file_path, 'wb');
-//        fwrite($file, $attach);
-//        fclose($file);
-
-        $png_file_path = "/reports/$reportName.png";
-        $file = fopen(public_path() . $png_file_path, 'wb');
-        $img = str_replace(['data:image/png;base64,', 'data:application/octet-stream;base64,'], [''], $canvas);
-        $img = str_replace(' ', '+', $img);
-        $fileData = base64_decode($img);
-        fwrite($file, $fileData);
+        $xls_file_path = "/reports/$reportName.xlsx";
+        $file = fopen(public_path() . $xls_file_path, 'wb');
+        fwrite($file, $attach);
         fclose($file);
+
+//        $png_file_path = "/reports/$reportName.png";
+//        $file = fopen(public_path() . $png_file_path, 'wb');
+//        $img = str_replace(['data:image/png;base64,', 'data:application/octet-stream;base64,'], [''], $canvas);
+//        $img = str_replace(' ', '+', $img);
+//        $fileData = base64_decode($img);
+//        fwrite($file, $fileData);
+//        fclose($file);
 
         $viberReceiverIDs = [
             'VCvoJZRu3ZC9F24LosVBOw==', // я
@@ -432,11 +432,11 @@ class IndexController extends Controller
             'xzfQLEg4r8ElRtwwi8zenw==', // кир
         ];
         foreach ($viberReceiverIDs as $user_id) {
-            $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
+            $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $xls_file_path);
         }
 
         $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
-        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path;
+        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $xls_file_path;
         $ch = curl_init();
         $optArray = array(
             CURLOPT_URL            => $url,
