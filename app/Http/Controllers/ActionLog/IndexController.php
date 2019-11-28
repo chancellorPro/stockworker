@@ -437,7 +437,7 @@ class IndexController extends Controller
         }
 
         $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
-        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path ' | '. $_SERVER['HTTP_HOST'] . $xls_file_path;
+        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path . ' | '. $_SERVER['HTTP_HOST'] . $xls_file_path;
         $ch = curl_init();
         $optArray = array(
             CURLOPT_URL            => $url,
