@@ -7,6 +7,7 @@ $(document)
     })
 
     .on('click', '.reports', function () {
+        $('#send-report').attr('disabled', true);
         setTimeout(function () {
             let element = $("#html-content-holder");
             let canvas_handler = $("#canvas_handler");
@@ -25,6 +26,7 @@ $(document)
                 let imageData = canvas.toDataURL("image/png");
                 let newData = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
                 $('#canvas-data').val(newData);
+                $('#send-report').attr('disabled', false);
             });
-        }, 500)
+        }, 300)
     });
