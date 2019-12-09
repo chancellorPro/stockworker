@@ -17,7 +17,7 @@ services:
     networks:
       backend:
         aliases:
-          - stockworker-app
+          - app
 
   stockworker-db:
     image: mysql:5.7
