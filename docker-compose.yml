@@ -1,12 +1,12 @@
 version: '3.5'
 
 services:
-  laravel-app:
+  stockworker-app:
     build:
       context: '.'
       args:
         uid: ${UID}
-    container_name: laravel-app
+    container_name: stockworker-app
     ports:
       - 8888:80
     environment:
@@ -19,9 +19,9 @@ services:
         aliases:
           - app
 
-  mysql-db:
+  stockworker-db:
     image: mysql:5.7
-    container_name: mysql-db
+    container_name: stockworker-db
     volumes:
       - ./run/var:/var/lib/mysql
       - ./run/dump/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -36,7 +36,7 @@ services:
     networks:
       backend:
         aliases:
-          - mysql-db
+          - stockworker-db
 
 networks:
   backend:

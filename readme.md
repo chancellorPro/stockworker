@@ -22,7 +22,7 @@ docker-compose up -d
 Running `composer`, `php artisan` or `phpunit` against the `php` container with helper scripts in the main directory:
 
 ### container
-Running `./container` takes you inside the `laravel-app` container under user uid(1000) (same with host user)
+Running `./container` takes you inside the `stockworker-app` container under user uid(1000) (same with host user)
 ```
 $ ./container
 devuser@8cf37a093502:/var/www/html$
