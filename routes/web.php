@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('history', 'Plan\HistoryController@index')->name('history');
     Route::resource('customer', 'Customer\IndexController');
     Route::resource('user', 'User\IndexController');
+    Route::resource('material', 'Material\IndexController');
+    Route::resource('product-material', 'ProductMaterial\IndexController');
 
     Route::post('export', 'ActionLog\IndexController@getExportData')->name('export');
     Route::post('send', 'ActionLog\IndexController@orderSend')->name('send');

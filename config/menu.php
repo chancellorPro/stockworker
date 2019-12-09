@@ -24,6 +24,8 @@ return [
             ['name' => 'История', 'route' => 'history', 'icon' => 'fa-history'],
             ['name' => 'Склад', 'route' => 'stock.index', 'icon' => 'fa-th'],
             ['name' => 'Товары', 'route' => 'product.index', 'icon' => 'fa-cubes'],
+            ['name' => 'Материалы Товаров', 'route' => 'product-material.index', 'icon' => 'fa-dropbox'],
+            ['name' => 'Материалы', 'route' => 'material.index', 'icon' => 'fa-puzzle-piece'],
             ['name' => 'Заказчики', 'route' => 'customer.index', 'icon' => 'fa-fax'],
             ['name' => 'Менеджеры', 'route' => 'user.index', 'icon' => 'fa-users'],
         ],
