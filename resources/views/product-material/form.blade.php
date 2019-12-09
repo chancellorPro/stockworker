@@ -23,17 +23,23 @@
     'addempty' => true,
 ])
 
-@include('layouts.form-fields.input', [
-    'model' => $currentModel,
-    'name'  => 'color',
+@include('layouts.form-fields.select2', [
     'label' => __('Color'),
+    'model' => $currentModel,
+    'name' => 'color_id',
+    'collection' => $colors,
+    'id' => 'id',
+    'value' => 'name',
+    'addempty' => true,
 ])
+
 @include('layouts.form-fields.input', [
     'model' => $currentModel,
     'name'  => 'height',
     'inputType' => 'number',
     'label' => __('Height'),
 ])
+
 @include('layouts.form-fields.input', [
     'model' => $currentModel,
     'name'  => 'width',

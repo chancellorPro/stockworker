@@ -1,5 +1,5 @@
 @extends('layouts.pages.config', [
-    'title' => 'Product Material Relation',
+    'title' => 'Color',
     'data' => $data,
     'filter' => $filter,
 ])
@@ -7,11 +7,11 @@
 @section('controls')
     {{-- Create --}}
     @include('common.buttons.create', [
-        'route' => 'product-material.create',
-        'name' => __('Product Material'),
+        'route' => 'color.create',
+        'name' => __('Color'),
         'class' => 'ajax-modal-action show-form',
         'dataset' => [
-            'header' => __('Create Product Material'),
+            'header' => __('Create Color'),
             'reload' => 1,
         ],
     ])
@@ -24,11 +24,7 @@
             <thead>
             <tr>
                 <th class="id">@lang('Id')</th>
-                <th>@lang('Product')</th>
-                <th>@lang('Material')</th>
-                <th>@lang('Color')</th>
-                <th>@lang('Height')</th>
-                <th>@lang('Width')</th>
+                <th>@lang('Name')</th>
                 <th class="actions">@lang('Actions')</th>
             </tr>
             </thead>
@@ -36,14 +32,16 @@
             @foreach($data as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td>{{ $item->product->name }}</td>
-                    <td>{{ $item->material->name }}</td>
-                    <td>{{ $item->color_id ? $item->color->name : '' }}</td>
-                    <td>{{ $item->height }}</td>
-                    <td>{{ $item->width }}</td>
+                    <td>
+                        @include('layouts.form-fields.input', [
+                            'name' => "color[{$item->id}][name]",
+                            'label' => false,
+                            'value' => $item->name ?? ''
+                        ])
+                    </td>
                     <td>
                         @include('common.buttons.edit', [
-                            'route' => 'product-material.edit',
+                            'route' => 'color.edit',
                             'route_params' => [
                                 'id' => $item->id,
                             ],
@@ -53,7 +51,7 @@
                             ],
                         ])
                         @include('common.buttons.delete', [
-                            'route' => 'product-material.destroy',
+                            'route' => 'color.destroy',
                             'route_params' => [
                                 'id' => $item->id,
                             ],
@@ -74,7 +72,7 @@
     <script src="{{ asset("js/filter-col.js") }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            init_filter_col("{{ route('material.index') }}");
+            init_filter_col("{{ route('color.index') }}");
         })
     </script>
 @endpush

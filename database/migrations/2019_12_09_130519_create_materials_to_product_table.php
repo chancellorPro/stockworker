@@ -14,11 +14,12 @@ class CreateMaterialsToProductTable extends Migration
     public function up()
     {
         Schema::create('materials_to_product', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('material_id');
             $table->unsignedInteger('product_id');
-            $table->string('color');
-            $table->string('height');
-            $table->string('width');
+            $table->unsignedInteger('color_id')->nullable();
+            $table->string('height')->nullable();
+            $table->string('width')->nullable();
         });
     }
 

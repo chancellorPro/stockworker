@@ -31,7 +31,7 @@ class ProductMaterial extends Model
     protected $fillable = [
         'material_id',
         'product_id',
-        'color',
+        'color_id',
         'height',
         'width',
     ];
@@ -54,5 +54,15 @@ class ProductMaterial extends Model
     public function material()
     {
         return $this->belongsTo(Material::class, 'material_id');
+    }
+
+    /**
+     * Product relation
+     *
+     * @return BelongsTo
+     */
+    public function color()
+    {
+        return $this->belongsTo(Color::class, 'color_id');
     }
 }

@@ -26,6 +26,7 @@ return [
             ['name' => 'Товары', 'route' => 'product.index', 'icon' => 'fa-cubes'],
             ['name' => 'Материалы Товаров', 'route' => 'product-material.index', 'icon' => 'fa-dropbox'],
             ['name' => 'Материалы', 'route' => 'material.index', 'icon' => 'fa-puzzle-piece'],
+            ['name' => 'Цвета', 'route' => 'color.index', 'icon' => 'fa-paint-brush'],
             ['name' => 'Заказчики', 'route' => 'customer.index', 'icon' => 'fa-fax'],
             ['name' => 'Менеджеры', 'route' => 'user.index', 'icon' => 'fa-users'],
         ],

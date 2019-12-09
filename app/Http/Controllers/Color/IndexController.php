@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\ProductMaterial;
+namespace App\Http\Controllers\Color;
 
 use App\Http\Controllers\Controller;
 use App\Models\Color;
-use App\Models\Material;
-use App\Models\Product;
-use App\Models\ProductMaterial;
 use App\Traits\FilterBuilder;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\QueryException;
@@ -23,11 +20,11 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'material' => 'manual',
+        'color' => 'manual',
     ];
 
     /**
-     * List of product-materials
+     * List of colors
      *
      * @param Request $request Request
      *
@@ -35,30 +32,26 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->applyFilter($request, ProductMaterial::query())->paginate($this->perPage);
+        $data = $this->applyFilter($request, Color::query())->paginate($this->perPage);
 
-        return view('product-material.index', [
+        return view('color.index', [
             'data'   => $data,
             'filter' => $this->getFilter(),
         ]);
     }
 
     /**
-     * Create new product-material view
+     * Create new color view
      *
      * @return Factory|View
      */
     public function create()
     {
-        return view('product-material.create', [
-            'colors' => Color::all(),
-            'products' => Product::all(),
-            'materials' => Material::all(),
-        ]);
+        return view('color.create');
     }
 
     /**
-     * Save new product-material
+     * Save new color
      *
      * @param Request $request
      * @return JsonResponse
@@ -66,18 +59,18 @@ class IndexController extends Controller
     public function store(Request $request)
     {
         try {
-            ProductMaterial::create($request->all());
+            Color::create($request->all());
         } catch (QueryException $e) {
             Log::info(json_encode($e->getMessage()));
             return $this->error(['message' => $e->getMessage()]);
         }
 
-        pushNotify('success', __('ProductMaterial') . ' ' . __('common.action.added'));
+        pushNotify('success', __('Color') . ' ' . __('common.action.added'));
         return $this->success();
     }
 
     /**
-     * Edit product-material view
+     * Edit color view
      *
      * @param integer $id ID
      *
@@ -85,16 +78,13 @@ class IndexController extends Controller
      */
     public function edit(int $id)
     {
-        return view('product-material.edit', [
-            'model' => ProductMaterial::find($id),
-            'colors' => Color::all(),
-            'products' => Product::all(),
-            'materials' => Material::all(),
+        return view('color.edit', [
+            'model' => Color::find($id),
         ]);
     }
 
     /**
-     * Update material
+     * Update color
      *
      * @param Request $request
      * @param integer $id ID
@@ -103,14 +93,14 @@ class IndexController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $action = ProductMaterial::findOrFail($id);
+        $action = Color::findOrFail($id);
         $action->update($request->all());
 
         return $this->success();
     }
 
     /**
-     * Delete material
+     * Delete color
      *
      * @param integer $id ID
      *
@@ -118,7 +108,7 @@ class IndexController extends Controller
      */
     public function destroy(int $id)
     {
-        ProductMaterial::destroy($id);
+        Color::destroy($id);
 
         return $this->success();
     }
