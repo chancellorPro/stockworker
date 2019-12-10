@@ -11,9 +11,12 @@ $(document)
         setTimeout(function () {
             let element = $("#html-content-holder");
             let canvas_handler = $("#canvas_handler");
+            let submitBtn = $('#load');
+
+            submitBtn.data('loading-text', '<i class="fa fa-spinner fa-spin"></i> Подготовка');
+            submitBtn.button('loading');
+            submitBtn.attr('disabled', true);
             canvas_handler.empty();
-            console.log('element.height()');
-            console.log(element.height());
 
             element.width(480);
             element.css('margin', 20);
@@ -35,6 +38,11 @@ $(document)
                 let newData = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
                 $('#canvas-data').val(newData);
                 $('#send-report').attr('disabled', false);
+                setTimeout(function () {
+                    submitBtn.button('reset');
+
+                    $('#send-report').attr('disabled', false);
+                }, 4000)
             });
         }, 300)
     });

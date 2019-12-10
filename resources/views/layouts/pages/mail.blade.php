@@ -30,6 +30,7 @@
             @include('common.buttons.save', [
                 'route' => 'send',
                 'id' => 'send-report',
+                'showPreloader' => true,
                 'route_params' => [
                     'has_parent' => false,
                     'orderType' => $orderType,

@@ -16,8 +16,8 @@
         @endforeach
     @endif
 >
-    <button class="btn {{ $btn_class ?? '' }}">
-        @if (!empty($btn_body))
+    <button class="btn {{ $btn_class ?? '' }}" {{ !empty($showPreloader) ? 'id=load' : '' }}>
+    @if (!empty($btn_body))
             {!! $btn_body !!}
         @else
             <i class="fa {{ $fa_class ?? '' }}" aria-hidden="true"></i>

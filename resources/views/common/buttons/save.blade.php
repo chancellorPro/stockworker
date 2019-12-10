@@ -11,6 +11,7 @@
 @endphp
 @include('common.buttons.base', [
     'name' => $name ?? __('Save'),
+    'showPreloader' => $showPreloader ?? false,
     'fa_class' => $fa_class ?? '',
     'btn_class' => $btn_class ?? 'btn-primary btn-sm',
     'class' => $class ?? 'ajax-submit-action',

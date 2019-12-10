@@ -187,6 +187,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             init_filter_col("{{ route('action-log.index') }}");
+
         });
 
         $(document)
