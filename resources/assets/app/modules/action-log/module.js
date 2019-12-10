@@ -12,6 +12,14 @@ $(document)
             let element = $("#html-content-holder");
             let canvas_handler = $("#canvas_handler");
             canvas_handler.empty();
+            console.log('element.height()');
+            console.log(element.height());
+
+            element.width(480);
+            element.css('margin', 20);
+            element.css({"border-color": "#2d2d2d",
+                "border-width":"2px",
+                "border-style":"solid"});
 
             const copy_ele = element.get(0).cloneNode(true);
             canvas_handler.append(copy_ele);

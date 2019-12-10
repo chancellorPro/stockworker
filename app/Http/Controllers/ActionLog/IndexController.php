@@ -428,8 +428,8 @@ class IndexController extends Controller
 
         $viberReceiverIDs = [
             'VCvoJZRu3ZC9F24LosVBOw==', // я
-            'Lm9+v/ecMk90fl7tHAStjA==', // ,fnz
-            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
+//            'Lm9+v/ecMk90fl7tHAStjA==', // ,fnz
+//            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
 //            'xzfQLEg4r8ElRtwwi8zenw==', // кир
         ];
 
@@ -437,18 +437,18 @@ class IndexController extends Controller
             $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
         }
 
-        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
-        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path . ' | '. $_SERVER['HTTP_HOST'] . $xls_file_path;
-        $ch = curl_init();
-        $optArray = array(
-            CURLOPT_URL            => $url,
-            CURLOPT_RETURNTRANSFER => true,
-        );
-        curl_setopt_array($ch, $optArray);
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        return $result;
+//        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
+//        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path . ' | '. $_SERVER['HTTP_HOST'] . $xls_file_path;
+//        $ch = curl_init();
+//        $optArray = array(
+//            CURLOPT_URL            => $url,
+//            CURLOPT_RETURNTRANSFER => true,
+//        );
+//        curl_setopt_array($ch, $optArray);
+//        $result = curl_exec($ch);
+//        curl_close($ch);
+//
+//        return $result;
     }
 
     function send_message($receiverID, $TextMessage)

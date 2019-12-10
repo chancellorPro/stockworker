@@ -29,6 +29,9 @@ html , body{
 .table-inverse tr.changed td{
     background: #26b99a4d;
 }
+#canvas_handler{
+    padding: 20px
+}
 .toggle_ids{
     cursor: pointer;
     text-decoration: underline;

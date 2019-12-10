@@ -38,7 +38,7 @@
                 >
             </div>
         </div>
-        <div id="canvas_handler" style="position: absolute;right:100000px"></div>
+        <div id="canvas_handler" style="position: absolute;right:100000px;"></div>
 
         {{-- Income report --}}
         @include('common.buttons.save', [
