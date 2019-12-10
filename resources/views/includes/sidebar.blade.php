@@ -2,7 +2,9 @@
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
             <a href="{{ url('/') }}" class="site_title">
-                <i class="fa fa-home"></i>
+{{--                <i class="fa fa-home"></i>--}}
+                <img src="./home.png" style="margin: -10px 0 0 0;height: 50px;">
+
                 <span>{{ config('app.name', 'Stock Worker') }}</span>
             </a>
         </div>
