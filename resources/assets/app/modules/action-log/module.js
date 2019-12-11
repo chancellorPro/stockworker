@@ -9,7 +9,7 @@ $(document)
     .on('click', '.reports', function () {
         $('#send-report').attr('disabled', true);
         setTimeout(function () {
-            let element = $("#html-content-holder");
+            let element = $(".html-content-holder");
             let canvas_handler = $("#canvas_handler");
             let submitBtn = $('#load');
 
@@ -29,6 +29,10 @@ $(document)
             canvas_handler.css('height', element.scrollHeight + 20);
             canvas_handler.css('width', element.scrollWidth + 10);
 
+            element.empty();
+            console.log(canvas_handler);
+            element.append(canvas_handler.find('table').html());
+
             html2canvas(copy_ele, {
                 scrollX: 0,
                 scrollY: -1,
@@ -42,7 +46,7 @@ $(document)
                     submitBtn.button('reset');
 
                     $('#send-report').attr('disabled', false);
-                }, 4000)
+                }, 2000)
             });
         }, 300)
     });

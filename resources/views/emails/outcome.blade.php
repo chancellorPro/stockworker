@@ -2,10 +2,12 @@
 
 @section('main_container')
     <div style="position: relative">
-        <h3>За {{ $dateFrom }} - {{ $dateTo }}</h3>
-        <div id="html-content-holder">
+        <div class="html-content-holder">
             <table>
                 <thead>
+                <tr>
+                    <th class="text-center"  colspan="4">За {{ $dateFrom }} - {{ $dateTo }}</th>
+                </tr>
                 <tr>
                     <th>#</th>
                     <th style="width: 356px;">Наименование</th>
