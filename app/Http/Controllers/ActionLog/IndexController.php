@@ -150,7 +150,7 @@ class IndexController extends Controller
             if ((int)$request->get('income') === ActionLog::INCOME) {
                 $insertData = [
                     'count'       => $stock->count + (int)$request->get('count'),
-                    'description' => $request->get('description'),
+                    'description' => $stock->description . '. ' . $request->get('description')
                 ];
 
                 if (!empty($request->get('partition'))) {
@@ -182,7 +182,7 @@ class IndexController extends Controller
                     }
                     $insertData = [
                         'count'       => $count,
-                        'description' => $request->get('description')
+                        'description' => $stock->description . '. ' . $request->get('description')
                     ];
 
                     if (!empty($request->get('partition'))) {
