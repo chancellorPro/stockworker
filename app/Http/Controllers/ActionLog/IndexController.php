@@ -148,11 +148,16 @@ class IndexController extends Controller
             }
 
             if ((int)$request->get('income') === ActionLog::INCOME) {
+                $insertData = [
+                    'count'       => $stock->count + (int)$request->get('count'),
+                    'description' => $request->get('description'),
+                ];
+
+                if (!empty($request->get('partition'))) {
+                    $insertData['partition'] = $request->get('partition');
+                }
                 if (!empty($stock)) {
-                    $stock->update([
-                        'count'       => $stock->count + (int)$request->get('count'),
-                        'description' => $request->get('description')
-                    ]);
+                    $stock->update($insertData);
                 }
                 if (!empty($plan)) {
                     $plan->progress += (int)$request->get('count');
@@ -175,10 +180,16 @@ class IndexController extends Controller
                     if ($count < 0) {
                         return $this->error(['message' => 'Такого количества нет на складе!']);
                     }
-                    $stock->update([
+                    $insertData = [
                         'count'       => $count,
                         'description' => $request->get('description')
-                    ]);
+                    ];
+
+                    if (!empty($request->get('partition'))) {
+                        $insertData['partition'] = $request->get('partition');
+                    }
+
+                    $stock->update($insertData);
                 }
             }
 

@@ -40,7 +40,8 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        $builder = Stock::selectRaw('sum(a.count) as outcome_sum, stock.product_id, max(stock.partition) as partition_number, max(stock.count) as count, max(stock.description) as description, max(p.count) as plan_count, max(p.progress) as progress')
+        $builder = Stock::selectRaw('sum(a.count) as outcome_sum, stock.product_id, max(stock.partition) as partition_number,
+        max(stock.count) as count, max(stock.description) as description, max(p.count) as plan_count, max(p.progress) as progress')
             ->leftJoin('plan AS p', 'p.product_id', '=', 'stock.product_id')
             ->leftJoin('action_log AS a', function($join) {
                 $join->on('a.product_id', '=', 'stock.product_id')
