@@ -6,7 +6,7 @@
             <table>
                 <thead>
                 <tr>
-                    <th class="text-center" colspan="7">На {{ $dateTo }}</th>
+                    <th class="text-center" colspan="7">Состояние склада на {{ $dateTo }}</th>
                 </tr>
                 <tr>
                     <th>#</th>

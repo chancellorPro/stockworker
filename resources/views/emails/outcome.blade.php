@@ -6,7 +6,7 @@
             <table>
                 <thead>
                 <tr>
-                    <th class="text-center"  colspan="4">За {{ $dateFrom }} - {{ $dateTo }}</th>
+                    <th class="text-center"  colspan="4">Отгрузка за {{ $dateFrom }} - {{ $dateTo }}</th>
                 </tr>
                 <tr>
                     <th>#</th>

@@ -6,7 +6,7 @@
             <table style="padding: 20px;margin: 20px">
                 <thead>
                 <tr>
-                    <th class="text-center"  colspan="6">За {{ $dateFrom }} - {{ $dateTo }}</th>
+                    <th class="text-center"  colspan="6">Приход за {{ $dateFrom }} - {{ $dateTo }}</th>
                 </tr>
                 <tr>
                     <th>#</th>
