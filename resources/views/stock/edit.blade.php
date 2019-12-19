@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('stock.update', ['id' => $model->id]) }}" class="form-horizontal">
+<form method="POST" action="{{ route('stock.update', ['id' => $model->product_id]) }}" class="form-horizontal">
     {{ method_field('PATCH') }}
     {{ csrf_field() }}
 
@@ -11,7 +11,7 @@
         @include('common.buttons.save', [
             'route' => 'stock.update',
             'route_params' => [
-                'id' => $model->id,
+                'id' => $model->product_id,
             ],
             'dataset' => [
                 'method' => 'PATCH',

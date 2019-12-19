@@ -56,7 +56,20 @@
                         @endif
                     </td>
                     <td>{{ $item->description }}</td>
-                    <td></td>
+                    <td>
+                        @if(auth()->id() < 3)
+                            @include('common.buttons.edit', [
+                                'route' => 'stock.edit',
+                                'route_params' => [
+                                    'id' => $item->product_id,
+                                ],
+                                'class' => 'ajax-modal-action show-form',
+                                'dataset' => [
+                                    'header' => $item->name,
+                                ],
+                            ])
+                        @endif
+                    </td>
                 </tr>
             @endforeach
             </tbody>

@@ -134,7 +134,7 @@ class IndexController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $resource = Stock::findOrFail($id);
+        $resource = Stock::where(['product_id' => $id])->first();
         $resource->update($request->all());
 
         return $this->success();

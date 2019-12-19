@@ -147,6 +147,11 @@ class IndexController extends Controller
                 $request->offsetUnset('box_count');
             }
 
+            $description = $stock->description;
+            if ($request->has('description')) {
+                $description .= (strlen($description) > 0 ? '. ' : '') . $request->get('description');
+            }
+
             if ((int)$request->get('income') === ActionLog::INCOME) {
                 $insertData = [
                     'count'       => $stock->count + (int)$request->get('count'),
@@ -182,7 +187,7 @@ class IndexController extends Controller
                     }
                     $insertData = [
                         'count'       => $count,
-                        'description' => $stock->description . '. ' . $request->get('description')
+                        'description' => $description
                     ];
 
                     if (!empty($request->get('partition'))) {

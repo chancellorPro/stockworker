@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace App\Http\Controllers\Box;
 
 use App\Http\Controllers\Controller;
 use App\Models\Box;
@@ -13,7 +13,7 @@ use Illuminate\View\View;
 /**
  * Class IndexController
  */
-class BoxController extends Controller
+class IndexController extends Controller
 {
     use FilterBuilder;
 
