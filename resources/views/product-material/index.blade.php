@@ -36,8 +36,8 @@
             @foreach($data as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td>{{ $item->product->name }}</td>
-                    <td>{{ $item->material->name }}</td>
+                    <td>{{ $item->product ? $item->product->name : '' }}</td>
+                    <td>{{ $item->material->name ?? '' }}</td>
                     <td>{{ $item->color_id ? $item->color->name : '' }}</td>
                     <td>{{ $item->height }}</td>
                     <td>{{ $item->width }}</td>
@@ -49,7 +49,7 @@
                             ],
                             'class' => 'ajax-modal-action show-form',
                             'dataset' => [
-                                'header' => $item->name,
+                                'header' => $item->name ?? '',
                             ],
                         ])
                         @include('common.buttons.delete', [
@@ -58,7 +58,7 @@
                                 'id' => $item->id,
                             ],
                             'dataset' => [
-                                'header' => $item->name,
+                                'header' => $item->name ?? '',
                             ],
                         ])
                     </td>
