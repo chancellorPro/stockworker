@@ -37,7 +37,7 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->product ? $item->product->name : '' }}</td>
-                    <td>{{ $item->material->name ?? '' }}</td>
+                    <td>{{ $item->material ? $item->material->name : '' }}</td>
                     <td>{{ $item->color_id ? $item->color->name : '' }}</td>
                     <td>{{ $item->height }}</td>
                     <td>{{ $item->width }}</td>
