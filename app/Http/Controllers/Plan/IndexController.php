@@ -93,11 +93,12 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
-        $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
-        if($stock->count > 0) {
+//        $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
+//        if($stock->count > 0) {
             $request->merge(['progress' => $stock->count]);
-        }
+//        }
 
+        $request->merge(['progress' => 0]);
         Plan::create($request->all());
 
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));
