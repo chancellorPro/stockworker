@@ -13,6 +13,7 @@
                 <th class="id">@lang('Id')</th>
                 <th class="col-md-3">@lang('Product')</th>
                 <th>@lang('Partition')</th>
+                <th>@lang('Boxes count')</th>
                 <th>@lang('Count')</th>
                 <th>@lang('Description')</th>
                 <th class="actions">@lang('Actions')</th>
@@ -20,6 +21,7 @@
             <tr>
                 <th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'stock_product_id'])</th>
                 <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'stock_product_id', 'filterCollection' => $products])</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -32,6 +34,7 @@
                     <td>{{ $item->product_id }}</td>
                     <td>{{ $item->product ? $item->product->name : '' }}</td>
                     <td>{{ $item->partition_number }}</td>
+                    <td>{{ $item->count / ($item->product->box_size ?? 1) }}</td>
                     <td>
                         @if($item->plan_count)
                             <div class="progress-bar" style="background:#fff;padding:1px 0;margin-top: 20px;width:{{ ($item->progress - $item->count) / $item->plan_count * 100 }}%"></div>

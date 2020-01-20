@@ -149,13 +149,13 @@ class IndexController extends Controller
 
             $description = $stock->description;
             if ($request->has('description')) {
-                $description .= (strlen($description) > 0 ? '. ' : '') . $request->get('description');
+                $description .= strlen($description) . ' ' . $request->get('description');
             }
 
             if ((int)$request->get('income') === ActionLog::INCOME) {
                 $insertData = [
                     'count'       => $stock->count + (int)$request->get('count'),
-                    'description' => $stock->description . '. ' . $request->get('description')
+                    'description' => $stock->description . ' ' . $request->get('description')
                 ];
 
                 if (!empty($request->get('partition'))) {
