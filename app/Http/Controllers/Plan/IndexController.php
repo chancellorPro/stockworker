@@ -95,7 +95,7 @@ class IndexController extends Controller
     {
 //        $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
 //        if($stock->count > 0) {
-            $request->merge(['progress' => $stock->count]);
+//            $request->merge(['progress' => $stock->count]);
 //        }
 
         $request->merge(['progress' => 0]);
