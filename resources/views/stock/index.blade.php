@@ -34,7 +34,7 @@
                     <td>{{ $item->product_id }}</td>
                     <td>{{ $item->product ? $item->product->name : '' }}</td>
                     <td>{{ $item->partition_number }}</td>
-                    <td>{{ $item->count / ($item->product->box_size ?? 1) }}</td>
+                    <td>{{ round($item->count / ($item->product->box_size ?? 1), 2) }}</td>
                     <td>
                         @if($item->plan_count)
                             <div class="progress-bar" style="background:#fff;padding:1px 0;margin-top: 20px;width:{{ ($item->progress - $item->count) / $item->plan_count * 100 }}%"></div>
