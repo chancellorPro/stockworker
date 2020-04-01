@@ -147,7 +147,7 @@
                     <td>{{ $item->product ? $item->product->name : '' }}</td>
                     <td style="{{ $currentDate > Carbon::createFromFormat('Y-m-d', $item->date)->setTimezone('Europe/Kiev') ? 'background:silver' : '' }}">{{ $item->date }}</td>
                     <td>{{ $item->count }}</td>
-                    <td>{{ $item->income ? ($item->count / ($item->product->box_size ?? 1)) * $item->product->box_weight : '' }}</td>
+                    <td>{{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $item->product->box_weight, 1) : '' }}</td>
                     <td>{{ $item->partition }}</td>
                     <td>{{ $item->customer ? $item->customer->name : '' }}</td>
                     <td>
