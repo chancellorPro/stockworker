@@ -116,6 +116,7 @@
                 <th>@lang('Product')</th>
                 <th>@lang('Date')</th>
                 <th>@lang('Count')</th>
+                <th>@lang('Weight')</th>
                 <th>@lang('Partition')</th>
                 <th>@lang('Customer')</th>
                 <th>@lang('Description')</th>
@@ -125,6 +126,7 @@
                 <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'income', 'filterCollection' => $transaction_type])</th>
                 <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'product', 'filterCollection' => $products])</th>
                 <th>@include('layouts.filter-col', ['filterType' => 'date_range', 'field' => 'date'])</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'customer', 'filterCollection' => $customers])</th>
@@ -145,6 +147,7 @@
                     <td>{{ $item->product ? $item->product->name : '' }}</td>
                     <td style="{{ $currentDate > Carbon::createFromFormat('Y-m-d', $item->date)->setTimezone('Europe/Kiev') ? 'background:silver' : '' }}">{{ $item->date }}</td>
                     <td>{{ $item->count }}</td>
+                    <td>{{ ($item->count / ($item->product->box_size ?? 1)) * $item->product->box_weight }}</td>
                     <td>{{ $item->partition }}</td>
                     <td>{{ $item->customer ? $item->customer->name : '' }}</td>
                     <td>
