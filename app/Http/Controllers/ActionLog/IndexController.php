@@ -445,12 +445,13 @@ class IndexController extends Controller
         $viberReceiverIDs = [
             'VCvoJZRu3ZC9F24LosVBOw==', // я
             'Lm9+v/ecMk90fl7tHAStjA==', // ,fnz
+            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
             'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
 //            'xzfQLEg4r8ElRtwwi8zenw==', // кир
         ];
 
         foreach ($viberReceiverIDs as $user_id) {
-            $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
+            $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path. ' | '. $_SERVER['HTTP_HOST'] . $xls_file_path);
         }
 
         $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
