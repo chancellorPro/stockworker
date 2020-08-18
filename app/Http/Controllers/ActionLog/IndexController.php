@@ -8,6 +8,7 @@ use App\Exports\StockReport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ActionLog\ActionLogRequest;
 use App\Models\ActionLog;
+use App\Models\Box;
 use App\Models\Customer;
 use App\Models\Plan;
 use App\Models\PlanHistory;
@@ -16,6 +17,7 @@ use App\Models\Stock;
 use App\Traits\FilterBuilder;
 use Carbon\Carbon;
 use CURLFile;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
@@ -312,7 +314,7 @@ class IndexController extends Controller
      * getExportData
      *
      * @param Request $request
-     * @return void //return Excel::download(new OrderExport($from, $to, $income, $hasParent), 'file.xlsx');
+     * @return Application|Factory|View|void
      */
     public function getExportData(Request $request)
     {
@@ -348,7 +350,7 @@ class IndexController extends Controller
         }
 
         return view('emails.' . $template, [
-            'boxes'     => arrayToKeyValue(config('presets.boxes'), 'id', 'name'),
+            'boxes'     => Box::all(),
             'orderType' => $orderType,
             'data'      => $entity->collection(),
             'dateFrom'  => $request->get('from'),
@@ -388,7 +390,7 @@ class IndexController extends Controller
             }
 
             $request->merge(['data' => $entity->collection()]);
-            $request->merge(['boxes' => arrayToKeyValue(config('presets.boxes'), 'id', 'name')]);
+            $request->merge(['boxes' => Box::all()]);
             $request->merge(['hide_button' => true]);
 
             $excel = App::make('excel');
