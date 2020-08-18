@@ -37,9 +37,9 @@ class IndexController extends Controller
             Box::oldest('id')
         )->paginate($this->perPage);
 
-        return view('customer.index', [
-            'data'         => $data,
-            'filter'       => $this->getFilter(),
+        return view('box.index', [
+            'data'   => $data,
+            'filter' => $this->getFilter(),
         ]);
     }
 
@@ -50,7 +50,7 @@ class IndexController extends Controller
      */
     public function create()
     {
-        return view('customer.create');
+        return view('box.create');
     }
 
     /**
@@ -62,7 +62,10 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
-        Box::create($request->all());
+        Box::create([
+            'name'   => $request->get('name'),
+            'volume' => $request->get('name')
+        ]);
 
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));
 
@@ -78,7 +81,7 @@ class IndexController extends Controller
      */
     public function edit(int $id)
     {
-        return view('customer.edit', [
+        return view('box.edit', [
             'model' => Box::find($id),
         ]);
     }
@@ -94,7 +97,10 @@ class IndexController extends Controller
     public function update(Request $request, int $id)
     {
         $resource = Box::findOrFail($id);
-        $resource->update($request->all());
+        $resource->update([
+            'name'   => $request->get('name'),
+            'volume' => $request->get('name')
+        ]);
 
         return $this->success();
     }

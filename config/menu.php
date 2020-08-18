@@ -17,18 +17,19 @@
 //];
 return [
     [
-        'name' => 'Admin',
+        'name'  => 'Admin',
         'child' => [
-            ['name' => 'События', 'route' => 'action-log.index', 'icon' => 'fa-dropbox'],
-            ['name' => 'План', 'route' => 'plan.index', 'icon' => 'fa-bullhorn'],
-            ['name' => 'История', 'route' => 'history', 'icon' => 'fa-history'],
-            ['name' => 'Склад', 'route' => 'stock.index', 'icon' => 'fa-th'],
-            ['name' => 'Товары', 'route' => 'product.index', 'icon' => 'fa-cubes'],
-            ['name' => 'Материалы Товаров', 'route' => 'product-material.index', 'icon' => 'fa-dropbox'],
+            ['name' => 'События', 'route' => 'action-log.index', 'icon' => 'fa-truck'],
+            ['name' => 'Склад', 'route' => 'stock.index', 'icon' => 'fa-cubes'],
+            ['name' => 'Товары', 'route' => 'product.index', 'icon' => 'fa-th-large'],
+            ['name' => 'Материалы Товаров', 'route' => 'product-material.index', 'icon' => 'fa-delicious'],
             ['name' => 'Материалы', 'route' => 'material.index', 'icon' => 'fa-puzzle-piece'],
+            ['name' => 'Ящики', 'route' => 'box.index', 'icon' => 'fa-dropbox'],
             ['name' => 'Цвета', 'route' => 'color.index', 'icon' => 'fa-paint-brush'],
             ['name' => 'Заказчики', 'route' => 'customer.index', 'icon' => 'fa-fax'],
             ['name' => 'Менеджеры', 'route' => 'user.index', 'icon' => 'fa-users'],
+            ['name' => 'План', 'route' => 'plan.index', 'icon' => 'fa-bullhorn'],
+            ['name' => 'История', 'route' => 'history', 'icon' => 'fa-history'],
         ],
     ],
 ];

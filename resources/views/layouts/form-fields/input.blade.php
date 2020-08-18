@@ -34,7 +34,7 @@
             value="{{ old($name, $value ?? $model->{$name} ?? '') }}"
             {{ !empty($disabled) ? 'disabled' : '' }}
             placeholder="{{ $placeholder ?? '' }}"
-            {{ !empty($attrs) ? implode(parameterizeArray($attrs), ' ') : '' }}
+            {{ !empty($attrs) ? implode(' ', parameterizeArray($attrs)) : '' }}
         >
         {!! $errors->first($name, '<p class="help-block">:message</p>') !!}
     </div>

@@ -67,5 +67,11 @@
     "Height": "Толщина",
     "Box weight": "Вес в ящике",
     "Box": "Объём ящика",
+    "Boxes": "Ящики",
+    "Create box": "Создать ящик",
+    "Box count": "Кол-во ящиков",
+    "Product Material Relation": "Материалы Товаров",
+    "Product Material": "Создать материал товара",
+    "Create Product Material": "Связать материал с товаром",
     "Weight": "Вес"
 }

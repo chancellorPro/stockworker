@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
+use App\Models\Box;
 use App\Models\Product;
 use App\Traits\FilterBuilder;
 use Illuminate\Contracts\View\Factory;
@@ -42,7 +43,7 @@ class IndexController extends Controller
         return view('product.index', [
             'rows'   => $data,
             'filter' => $this->getFilter(),
-            'boxes'  => arrayToKeyValue(config('presets.boxes'), 'id', 'name'),
+            'boxes'  => Box::all(),
         ]);
     }
 
@@ -77,7 +78,7 @@ class IndexController extends Controller
 
         return view('product.create', [
             'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
-            'boxes'     => config('presets.boxes'),
+            'boxes'     => Box::all(),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
         ]);
@@ -113,7 +114,7 @@ class IndexController extends Controller
         return view('product.edit', [
             'model'     => Product::find($id),
             'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
-            'boxes'     => config('presets.boxes'),
+            'boxes'     => Box::all(),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
         ]);
