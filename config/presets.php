@@ -1,8 +1,5 @@
 <?php
 
-use \App\Models\Cms\Asset;
-use \App\Models\User\User;
-
 return [
     'environments' => [
         ['id' => 'dev',   'name' => 'Dev'],
@@ -230,11 +227,4 @@ return [
         ['id' => 0, 'name' => 'Income'],
         ['id' => 1, 'name' => 'Outcome'],
     ],
-
-    'boxes' => [
-        ['id' => 0, 'name' => '0.14'],
-        ['id' => 1, 'name' => '0.122'],
-        ['id' => 2, 'name' => '0.08'],
-    ],
-
 ];

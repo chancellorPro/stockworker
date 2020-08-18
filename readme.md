@@ -12,6 +12,8 @@ $ git clone https://github.com/laravel/laravel.git
 $ cd laravel
 ```
 
+Create .env file and prepare database connection
+
 Build the images and start the services:
 ```
 docker-compose build

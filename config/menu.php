@@ -19,11 +19,12 @@ return [
     [
         'name' => 'Admin',
         'child' => [
-            ['name' => 'События', 'route' => 'action-log.index', 'icon' => 'fa-dropbox'],
+            ['name' => 'События', 'route' => 'action-log.index', 'icon' => 'fa-ambulance'],
             ['name' => 'План', 'route' => 'plan.index', 'icon' => 'fa-bullhorn'],
             ['name' => 'История', 'route' => 'history', 'icon' => 'fa-history'],
-            ['name' => 'Склад', 'route' => 'stock.index', 'icon' => 'fa-th'],
-            ['name' => 'Товары', 'route' => 'product.index', 'icon' => 'fa-cubes'],
+            ['name' => 'Склад', 'route' => 'stock.index', 'icon' => 'fa-cubes'],
+            ['name' => 'Товары', 'route' => 'product.index', 'icon' => 'fa-briefcase'],
+            ['name' => 'Ящики', 'route' => 'box.index', 'icon' => 'fa-dropbox'],
             ['name' => 'Заказчики', 'route' => 'customer.index', 'icon' => 'fa-fax'],
             ['name' => 'Менеджеры', 'route' => 'user.index', 'icon' => 'fa-users'],
         ],
