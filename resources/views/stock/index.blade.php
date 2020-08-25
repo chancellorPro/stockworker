@@ -68,7 +68,14 @@
                     <td>{{ ceil($item->count / $item->product->box_size) }}</td>
                     <td>{{ $item->product->box_size }}</td>
                     <td>{{ $item->description }}</td>
-                    <td></td>
+                    <td>
+                        <a href="{{ route('stock.edit', ['stock' => $item->product_id]) }}" title="Править" class="ajax-modal-action show-form" data-header="">
+                            <button class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                Править
+                            </button>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
