@@ -439,9 +439,9 @@ class IndexController extends Controller
 
         $viberReceiverIDs = [
             'VCvoJZRu3ZC9F24LosVBOw==', // я
-//            'Lm9+v/ecMk90fl7tHAStjA==', // ,fnz
-//            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
-//            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
+            'Lm9+v/ecMk90fl7tHAStjA==', // ,fnz
+            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
+            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
 //            'xzfQLEg4r8ElRtwwi8zenw==', // кир
         ];
 
