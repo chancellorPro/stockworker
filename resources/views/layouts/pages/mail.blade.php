@@ -14,11 +14,19 @@
     <style>
         table {
             border-collapse: collapse;
+            border-left: 1px solid black;
         }
 
         table, th, td {
-            border: 1px solid black;
+            border-top: 1px solid black;
+            border-left: 0;
+            border-right: 1px solid black;
+            border-bottom: 0;
             padding: 5px;
+        }
+
+        textarea {
+            height: 30px;
         }
     </style>
 </head>
@@ -26,27 +34,32 @@
 <div class="container body">
     <div class="main_container">
         @if(empty($hide_button))
-            {{-- Send report --}}
-            @include('common.buttons.save', [
-                'route' => 'send',
-                'id' => 'send-report',
-                'showPreloader' => true,
-                'route_params' => [
-                    'has_parent' => false,
-                    'orderType' => $orderType,
-                    'dateFrom' => $dateFrom,
-                    'dateTo' => $dateTo,
-                    'direction' => $direction,
-                    'template' => $template,
-                ],
-                'name' => __('Send report'),
-                'fa_class' => 'fa-save',
-                'class' => 'reports',
-                'dataset' => [
-                    'method' => 'POST',
-                ],
-            ])
-            <textarea id="canvas-data" style="display:none;"></textarea>
+            <div class="row">
+                <div class="col-sm-2">
+                    {{-- Send report --}}
+                    @include('common.buttons.save', [
+                        'route' => 'send',
+                        'id' => 'send-report',
+                        'showPreloader' => true,
+                        'route_params' => [
+                            'has_parent' => false,
+                            'orderType' => $orderType,
+                            'dateFrom' => $dateFrom,
+                            'dateTo' => $dateTo,
+                            'direction' => $direction,
+                            'template' => $template,
+                        ],
+                        'name' => __('Send report'),
+                        'fa_class' => 'fa-save',
+                        'dataset' => [
+                            'method' => 'POST',
+                        ],
+                    ])
+                </div>
+                <div class="col-sm-10">
+                    <textarea class="col-sm-6" id="canvas-data"></textarea>
+                </div>
+            </div>
             <br><br>
         @endif
         @yield('main_container')

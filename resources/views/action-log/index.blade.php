@@ -210,45 +210,47 @@
                 }
             });
 
-        $(document)
-            .on('click', '.reports', function (e) {
-                e.preventDefault();
+        // $(document)
+        //     .on('click', '.reports', function (e) {
+        //         e.preventDefault();
+        //
+        //         let dateFrom = $('[name="today[from]"]').val();
+        //         let dateTo = $('[name="today[to]"]').val();
+        //         let canvas = $('#canvas-data').val();
+        //         let data = {from: dateFrom, to: dateTo, canvas: canvas};
+        //         let canvas_handler = $("#canvas_handler");
+        //
+        //         if (Object.keys(data).length) {
+        //             $.ajax({
+        //                 url: $(this).attr('href'),
+        //                 type: 'POST',
+        //                 data: data,
+        //                 error: response => {
+        //                     if (!!response.responseJSON) {
+        //                         this._error(response.responseJSON);
+        //                     }
+        //                 },
+        //                 success: function (r) {
+        //                     canvas_handler.empty();
+        //                     if (r.hasOwnProperty('success')) {
+        //                         $('.modal-title').text(r.success);
+        //                         $('.modal-header').css('background', '#a7ff83');
+        //                     } else {
+        //                         new ModalBuilder()
+        //                             .header('Предпросмотр отчета')
+        //                             .body(r)
+        //                             .modal();
+        //                     }
+        //                 },
+        //                 complete: function (r) {
+        //                 },
+        //             });
+        //         }
+        //
+        //         return false;
+        //     });
 
-                let dateFrom = $('[name="today[from]"]').val();
-                let dateTo = $('[name="today[to]"]').val();
-                let canvas = $('#canvas-data').val();
-                let data = {from: dateFrom, to: dateTo, canvas: canvas};
-                let canvas_handler = $("#canvas_handler");
 
-                if (Object.keys(data).length) {
-                    $.ajax({
-                        url: $(this).attr('href'),
-                        type: 'POST',
-                        data: data,
-                        error: response => {
-                            if (!!response.responseJSON) {
-                                this._error(response.responseJSON);
-                            }
-                        },
-                        success: function (r) {
-                            canvas_handler.empty();
-                            if (r.hasOwnProperty('success')) {
-                                $('.modal-title').text(r.success);
-                                $('.modal-header').css('background', '#a7ff83');
-                            } else {
-                                new ModalBuilder()
-                                    .header('Предпросмотр отчета')
-                                    .body(r)
-                                    .modal();
-                            }
-                        },
-                        complete: function (r) {
-                        },
-                    });
-                }
-
-                return false;
-            });
         const modalsContainer = $('body');
 
         const MODAL_SIZES = {

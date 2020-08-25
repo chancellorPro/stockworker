@@ -4060,6 +4060,9 @@ fieldset {
 .cropper .docs-cropped canvas {
     max-width: 100%
 }
+.modal-dialog {
+    width: 800px !important;
+}
 .form_wizard .stepContainer {
     display: block;
     position: relative;
