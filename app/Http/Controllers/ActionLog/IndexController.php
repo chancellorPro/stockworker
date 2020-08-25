@@ -322,19 +322,14 @@ class IndexController extends Controller
         $date_to = $request->has('to') ? Carbon::createFromFormat('Y-m-d', $request->get('to')) : Carbon::now();
         $from = $date_from->startOfDay()->format('Y-m-d H:i:s');
         $to = $date_to->endOfDay()->format('Y-m-d H:i:s');
-        $hasParent = null;
         $orderType = $request->get('orderType');
 
-        if ($request->has('has_parent')) {
-            $hasParent = $request->get('has_parent');
-        }
-
         if ($request->get('income') == ActionLog::INCOME) {
-            $entity = new IncomeReport($from, $to, $request->get('income'), $hasParent);
+            $entity = new IncomeReport($from, $to, $request->get('income'));
         } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
-            $entity = new OutcomeReport($from, $to, $request->get('income'), $hasParent);
+            $entity = new OutcomeReport($from, $to, $request->get('income'));
         } elseif ((int)$request->get('income') === ActionLog::STOCK) {
-            $entity = new StockReport($from, $to, $request->get('income'), $hasParent);
+            $entity = new StockReport($from, $to, $request->get('income'));
         }
 
         $template = 'stock';
@@ -357,7 +352,6 @@ class IndexController extends Controller
             'dateTo'    => $request->get('to'),
             'direction' => $request->get('income'),
             'template'  => $template,
-            'hasParent' => $hasParent
         ]);
     }
 
@@ -372,7 +366,6 @@ class IndexController extends Controller
         $canvas = $request->get('canvas');
         $direction = $request->get('direction');
         $template = $request->get('template');
-        $hasParent = $request->get('hasParent');
         $orderType = $request->get('orderType');
 
         try {
@@ -380,13 +373,13 @@ class IndexController extends Controller
 
             if ($direction == ActionLog::INCOME) {
                 $reportName = $currentDate . '_Отчет_о_прибытии';
-                $entity = new IncomeReport($dateFrom, $dateTo, $direction, $hasParent);
+                $entity = new IncomeReport($dateFrom, $dateTo, $direction);
             } elseif ((int)$direction === ActionLog::OUTOME) {
                 $reportName = $currentDate . '_Отчет_об_отгрузке';
-                $entity = new OutcomeReport($dateFrom, $dateTo, $direction, $hasParent);
+                $entity = new OutcomeReport($dateFrom, $dateTo, $direction);
             } elseif ((int)$direction === ActionLog::STOCK) {
                 $reportName = $currentDate . '_Отчет_о_состоянии_склада';
-                $entity = new StockReport($dateFrom, $dateTo, $direction, $hasParent);
+                $entity = new StockReport($dateFrom, $dateTo, $direction);
             }
 
             $request->merge(['data' => $entity->collection()]);

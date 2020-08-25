@@ -35,30 +35,28 @@
     <div class="main_container">
         @if(empty($hide_button))
             <div class="row">
-                <div class="col-sm-2">
-                    {{-- Send report --}}
-                    @include('common.buttons.save', [
-                        'route' => 'send',
-                        'id' => 'send-report',
-                        'showPreloader' => true,
-                        'route_params' => [
-                            'has_parent' => false,
-                            'orderType' => $orderType,
-                            'dateFrom' => $dateFrom,
-                            'dateTo' => $dateTo,
-                            'direction' => $direction,
-                            'template' => $template,
-                        ],
-                        'name' => __('Send report'),
-                        'fa_class' => 'fa-save',
-                        'dataset' => [
-                            'method' => 'POST',
-                        ],
-                    ])
-                </div>
-                <div class="col-sm-10">
-                    <textarea class="col-sm-6" id="canvas-data"></textarea>
-                </div>
+                {{-- Send report --}}
+                <form method="POST" action="{{ route('send') }}" class="form-horizontal">
+                    <div class="col-sm-2">
+                        {{ csrf_field() }}
+                        @include('common.buttons.save', [
+                            'route' => 'send',
+                            'name' => __('Send report'),
+                            'showPreloader' => true,
+                            'route_params' => [
+                                'orderType' => $orderType,
+                                'dateFrom' => $dateFrom,
+                                'dateTo' => $dateTo,
+                                'direction' => $direction,
+                                'template' => $template,
+                            ],
+                        ])
+                    </div>
+                    <div class="col-sm-10">
+                        <textarea class="col-sm-6" id="canvas-data" name="canvas"></textarea>
+                    </div>
+                </form>
+
             </div>
             <br><br>
         @endif
