@@ -6,6 +6,14 @@ $(document)
         $('#product_id').prev('.select2-container').find('.select2-search__field').focus()
     })
 
+    .on('click', '#send-report', function(e) {
+        e.preventDefault();
+
+        $(this).closest("form").submit();
+
+        return false;
+    })
+
     .on('click', '.reports', function (e) {
         e.preventDefault();
 
