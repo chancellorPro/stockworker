@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Stock;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActionLog;
+use App\Models\Box;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Traits\FilterBuilder;
@@ -58,6 +59,7 @@ class IndexController extends Controller
 
         return view('stock.index', [
             'data'     => $data,
+            'boxes'    => Box::all(),
             'products' => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'filter'   => $this->getFilter(),
         ]);

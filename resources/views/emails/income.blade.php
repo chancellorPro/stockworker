@@ -12,7 +12,7 @@
                     </tr>
                     <tr>
                         <th>#</th>
-                        <th style="width: 356px;">Наименование</th>
+                        <th style="width: 356px;">Товар</th>
                         <th>Количество</th>
                         <th>На складе</th>
                         <th>План</th>

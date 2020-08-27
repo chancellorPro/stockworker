@@ -67,37 +67,30 @@ $(document)
                 let canvas_handler = $("#canvas_handler");
                 canvas_handler.empty();
 
-                element.css('margin', 20);
-                element.css({
-                    "border-color": "#2d2d2d",
-                    "border-width": "2px",
-                    "border-style": "solid"
-                });
-
                 const copy_ele = $(element).find('.wrapper').get(0).cloneNode(true);
                 canvas_handler.append(copy_ele);
-                element.empty();
                 canvas_handler.css('height', element.scrollHeight + 20);
-                canvas_handler.css('width', element.scrollWidth + 10);
+                canvas_handler.css('width', 760);
 
                 html2canvas(copy_ele, {
                     scrollX: 0,
                     scrollY: 0,
                     useCORS: true,
                 }).then(function (canvas) {
-                    // console.log('canvas', canvas);
                     let imageData = canvas.toDataURL("image/png");
-                    // console.log('imageData', imageData);
                     let newData = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
-                    // console.log('newData', newData);
                     $('#canvas-data').val(newData);
                     $('#send-report').attr('disabled', false);
+                    // element.append(canvas_handler.html())
+                    element.empty();
+                    element.get(0).appendChild(canvas)
+
                     setTimeout(function () {
                         submitBtn.button('reset');
-                        element.append(canvas_handler.html());
                         $('#send-report').attr('disabled', false);
-                    }, 400)
+                    }, 500)
                 });
+
             }, 300)
         }
 

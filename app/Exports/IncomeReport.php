@@ -24,7 +24,7 @@ class IncomeReport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['#', 'Наименование', 'Количество', 'На складе', 'План', 'Заказчик'];
+        return ['#', 'Товар', 'Количество', 'На складе', 'План', 'Заказчик'];
     }
 
     /**

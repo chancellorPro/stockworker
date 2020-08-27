@@ -24,7 +24,7 @@ class OutcomeReport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['#', 'Наименование', 'Количество', 'Заказчик'];
+        return ['#', 'Товар', 'Количество', 'Заказчик'];
     }
 
     /**

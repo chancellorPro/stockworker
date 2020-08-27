@@ -12,15 +12,19 @@
             <tr>
                 <th class="id">@lang('Id')</th>
                 <th class="col-md-3">@lang('Product')</th>
-                <th>@lang('Count')</th>
+                <th>@lang('Stock state')</th>
                 <th>@lang('Box count')</th>
                 <th>@lang('Box size')</th>
+                <th>@lang('Box weight')</th>
+                <th>@lang('Box volume')</th>
                 <th>@lang('Description')</th>
                 <th class="actions">@lang('Actions')</th>
             </tr>
             <tr>
                 <th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'stock_product_id'])</th>
                 <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'stock_product_id', 'filterCollection' => $products])</th>
+                <th></th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -67,6 +71,8 @@
                     </td>
                     <td>{{ ceil($item->count / $item->product->box_size) }}</td>
                     <td>{{ $item->product->box_size }}</td>
+                    <td>{{ $item->product->box_weight }}</td>
+                    <td>{{ (isset($item->product) && isset($boxes[$item->product->box_id])) ? $boxes[$item->product->box_id]->name : '' }}</td>
                     <td>{{ $item->description }}</td>
                     <td>
                         <a href="{{ route('stock.edit', ['stock' => $item->product_id]) }}" title="Править" class="ajax-modal-action show-form" data-header="">

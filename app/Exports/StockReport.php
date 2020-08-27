@@ -24,7 +24,7 @@ class StockReport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['#', 'Наименование', 'На складе', 'План', 'Кол-во ящиков', 'Вес ящика'];
+        return ['#', 'Товар', 'На складе', 'Кол-во ящиков', 'Кол-во в ящике', 'Вес полного ящика', "Объём ящика"];
     }
 
     /**
@@ -36,8 +36,8 @@ class StockReport implements FromCollection, WithHeadings
         stock.product_id,
         p.name as p_name,
         stock.count as s_count,
-        pl.count as pl_count,
         round(stock.count / p.box_size) as boxes_count,
+        p.box_size,
         p.box_weight as box_weight')
             ->join('products AS p', 'p.id', '=', 'stock.product_id')
             ->leftJoin('plan AS pl', 'pl.product_id', '=', 'stock.product_id');
