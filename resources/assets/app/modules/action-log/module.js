@@ -67,22 +67,18 @@ $(document)
                 let canvas_handler = $("#canvas_handler");
                 canvas_handler.empty();
 
-                // element.width(480);
-                // element.css('margin', 20);
-                // element.css({
-                //     "border-color": "#2d2d2d",
-                //     "border-width": "2px",
-                //     "border-style": "solid"
-                // });
+                element.css('margin', 20);
+                element.css({
+                    "border-color": "#2d2d2d",
+                    "border-width": "2px",
+                    "border-style": "solid"
+                });
 
-                const copy_ele = element.get(0).cloneNode(true);
+                const copy_ele = $(element).find('.wrapper').get(0).cloneNode(true);
                 canvas_handler.append(copy_ele);
                 element.empty();
-                // canvas_handler.css('height', element.scrollHeight + 20);
-                // canvas_handler.css('width', element.scrollWidth + 10);
-
-                // console.log(canvas_handler);
-                // element.append(canvas_handler.find('table').html());
+                canvas_handler.css('height', element.scrollHeight + 20);
+                canvas_handler.css('width', element.scrollWidth + 10);
 
                 html2canvas(copy_ele, {
                     scrollX: 0,
