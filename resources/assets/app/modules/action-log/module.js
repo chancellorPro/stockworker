@@ -77,6 +77,9 @@ $(document)
                 canvas_handler.css('height', element.scrollHeight + 20);
                 canvas_handler.css('width', 760);
 
+                element.css('margin-bottom', 20);
+                element.css('padding-bottom', 40);
+
                 html2canvas(copy_ele, {
                     scrollX: 0,
                     scrollY: 0,
