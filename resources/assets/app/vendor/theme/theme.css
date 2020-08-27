@@ -155,6 +155,11 @@ html , body{
     line-height: 30px;
     border-radius: 0px !important
 }
+
+.reports{
+    pointer-events: none;
+}
+
 .daterangepicker select.monthselect {
     margin-right: 2%
 }

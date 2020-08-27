@@ -1,6 +1,7 @@
 import html2canvas from 'html2canvas';
 
 $(document)
+    .ready(function(){$('.reports').css('pointer-events', 'auto')})
 
     .on('click', '#product_id', function () {
         $('#product_id').prev('.select2-container').find('.select2-search__field').focus()
@@ -18,6 +19,7 @@ $(document)
         e.preventDefault();
 
         $('#send-report').attr('disabled', true);
+        $('.reports').css('pointer-events', 'none');
 
         let dateFrom = $('[name="today[from]"]').val();
         let dateTo = $('[name="today[to]"]').val();
@@ -31,12 +33,14 @@ $(document)
                 type: 'POST',
                 data: data,
                 error: response => {
+                    $('.reports').css('pointer-events', 'auto')
                     if (!!response.responseJSON) {
                         this._error(response.responseJSON);
                     }
                 },
                 success: function (r) {
-                    console.log('success');
+                    console.log('success')
+                    $('.reports').css('pointer-events', 'auto')
                     canvas_handler.empty();
                     if (r.hasOwnProperty('success')) {
                         $('.modal-title').text(r.success);
@@ -49,6 +53,7 @@ $(document)
                     }
                 },
                 complete: function (r) {
+                    $('.reports').css('pointer-events', 'auto')
                     console.log('complete');
                     postProcess();
                 },
