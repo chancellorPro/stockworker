@@ -438,11 +438,10 @@ class IndexController extends Controller
         fclose($file);
 
         $viberReceiverIDs = [
-            'VCvoJZRu3ZC9F24LosVBOw==', // я
-//            'Lm9+v/ecMk90fl7tHAStjA==', // ,fnz
-//            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
-//            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
-//            'xzfQLEg4r8ElRtwwi8zenw==', // кир
+//            'VCvoJZRu3ZC9F24LosVBOw==', // я
+            'Lm9+v/ecMk90fl7tHAStjA==', // Папа
+            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
+            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
         ];
 
         foreach ($viberReceiverIDs as $user_id) {
