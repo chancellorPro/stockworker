@@ -72,7 +72,7 @@
                     <td>{{ ceil($item->count / $item->product->box_size) }}</td>
                     <td>{{ $item->product->box_size }}</td>
                     <td>{{ $item->product->box_weight }}</td>
-                    <td>{{ (isset($item->product) && isset($boxes[$item->product->box_id])) ? $boxes[$item->product->box_id]->name : '' }}</td>
+                    <td>{{ (isset($item->product) && isset($boxes[$item->product->box_id])) ? $boxes[$item->product->box_id]->volume : '' }}</td>
                     <td>{{ $item->description }}</td>
                     <td>
                         <a href="{{ route('stock.edit', ['stock' => $item->product_id]) }}" title="Править" class="ajax-modal-action show-form" data-header="">

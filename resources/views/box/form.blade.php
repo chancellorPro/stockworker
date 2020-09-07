@@ -5,6 +5,14 @@
 {{-- Name --}}
 @include('layouts.form-fields.input', [
     'model' => $currentModel,
-    'name'  => 'name',
+    'inputType'  => 'number',
+    'name'  => 'volume',
     'label' => __('Name'),
+])
+
+{{-- Name --}}
+@include('layouts.form-fields.input', [
+    'model' => $currentModel,
+    'name'  => 'name',
+    'label' => __('Chars'),
 ])

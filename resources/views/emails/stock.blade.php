@@ -28,7 +28,7 @@
                             <td> {{ $row->boxes_count }} </td>
                             <td> {{ $row->box_size ?? '' }} </td>
                             <td> {{ $row->box_weight ?? '' }} </td>
-                            <td> {{ (isset($row->product) && isset($boxes[$row->product->box_id])) ? $boxes[$row->product->box_id]->name : '' }} </td>
+                            <td> {{ (isset($row->product) && isset($boxes[$row->product->box_id])) ? $boxes[$row->product->box_id]->volume : '' }} </td>
                         </tr>
                     @endforeach
                 </table>

@@ -16,7 +16,6 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Traits\FilterBuilder;
 use Carbon\Carbon;
-use CURLFile;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\QueryException;
@@ -27,7 +26,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Excel;
-use Matrix\Exception;
 use Swift_TransportException;
 
 /**
@@ -389,13 +387,13 @@ class IndexController extends Controller
             $excel = App::make('excel');
             $attach = $excel->raw($entity, Excel::XLSX);
 
-            Mail::send('emails.' . $template, $request->all(), function ($message) use ($attach, $orderType) {
-                $message->subject($orderType);
-                $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
-                $message->to('pavel@zolotarev.pp.ua');
-                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
-                $message->attachData($attach, 'report.xlsx', $options = []);
-            });
+//            Mail::send('emails.' . $template, $request->all(), function ($message) use ($attach, $orderType) {
+//                $message->subject($orderType);
+//                $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
+//                $message->to('pavel@zolotarev.pp.ua');
+//                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
+//                $message->attachData($attach, 'report.xlsx', $options = []);
+//            });
 
             $telegramResponse = $this->sendMessage($attach, $canvas, $reportName);
         } catch (Swift_TransportException $e) {

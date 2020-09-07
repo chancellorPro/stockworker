@@ -16,7 +16,7 @@ class CreateBoxesTable extends Migration
         Schema::create('boxes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 150);
-            $table->float('volume');
+            $table->float('volume', 8, 3);
             $table->timestamps();
         });
     }
