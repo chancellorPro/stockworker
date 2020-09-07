@@ -64,7 +64,7 @@ class IndexController extends Controller
     {
         Box::create([
             'name'   => $request->get('name'),
-            'volume' => $request->get('name')
+            'volume' => $request->get('volume')
         ]);
 
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));
@@ -99,7 +99,7 @@ class IndexController extends Controller
         $resource = Box::findOrFail($id);
         $resource->update([
             'name'   => $request->get('name'),
-            'volume' => $request->get('name')
+            'volume' => $request->get('volume')
         ]);
 
         return $this->success();
