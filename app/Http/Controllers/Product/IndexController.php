@@ -37,7 +37,7 @@ class IndexController extends Controller
     {
         $data = $this->applyFilter(
             $request,
-            Product::with('product_ref')
+            Product::with('product_ref')->oldest('products.id')
         )->get();
 
         return view('product.index', [

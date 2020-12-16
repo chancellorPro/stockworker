@@ -49,7 +49,7 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->product_ref->name ?? '' }}</td>
                     <td>{{ $item->box_size }}</td>
-                    <td>{{ $item->box_id !== null ? $boxes[$item->box_id]->volume : '' }}</td>
+                    <td>{{ $item->box_id !== null && isset($boxes[$item->box_id]) ? $boxes[$item->box_id]->volume : '' }}</td>
                     <td>{{ $item->box_weight }}</td>
                     <td>{{ $item->description ?? '' }}</td>
                     <td>
