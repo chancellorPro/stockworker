@@ -59,7 +59,7 @@ class IndexController extends Controller
 
         return view('stock.index', [
             'data'     => $data,
-            'boxes'    => Box::all(),
+            'boxes'    => Box::all()->keyBy('id'),
             'products' => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'filter'   => $this->getFilter(),
         ]);

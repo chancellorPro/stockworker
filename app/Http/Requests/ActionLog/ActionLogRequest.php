@@ -18,9 +18,9 @@ class ActionLogRequest extends FormRequest
     public function rules()
     {
         return [
-            'income' => 'integer',
-            'product_id' => 'required',
-            'date' => 'required|string',
+            'income'      => 'integer',
+            'product_id'  => 'required',
+            'date'        => 'required|string',
             'description' => 'nullable|string',
         ];
     }
@@ -28,14 +28,14 @@ class ActionLogRequest extends FormRequest
     /**
      * @return array
      */
-    public function messages():array
+    public function messages(): array
     {
         $messages = parent::messages();
 
         $messages = [
-            'income.integer' => 'Не указано направление',
+            'income.integer'      => 'Не указано направление',
             'product_id.required' => 'Не выбран товар',
-            'date.required' => 'Не указана дата',
+            'date.required'       => 'Не указана дата',
         ];
 
         return $messages;

@@ -44,12 +44,12 @@
 ])
 
 {{-- Parent product --}}
-@include('layouts.form-fields.select2', [
-    'label' => __('Parent product'),
-    'model' => $currentModel,
-    'name' => 'parent_product',
-    'collection' => $products,
-    'id' => 'id',
-    'value' => 'name',
-    'addempty' => true,
-])
+{{--@include('layouts.form-fields.select2', [--}}
+{{--    'label' => __('Parent product'),--}}
+{{--    'model' => $currentModel,--}}
+{{--    'name' => 'parent_product',--}}
+{{--    'collection' => $products,--}}
+{{--    'id' => 'id',--}}
+{{--    'value' => 'name',--}}
+{{--    'addempty' => true,--}}
+{{--])--}}

@@ -12,7 +12,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Гарант-ПАК') }}</title>
         <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
         <link href="{{ asset("app/css/vendor.css") }}" rel="stylesheet">
         <link href="{{ asset("app/css/main.css") }}" rel="stylesheet">

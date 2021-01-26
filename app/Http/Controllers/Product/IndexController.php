@@ -43,7 +43,7 @@ class IndexController extends Controller
         return view('product.index', [
             'rows'   => $data,
             'filter' => $this->getFilter(),
-            'boxes'  => Box::all(),
+            'boxes'  => Box::all()->keyBy('id'),
         ]);
     }
 
@@ -78,7 +78,7 @@ class IndexController extends Controller
 
         return view('product.create', [
             'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
-            'boxes'     => Box::all(),
+            'boxes'     => Box::all()->keyBy('id'),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
         ]);
@@ -114,7 +114,7 @@ class IndexController extends Controller
         return view('product.edit', [
             'model'     => Product::find($id),
             'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
-            'boxes'     => Box::all(),
+            'boxes'     => Box::all()->keyBy('id'),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
         ]);

@@ -5,7 +5,7 @@
 {{--                <i class="fa fa-home"></i>--}}
                 <img src="./home.png" style="margin: -10px 0 0 0;height: 50px;">
 
-                <span>{{ config('app.name', 'Stock Worker') }}</span>
+                <span>{{ config('app.name', 'Гарант-ПАК') }}</span>
             </a>
         </div>
 

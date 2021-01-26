@@ -343,7 +343,7 @@ class IndexController extends Controller
         }
 
         return view('emails.' . $template, [
-            'boxes'     => Box::all(),
+            'boxes'     => Box::all()->keyBy('id'),
             'orderType' => $orderType,
             'data'      => $entity->collection(),
             'dateFrom'  => $request->get('from'),
@@ -381,7 +381,7 @@ class IndexController extends Controller
             }
 
             $request->merge(['data' => $entity->collection()]);
-            $request->merge(['boxes' => Box::all()]);
+            $request->merge(['boxes' => Box::all()->keyBy('id')]);
             $request->merge(['hide_button' => true]);
 
             $excel = App::make('excel');
