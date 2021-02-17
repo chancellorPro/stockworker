@@ -1,4 +1,3 @@
 #!/bin/bash
 
 docker exec -it stockworker-app bash -c "sudo -u devuser /bin/bash"
-

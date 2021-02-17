@@ -1,6 +1,6 @@
 <div class="row form-group {{ $errors->has($name) ? 'has-error' : ''}}">
     @if ((isset($label) && $label !== false) || !isset($label))
-        <label {{ !empty($fieldId) ? "for=$fieldId" : "" }} class="col-md-4 control-label">
+        <label {{ !empty($fieldId) ? "for=$fieldId" : "" }} class="col-xs-2 col-md-2 control-label">
             @if (!empty($label))
                 {{ __($label) }}
             @else
@@ -8,8 +8,8 @@
             @endif
         </label>
     @endif
-    
-    <div class="@if (isset($label) && $label === false) col-md-12 @else col-md-6 @endif cp2 input-group colorpicker-component">
+
+    <div class="@if (isset($label) && $label === false) col-md-10 @else col-xs-10 col-md-10 @endif cp2 input-group colorpicker-component">
         <input
             type="{{ $inputType ?? 'text' }}"
             class="form-control {{ $class ?? '' }}"

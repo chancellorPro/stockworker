@@ -36,9 +36,6 @@
                             @endif
 
                             @yield('controls')
-                            @if (isset($data) and isset($filter))
-                                @include('common.paginate', ['data' => $data, 'filter' => $filter])
-                            @endif
 
                             @yield('content')
 

@@ -3797,7 +3797,8 @@ form:after {
 }
 .login_content form {
     margin: 20px 0;
-    position: relative
+    position: relative;
+    padding: 15px;
 }
 .login_content form input[type="text"],
 .login_content form input[type="email"],
@@ -4066,8 +4067,15 @@ fieldset {
     max-width: 100%
 }
 .modal-dialog {
-    width: 800px !important;
+    width: 500px;
 }
+
+#modals-container-item-1,
+#modals-container-item-2,
+#modals-container-item-3{
+    width: 600px;
+}
+
 .form_wizard .stepContainer {
     display: block;
     position: relative;

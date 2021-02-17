@@ -9,6 +9,7 @@
     "scripts": {
         "build": "webpack --mode production --config webpack.config.js --bail",
         "dev": "webpack --mode development --bail",
+        "watch": "webpack --watch",
         "start": "webpack --mode development --watch --bail",
         "test": "echo \"Error: no test specified\" && exit 1"
     },

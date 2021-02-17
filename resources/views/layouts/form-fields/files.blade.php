@@ -1,8 +1,8 @@
 <div class="row form-group {{ $errors->has('files') ? 'has-error' : ''}}">
     @if ((isset($label) && $label !== false) || !isset($label))
-        <label class="col-md-4 control-label"> @formFieldLabel($name) </label>
+        <label class="col-xs-2 col-md-2 control-label"> @formFieldLabel($name) </label>
     @endif
-    <div class="col-md-6">
+    <div class="col-xs-10 col-md-10">
         <div class="row">
             @if ((!empty($files) && !empty($mult)) || (!empty($file) && empty($mult)))
 
@@ -13,7 +13,7 @@
                 @endphp
 
                 @foreach($files as $file)
-               
+
                 <div class="col-md-3 {{$type}}-thumbnail file-box thumbnail">
                         <input type="hidden" name="uploaded_{{ $name }}[]" value="{{ $file->{$id} }}">
                         @if ($type == 'image')
@@ -50,10 +50,10 @@
             <label class="input-group-btn">
                 <span class="btn btn-primary btn-file-upload">
                     @lang('common.file.browse')
-                    <input 
-                        type="file" 
+                    <input
+                        type="file"
                         @if(!empty($fileExt))accept="{{$fileExt}}"@endif
-                        name="{{ $name }}@if(!empty($mult))[]@endif" 
+                        name="{{ $name }}@if(!empty($mult))[]@endif"
                         style="display: none;" @if(!empty($mult)) multiple @endif>
                 </span>
             </label>

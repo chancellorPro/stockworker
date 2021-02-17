@@ -5,110 +5,106 @@
 ])
 
 @section('controls')
-    <div class="pull-right col-sm-10">
-        @php
-            use Carbon\Carbon as Carbon;
-            $field = 'today';
-            $selected = request()->get('date_range') ?? '';
-            $inputsStyle = 'style="visibility: hidden; height: 0"';
-            $currentDay = Carbon::now()->startOfDay()->format('Y-m-d');
-        @endphp
-        <div class="col-sm-7">
-            <div class="col-sm-4">
-                <label class="pull-right">@lang('Create report'): </label>
-            </div>
-            <div class="col-sm-4">
-                <input
-                    type="text"
-                    class="form-control filter datepicker filter-from"
-                    name="{{$field}}[from]"
-                    autocomplete="off"
-                    placeholder="from"
-                    value="{{ $dateFrom ?? $currentDay }}"
-                >
-            </div>
-            <div class="col-sm-4">
-                <input
-                    type="text"
-                    class="form-control filter datepicker filter-to"
-                    name="{{$field}}[to]"
-                    autocomplete="off"
-                    placeholder="to"
-                    value="{{ $dateTo?? $currentDay }}"
-                >
-            </div>
+    <div id="canvas_handler" style="position: absolute;right:100000px;"></div>
+    @php
+        use Carbon\Carbon as Carbon;
+        $field = 'today';
+        $selected = request()->get('date_range') ?? '';
+        $inputsStyle = 'style="visibility: hidden; height: 0"';
+        $currentDay = Carbon::now()->startOfDay()->format('Y-m-d');
+    @endphp
+    <div class="col-sm-12">
+        <div class="col-sm-3">
+            @if(auth()->id() < 3)
+                {{-- Create --}}
+                @include('common.buttons.create', [
+                    'route' => 'action-log.create',
+                    'name' => __('Create action'),
+                    'class' => 'ajax-modal-action show-form',
+                    'dataset' => [
+                        'header' => __('Create action'),
+                    ],
+                ])
+            @endif
         </div>
-        <div id="canvas_handler" style="position: absolute;right:100000px;"></div>
-
-        {{-- Income report --}}
-        @include('common.buttons.save', [
-            'route' => 'export',
-            'id' => 'income',
-            'route_params' => [
-                'income' => \App\Models\ActionLog::INCOME,
-                'has_parent' => false,
-                'orderType' => __('Income report'),
-            ],
-            'name' => __('Income report'),
-            'fa_class' => 'fa-save',
-            'class' => 'reports',
-            'dataset' => [
-                'method' => 'GET',
-                'event' => 'REPORT_SHOW_FORM',
-            ],
-        ])
-        {{-- Outcome report --}}
-        @include('common.buttons.save', [
-            'route' => 'export',
-            'id' => 'outcome',
-            'route_params' => [
-                'income'     => \App\Models\ActionLog::OUTOME,
-                'has_parent' => true,
-                'orderType' => __('Outcome report'),
-            ],
-            'name' => __('Outcome report'),
-            'fa_class' => 'fa-save',
-            'class' => 'reports',
-            'dataset' => [
-                'method' => 'GET',
-                'event' => 'REPORT_SHOW_FORM',
-            ],
-        ])
-        {{-- Stock state report --}}
-        @include('common.buttons.save', [
-            'route' => 'export',
-            'id' => 'stock',
-            'route_params' => [
-                'income' => \App\Models\ActionLog::STOCK,
-                'has_parent' => false,
-                'orderType' => __('Stock state report'),
-            ],
-            'name' => __('Stock state report'),
-            'fa_class' => 'fa-save',
-            'class' => 'reports',
-            'dataset' => [
-                'method' => 'GET',
-                'event' => 'REPORT_SHOW_FORM',
-            ],
-        ])
-    </div>
-    <div class="col-sm-1">
-        @if(auth()->id() < 3)
-            {{-- Create --}}
-            @include('common.buttons.create', [
-                'route' => 'action-log.create',
-                'name' => __('Create action'),
-                'class' => 'ajax-modal-action show-form',
+        <div class="col-sm-2">
+            <input
+                type="text"
+                class="form-control filter datepicker filter-from"
+                name="{{$field}}[from]"
+                autocomplete="off"
+                placeholder="from"
+                value="{{ $dateFrom ?? $currentDay }}"
+            >
+        </div>
+        <div class="col-sm-2">
+            <input
+                type="text"
+                class="form-control filter datepicker filter-to"
+                name="{{$field}}[to]"
+                autocomplete="off"
+                placeholder="to"
+                value="{{ $dateTo?? $currentDay }}"
+            >
+        </div>
+        <div class="col-sm-5">
+            {{-- Income report --}}
+            @include('common.buttons.save', [
+                'route' => 'export',
+                'id' => 'income',
+                'route_params' => [
+                    'income' => \App\Models\ActionLog::INCOME,
+                    'has_parent' => false,
+                    'orderType' => __('Income report'),
+                ],
+                'name' => __('Income report'),
+                'fa_class' => 'fa-save',
+                'class' => 'reports',
                 'dataset' => [
-                    'header' => __('Create action'),
+                    'method' => 'GET',
+                    'event' => 'REPORT_SHOW_FORM',
                 ],
             ])
-        @endif
+            {{-- Outcome report --}}
+            @include('common.buttons.save', [
+                'route' => 'export',
+                'id' => 'outcome',
+                'route_params' => [
+                    'income'     => \App\Models\ActionLog::OUTOME,
+                    'has_parent' => true,
+                    'orderType' => __('Outcome report'),
+                ],
+                'name' => __('Outcome report'),
+                'fa_class' => 'fa-save',
+                'class' => 'reports',
+                'dataset' => [
+                    'method' => 'GET',
+                    'event' => 'REPORT_SHOW_FORM',
+                ],
+            ])
+            {{-- Stock state report --}}
+            @include('common.buttons.save', [
+                'route' => 'export',
+                'id' => 'stock',
+                'route_params' => [
+                    'income' => \App\Models\ActionLog::STOCK,
+                    'has_parent' => false,
+                    'orderType' => __('Stock state report'),
+                ],
+                'name' => __('Stock state report'),
+                'fa_class' => 'fa-save',
+                'class' => 'reports',
+                'dataset' => [
+                    'method' => 'GET',
+                    'event' => 'REPORT_SHOW_FORM',
+                ],
+            ])
+        </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="table-responsive">
+    <div class="">
         <table class="table table-hover">
             <thead>
             <tr>
@@ -195,7 +191,7 @@
 
         $(document)
             .on('input', '[name="count"]', function (e) {
-                if($(this).val().length > 0) {
+                if ($(this).val().length > 0) {
                     $('[name="box_count"]').attr('disabled', true);
                 } else {
                     $('[name="box_count"]').attr('disabled', false);
@@ -203,7 +199,7 @@
             });
         $(document)
             .on('input', '[name="box_count"]', function (e) {
-                if($(this).val().length > 0) {
+                if ($(this).val().length > 0) {
                     $('[name="count"]').attr('disabled', true);
                 } else {
                     $('[name="count"]').attr('disabled', false);
@@ -420,7 +416,7 @@
                 }
 
                 let html = $(`
-            <div id="${ this._getID() }" class="modal fade" role="dialog" aria-hidden="true" ${dataset.join(' ')}>
+            <div id="${this._getID()}" class="modal fade" role="dialog" aria-hidden="true" ${dataset.join(' ')}>
                 <div class="modal-dialog modal-dialog-centered ${this._getSize()}">
                     <div class="modal-content"></div>
                 </div>

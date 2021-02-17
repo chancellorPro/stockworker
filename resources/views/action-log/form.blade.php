@@ -9,7 +9,7 @@
     'collection' => $transaction_type,
     'id' => 'id',
     'value' => 'name',
-    'addempty' => true,
+    'addempty' => false,
 ])
 
 @include('layouts.form-fields.select2', [
@@ -32,7 +32,7 @@
 ])
 
 <div class="row form-group">
-    <label class="control-label col-md-4 col-sm-12">{{ __('Count') }}</label>
+    <label class="control-label col-md-2 col-sm-2 col-xs-2">{{ __('Count') }}</label>
     <div class="col-md-3">
         @include('layouts.form-fields.input', [
             'model' => $currentModel,

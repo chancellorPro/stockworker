@@ -1,6 +1,6 @@
 <div class="row form-group {{ $errors->has($name) ? 'has-error' : ''}}">
     @if ((isset($label) && $label !== false) || !isset($label))
-        <label {{ !empty($fieldId) ? "for=$fieldId" : "" }} class="control-label col-md-4 col-sm-12">
+        <label {{ !empty($fieldId) ? "for=$fieldId" : "" }} class="control-label col-xs-2 col-md-2 col-sm-2">
             @if (!empty($sortable))
                 @php
                 $fieldsName = $formName ?? $name;
@@ -25,7 +25,7 @@
         </label>
     @endif
 
-    <div class="@if (isset($label) && $label === false) col-md-12 @else col-md-6 @endif col-sm-12">
+    <div class="@if (isset($label) && $label === false) col-md-10 @else col-xs-10 col-md-10 @endif col-sm-10">
         <input
             type="{{ $inputType ?? 'text' }}"
             class="form-control {{ $class ?? '' }}"

@@ -1,6 +1,6 @@
 <div class="row form-group {{ $errors->has('files') ? 'has-error' : ''}}">
-    <label class="col-md-4 control-label"> @formFieldLabel($name) </label>
-    <div class="col-md-6">
+    <label class="col-xs-2 col-md-2 control-label"> @formFieldLabel($name) </label>
+    <div class="col-xs-10 col-md-10">
         <div class="row">
             @if (!empty($file))
                 <div class="col-md-3 {{$type}}-thumbnail file-box thumbnail">
