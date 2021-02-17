@@ -3674,8 +3674,9 @@ a.hiddenanchor {
 }
 .registration_form,
 .login_form {
+    background: #43667B;
     position: absolute;
-    top: 0px;
+    top: 0;
     width: 100%
 }
 .registration_form {
@@ -4072,7 +4073,7 @@ fieldset {
 #modals-container-item-1,
 #modals-container-item-2,
 #modals-container-item-3{
-    width: 600px;
+    width: 700px;
 }
 
 .form_wizard .stepContainer {
