@@ -5,7 +5,7 @@
 {{-- Title --}}
 @include('layouts.form-fields.input', [
     'model' => $currentModel,
-    'name'  => 'title',
+    'name'  => 'name',
     'label' => __('Title'),
 ])
 

@@ -30,12 +30,20 @@
                     <th>@lang('Weight')</th>
                     <th class="actions">@lang('Actions')</th>
                 </tr>
+                <tr>
+                    <th></th>
+                    <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'id', 'filterCollection' => $data])</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="filter-actions">@include('layouts.filter-col', ['filterType' => 'actions'])</th>
+                </tr>
             </thead>
             <tbody class="fast-save-page-container">
                 @foreach($data as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->name }}</td>
                         <td>{{ $item->capacity }}</td>
                         <td>{{ $item->size }}</td>
                         <td>{{ $item->weight }}</td>
