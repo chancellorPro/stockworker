@@ -23,7 +23,7 @@ class Box extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
+        'name',
         'capacity',
         'size',
         'weight',

@@ -63,7 +63,7 @@ class IndexController extends Controller
     public function store(Request $request)
     {
         Box::create([
-            'title'    => $request->get('title'),
+            'name'     => $request->get('name'),
             'capacity' => $request->get('capacity'),
             'size'     => $request->get('size'),
             'weight'   => $request->get('weight')
@@ -100,7 +100,7 @@ class IndexController extends Controller
     {
         $resource = Box::findOrFail($id);
         $resource->update([
-            'title'    => $request->get('title'),
+            'name'     => $request->get('name'),
             'capacity' => $request->get('capacity'),
             'size'     => $request->get('size'),
             'weight'   => $request->get('weight')

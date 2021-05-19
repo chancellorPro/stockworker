@@ -14,8 +14,8 @@ class AddNewBoxesColumns extends Migration
     public function up()
     {
         Schema::table('boxes', function (Blueprint $table) {
-            $table->string('title');
-            $table->string('weight');
+            $table->string('title')->nullable();
+            $table->string('weight')->nullable();
         });
     }
 
