@@ -63,8 +63,10 @@ class IndexController extends Controller
     public function store(Request $request)
     {
         Box::create([
-            'name'   => $request->get('name'),
-            'volume' => $request->get('volume')
+            'title'    => $request->get('title'),
+            'capacity' => $request->get('capacity'),
+            'size'     => $request->get('size'),
+            'weight'   => $request->get('weight')
         ]);
 
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));
@@ -98,8 +100,10 @@ class IndexController extends Controller
     {
         $resource = Box::findOrFail($id);
         $resource->update([
-            'name'   => $request->get('name'),
-            'volume' => $request->get('volume')
+            'title'    => $request->get('title'),
+            'capacity' => $request->get('capacity'),
+            'size'     => $request->get('size'),
+            'weight'   => $request->get('weight')
         ]);
 
         return $this->success();

@@ -54,7 +54,7 @@ class IndexController extends Controller
             ->orderBy('stock.updated_at', 'desc')
             ->groupBy('stock.updated_at', 'a.product_id', 'stock.product_id', 'p.product_id');
 
-        $data = $this->applyFilter($request,$builder)->paginate($this->perPage);
+        $data = $this->applyFilter($request, $builder)->paginate($this->perPage);
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
 
         return view('stock.index', [

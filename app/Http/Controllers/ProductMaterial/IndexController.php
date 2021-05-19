@@ -23,7 +23,8 @@ class IndexController extends Controller
     use FilterBuilder;
 
     const FILTER_FIELDS = [
-        'material' => 'manual',
+        'material'   => 'manual',
+        'product_id' => 'equal',
     ];
 
     /**
@@ -35,11 +36,12 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->applyFilter($request, ProductMaterial::query())->paginate($this->perPage);
+        $data = $this->applyFilter($request, ProductMaterial::with('product', 'material'))->paginate($this->perPage);
 
         return view('product-material.index', [
-            'data'   => $data,
-            'filter' => $this->getFilter(),
+            'products' => Product::all(),
+            'data'     => $data,
+            'filter'   => $this->getFilter(),
         ]);
     }
 

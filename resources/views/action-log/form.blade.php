@@ -33,7 +33,7 @@
 
 <div class="row form-group">
     <label class="control-label col-md-2 col-sm-2 col-xs-2">{{ __('Count') }}</label>
-    <div class="col-md-3">
+    <div class="col-md-5">
         @include('layouts.form-fields.input', [
             'model' => $currentModel,
             'name'  => 'box_count',
@@ -42,7 +42,7 @@
             'label' => false,
         ])
     </div>
-    <div class="col-md-3">
+    <div class="col-md-5">
         @include('layouts.form-fields.input', [
             'model' => $currentModel,
             'name'  => 'count',

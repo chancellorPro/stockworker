@@ -28,12 +28,12 @@
                     <th>@lang('Description')</th>
                     <th class="actions">@lang('Actions')</th>
                 </tr>
-                {{--<tr>--}}
-                    {{--<th>@include('layouts.filter-col', ['filterType' => 'int', 'field' => 'id'])</th>--}}
-                    {{--<th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'name'])</th>--}}
-                    {{--<th></th>--}}
-                    {{--<th class="filter-actions">@include('layouts.filter-col', ['filterType' => 'actions'])</th>--}}
-                {{--</tr>--}}
+                <tr>
+                    <th></th>
+                    <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'id', 'filterCollection' => $data])</th>
+                    <th></th>
+                    <th class="filter-actions">@include('layouts.filter-col', ['filterType' => 'actions'])</th>
+                </tr>
             </thead>
             <tbody class="fast-save-page-container">
                 @foreach($data as $item)

@@ -31,6 +31,15 @@
                 <th>@lang('Width')</th>
                 <th class="actions">@lang('Actions')</th>
             </tr>
+            <tr>
+                <th></th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'product_id', 'filterCollection' => $products])</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th class="filter-actions">@include('layouts.filter-col', ['filterType' => 'actions'])</th>
+            </tr>
             </thead>
             <tbody class="fast-save-page-container">
             @foreach($data as $item)
@@ -74,7 +83,7 @@
     <script src="{{ asset("js/filter-col.js") }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            init_filter_col("{{ route('material.index') }}");
+            init_filter_col("{{ route('product-material.index') }}");
         })
     </script>
 @endpush

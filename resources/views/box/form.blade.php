@@ -2,17 +2,31 @@
     $currentModel = isset($model) ? $model : null;
 @endphp
 
-{{-- Name --}}
+{{-- Title --}}
+@include('layouts.form-fields.input', [
+    'model' => $currentModel,
+    'name'  => 'title',
+    'label' => __('Title'),
+])
+
+{{-- Capacity --}}
 @include('layouts.form-fields.input', [
     'model' => $currentModel,
     'inputType'  => 'number',
-    'name'  => 'volume',
-    'label' => __('Name'),
+    'name'  => 'capacity',
+    'label' => __('Capacity'),
 ])
 
-{{-- Name --}}
+{{-- Size --}}
 @include('layouts.form-fields.input', [
     'model' => $currentModel,
-    'name'  => 'name',
-    'label' => __('Chars'),
+    'name'  => 'size',
+    'label' => __('Size'),
+])
+
+{{-- Weight --}}
+@include('layouts.form-fields.input', [
+    'model' => $currentModel,
+    'name'  => 'weight',
+    'label' => __('Weight'),
 ])

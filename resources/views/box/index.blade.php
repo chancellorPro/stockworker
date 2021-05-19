@@ -24,8 +24,10 @@
             <thead>
                 <tr>
                     <th class="id">@lang('Id')</th>
-                    <th>@lang('Name')</th>
-                    <th>@lang('Chars')</th>
+                    <th>@lang('Title')</th>
+                    <th>@lang('Capacity')</th>
+                    <th>@lang('Size')</th>
+                    <th>@lang('Weight')</th>
                     <th class="actions">@lang('Actions')</th>
                 </tr>
             </thead>
@@ -33,8 +35,10 @@
                 @foreach($data as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->volume }}</td>
-                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->capacity }}</td>
+                        <td>{{ $item->size }}</td>
+                        <td>{{ $item->weight }}</td>
                         <td>
                             @include('common.buttons.edit', [
                                 'route' => 'box.edit',
