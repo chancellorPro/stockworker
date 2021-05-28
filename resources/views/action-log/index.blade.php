@@ -113,7 +113,7 @@
                 <th>@lang('Date')</th>
                 <th>@lang('Count')</th>
                 <th>@lang('Weight')</th>
-                <th>@lang('Partition')</th>
+                <th>@lang('Capacity')</th>
                 <th>@lang('Customer')</th>
                 <th>@lang('Description')</th>
                 <th class="actions">@lang('Actions')</th>
@@ -144,7 +144,7 @@
                     <td style="{{ $currentDate > Carbon::createFromFormat('Y-m-d', $item->date)->setTimezone('Europe/Kiev') ? 'background:silver' : '' }}">{{ $item->date }}</td>
                     <td>{{ $item->count }}</td>
                     <td>{{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $item->product->box_weight, 1) : '' }}</td>
-                    <td>{{ $item->partition }}</td>
+                    <td>{{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $boxes[$item->product->box_id]->capacity, 1) : '' }}</td>
                     <td>{{ $item->customer ? $item->customer->name : '' }}</td>
                     <td>
                         {{ $item->description }}

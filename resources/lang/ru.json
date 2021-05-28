@@ -74,8 +74,8 @@
     "Product Material Relation": "Материалы Товаров",
     "Product Material": "Создать материал товара",
     "Create Product Material": "Связать материал с товаром",
-    "Capacity": "Объём",
+    "Capacity": "Объём, м. куб",
     "Title": "Название",
     "Size": "Размер",
-    "Weight": "Вес"
+    "Weight": "Вес, кг"
 }

@@ -24,7 +24,6 @@
             <tr>
                 <th class="id">@lang('Id')</th>
                 <th class="col-sm-2">@lang('Name')</th>
-                <th class="col-sm-2">@lang('Parent product')</th>
                 <th class="id">@lang('Box size')</th>
                 <th class="id">@lang('Box')</th>
                 <th class="id">@lang('Box weight')</th>
@@ -34,7 +33,6 @@
             <tr>
                 <th>@include('layouts.filter-col', ['filterType' => 'string', 'field' => 'id'])</th>
                 <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'id', 'filterCollection' => $rows])</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'parent_id', 'filterCollection' => $rows])</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -47,9 +45,8 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->product_ref->name ?? '' }}</td>
                     <td>{{ $item->box_size }}</td>
-                    <td>{{ $item->box_id !== null && isset($boxes[$item->box_id]) ? $boxes[$item->box_id]->volume : '' }}</td>
+                    <td>{{ $item->box_id !== null && isset($boxes[$item->box_id]) ? $boxes[$item->box_id]->capacity : '' }}</td>
                     <td>{{ $item->box_weight }}</td>
                     <td>{{ $item->description ?? '' }}</td>
                     <td>

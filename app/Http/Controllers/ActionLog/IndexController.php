@@ -70,6 +70,7 @@ class IndexController extends Controller
             'dateTo'           => $request->get('dateTo'),
             'products'         => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
             'customers'        => Customer::all(),
+            'boxes'            => Box::all()->keyBy('id'),
         ]);
     }
 
