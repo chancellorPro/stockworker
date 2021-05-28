@@ -113,7 +113,7 @@
                 <th>@lang('Date')</th>
                 <th>@lang('Count')</th>
                 <th>@lang('Weight')</th>
-                <th>@lang('Capacity')</th>
+                <th>@lang('Outcome capacity')</th>
                 <th>@lang('Customer')</th>
                 <th>@lang('Description')</th>
                 <th class="actions">@lang('Actions')</th>
