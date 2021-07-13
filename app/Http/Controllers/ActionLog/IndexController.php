@@ -105,7 +105,7 @@ class IndexController extends Controller
     {
         $customer_id = $request->get('customer');
 
-        if (!empty($product_id)) {
+        if (!empty($customer_id)) {
             $builder
                 ->leftJoin('customers', 'action_log.customer_id', '=', 'customers.id')
                 ->where('customers.id', $customer_id);
