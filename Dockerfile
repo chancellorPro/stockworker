@@ -54,7 +54,6 @@ RUN docker-php-ext-configure bcmath --enable-bcmath \
         mysqli \
         pcntl \
         pdo_mysql \
-        pdo_pgsql \
         soap \
         sockets \
         zip \
