@@ -20,7 +20,7 @@ services:
           - app
 
   stockworker-db:
-    image: mysql:5.7
+    image: mariadb:10.5.8
     container_name: stockworker-db
     volumes:
       - ./run/var:/var/lib/mysql
