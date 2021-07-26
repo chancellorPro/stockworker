@@ -20,8 +20,10 @@
             <section class="login_content">
 
                 <div class="card-header">{{ __('Login') }}</div>
-                <div id="stock-app" style="display: none;">
-                    <a href="{{ asset("app/stock-app.apk") }}">Download Stock APP for Android</a>
+                <div id="stock-app">
+                    <a style="display: none;" href="{{ asset("app/stock-app.apk") }}">
+                        Download {app_name} for Android
+                    </a>
                 </div>
 
                 <form method="POST" action="{{ route('login') }}">
