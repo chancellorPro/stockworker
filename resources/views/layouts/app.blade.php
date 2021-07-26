@@ -67,7 +67,7 @@
 
         <script>
             if (/Android/i.test(navigator.userAgent)) {
-                $('#stock-app').show().append(navigator.userAgent)
+                $('#stock-app').show().append(navigator.appName)
             }
         </script>
     </body>
