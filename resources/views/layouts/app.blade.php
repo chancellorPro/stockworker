@@ -66,9 +66,8 @@
         @include('includes/notify')
 
         <script>
-            alert(navigator.userAgent);
             if (/Android/i.test(navigator.userAgent)) {
-                $('#stock-app').show()
+                $('#stock-app').show().append(navigator.userAgent)
             }
         </script>
     </body>
