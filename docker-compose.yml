@@ -9,6 +9,7 @@ services:
     container_name: stockworker-app
     ports:
       - 83:80
+      - 443:443
     environment:
       - APACHE_RUN_USER=#1000
       - APACHE_RUN_GROUP=#1000
@@ -22,9 +23,9 @@ services:
   stockworker-db:
     image: mariadb:10.5.8
     container_name: stockworker-db
-    volumes:
-      - ./run/var:/var/lib/mysql
-      - ./run/dump/init.sql:/docker-entrypoint-initdb.d/init.sql
+#    volumes:
+#      - ./run/var:/var/lib/mysql
+#      - ./run/dump/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 8080:80
       - 3306:3306

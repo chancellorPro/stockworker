@@ -6,6 +6,7 @@ use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 use App\Services\AvatarGenerator\AvatarGenerator;
 use App\Support\Contracts\AvatarGeneratorContract;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,9 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url): void
     {
-//        if (env('APP_ENV') !== 'local') {
-//            $url->forceScheme('https');
-//        }
+        if(env('APP_ENV') !== 'local') {
+            URL::forceScheme('https');
+        }
     }
 
     /**
