@@ -22,7 +22,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
                 <div id="stock-app">
                     <a style="display: none;" href="{{ asset("app/stock-app.apk") }}">
-                        Download {app_name} for Android
+                        Download Stock APP for Android
                     </a>
                 </div>
 
