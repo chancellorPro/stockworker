@@ -1,4 +1,23 @@
 <!-- top navigation -->
+<style>
+    #stock-app a{
+        color: blue;
+        font-size: 28px;
+        padding: 7px 15px 0 20px;
+        font-weight: bold;
+        background: #cdf086;
+        position: absolute;
+        top: 0;
+        height: 58px;
+        left: 0;
+    }
+    @media (min-width: 480px) {
+        #stock-app a {
+            left: 70px;
+        }
+    }
+
+</style>
 <div class="top_nav">
     <div class="nav_menu">
         <nav>
@@ -12,6 +31,10 @@
             </div>
 
             <div class="nav top-menu">
+                <div id="stock-app" style="display: none;">
+                    <a href="{{ asset("app/stock-app.apk") }}">Stock APP for Android</a>
+                </div>
+
                 @foreach(config('menu') as $menuItem)
                     @if (isset($menuItem['child']))
                         @foreach($menuItem['child'] as $childItem)

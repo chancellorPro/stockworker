@@ -64,5 +64,12 @@
         @stack('scripts')
 
         @include('includes/notify')
+
+        <script>
+            alert(navigator.userAgent);
+            if (/Android/i.test(navigator.userAgent)) {
+                $('#stock-app').show()
+            }
+        </script>
     </body>
 </html>

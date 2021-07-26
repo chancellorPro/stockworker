@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 use App\Services\AvatarGenerator\AvatarGenerator;
 use App\Support\Contracts\AvatarGeneratorContract;
@@ -13,9 +14,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(): void
+    public function boot(UrlGenerator $url): void
     {
-        //
+        if (env('APP_ENV') !== 'local') {
+            $url->forceScheme('https');
+        }
     }
 
     /**

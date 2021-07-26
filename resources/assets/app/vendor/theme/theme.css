@@ -3697,6 +3697,9 @@ a.hiddenanchor {
 #signin:target ~ .login_wrapper .registration_form {
     animation-name: fadeOutLeft
 }
+#canvas-data {
+    visibility: hidden
+}
 .animate {
     -webkit-animation-duration: 0.5s;
     -webkit-animation-timing-function: ease;
@@ -4067,13 +4070,15 @@ fieldset {
     max-width: 100%
 }
 .modal-dialog {
-    width: 500px;
+    width: 90% !important;
+    margin: 30px !important;
 }
 
 #modals-container-item-1,
 #modals-container-item-2,
 #modals-container-item-3{
-    width: 700px;
+    width: 90%;
+    left: 80px;
 }
 
 .form_wizard .stepContainer {
