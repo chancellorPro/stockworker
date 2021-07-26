@@ -364,8 +364,8 @@ class IndexController extends Controller
         $dateTo = $request->get('dateTo');
         $canvas = $request->get('canvas');
         $direction = $request->get('direction');
-        $template = $request->get('template');
-        $orderType = $request->get('orderType');
+//        $template = $request->get('template');
+//        $orderType = $request->get('orderType');
 
         try {
             $currentDate = Carbon::now()->format('Y-m-d');
@@ -385,8 +385,8 @@ class IndexController extends Controller
             $request->merge(['boxes' => Box::all()->keyBy('id')]);
             $request->merge(['hide_button' => true]);
 
-            $excel = App::make('excel');
-            $attach = $excel->raw($entity, Excel::XLSX);
+//            $excel = App::make('excel');
+//            $attach = $excel->raw($entity, Excel::XLSX);
 
 //            Mail::send('emails.' . $template, $request->all(), function ($message) use ($attach, $orderType) {
 //                $message->subject($orderType);
@@ -396,7 +396,7 @@ class IndexController extends Controller
 //                $message->attachData($attach, 'report.xlsx', $options = []);
 //            });
 
-            $telegramResponse = $this->sendMessage($attach, $canvas, $reportName);
+            $response = $this->sendMessage($canvas, $reportName);
         } catch (Swift_TransportException $e) {
             pushNotify('error', __('Mail service is not supported!'));
             return response()->json([
@@ -404,29 +404,29 @@ class IndexController extends Controller
             ]);
         }
 
-        pushNotify('success', __('Report sent!'));
+        pushNotify('success', __('Report sent! ' . var_export($response, 1)));
         return response()->json([
-            'telegramResponse' => $direction,
+            'response' => $direction,
             'dateFrom'         => $request->get('from'),
             'dateTo'           => $request->get('to'),
-            'success'          => __('Отчет отправлен!'),
+            'success'          => __('Отчет отправлен! ' . var_export($response, 1)),
         ]);
     }
 
     /**
      * Send Telegram message
      *
-     * @param $attach binary
+     *** @param $attach binary
      * @param $canvas binary
      * @param $reportName
      * @return bool|string
      */
-    function sendMessage($attach, $canvas, $reportName)
+    function sendMessage($canvas, $reportName)
     {
-        $xls_file_path = "/reports/$reportName.xlsx";
-        $file = fopen(public_path() . $xls_file_path, 'wb');
-        fwrite($file, $attach);
-        fclose($file);
+//        $xls_file_path = "/reports/$reportName.xlsx";
+//        $file = fopen(public_path() . $xls_file_path, 'wb');
+//        fwrite($file, $attach);
+//        fclose($file);
 
         $png_file_path = "/reports/$reportName.png";
         $file = fopen(public_path() . $png_file_path, 'wb');
@@ -437,14 +437,14 @@ class IndexController extends Controller
         fclose($file);
 
         $viberReceiverIDs = [
-//            'VCvoJZRu3ZC9F24LosVBOw==', // я
+            'VCvoJZRu3ZC9F24LosVBOw==', // я
             'Lm9+v/ecMk90fl7tHAStjA==', // Папа
             'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
             'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
         ];
 
         foreach ($viberReceiverIDs as $user_id) {
-            $response = $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path. ' | '. $_SERVER['HTTP_HOST'] . $xls_file_path);
+            $response[] = $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
         }
 
 //        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
