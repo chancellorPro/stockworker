@@ -35,7 +35,7 @@ class DatabaseBackup extends Command
     {
         $filename = "backup-" . Carbon::now()->format('Y-m-d') . ".sql";
 
-        $containerCommand = "mysqldump --user=homestead --password=secret --host=host.docker.internal homestead > " . "/docker-entrypoint-initdb.d/" . $filename;
+        $containerCommand = "mysqldump --user=homestead --password=secret --host=stockworker-db homestead > " . "/docker-entrypoint-initdb.d/" . $filename;
         $envCommand = 'docker exec -it stockworker-db bash -c "' . $containerCommand . '"';
         $returnVar = NULL;
         $output = NULL;
