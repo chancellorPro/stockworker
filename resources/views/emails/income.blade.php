@@ -4,7 +4,7 @@
     <div style="position: relative">
         <div class="html-content-holder">
             <div class="wrapper">
-                <table
+                <table id="report-table"
                     style="padding: 20px;margin: 20px;border-collapse: collapse;border-left: 1px solid black;border-bottom: 1px solid black;">
                     <thead>
                     <tr>
