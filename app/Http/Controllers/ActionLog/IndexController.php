@@ -16,6 +16,7 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Traits\FilterBuilder;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\QueryException;
@@ -321,7 +322,7 @@ class IndexController extends Controller
         $date_to = $request->has('to') ? Carbon::createFromFormat('Y-m-d', $request->get('to')) : Carbon::now();
         $from = $date_from->startOfDay()->format('Y-m-d H:i:s');
         $to = $date_to->endOfDay()->format('Y-m-d H:i:s');
-        $orderType = $request->get('orderType');
+//        $orderType = $request->get('orderType');
 
         if ($request->get('income') == ActionLog::INCOME) {
             $entity = new IncomeReport($from, $to, $request->get('income'));
@@ -345,7 +346,6 @@ class IndexController extends Controller
 
         return view('emails.' . $template, [
             'boxes'     => Box::all()->keyBy('id'),
-            'orderType' => $orderType,
             'data'      => $entity->collection(),
             'dateFrom'  => $request->get('from'),
             'dateTo'    => $request->get('to'),
@@ -371,13 +371,13 @@ class IndexController extends Controller
             $currentDate = Carbon::now()->format('Y-m-d');
 
             if ($direction == ActionLog::INCOME) {
-                $reportName = $currentDate . '_Отчет_о_прибытии';
+                $reportName = $currentDate . '_development_report';
                 $entity = new IncomeReport($dateFrom, $dateTo, $direction);
             } elseif ((int)$direction === ActionLog::OUTOME) {
-                $reportName = $currentDate . '_Отчет_об_отгрузке';
+                $reportName = $currentDate . '_delivery_report';
                 $entity = new OutcomeReport($dateFrom, $dateTo, $direction);
             } elseif ((int)$direction === ActionLog::STOCK) {
-                $reportName = $currentDate . '_Отчет_о_состоянии_склада';
+                $reportName = $currentDate . '_stock_report';
                 $entity = new StockReport($dateFrom, $dateTo, $direction);
             }
 
@@ -396,45 +396,42 @@ class IndexController extends Controller
 //                $message->attachData($attach, 'report.xlsx', $options = []);
 //            });
 
-            $response = $this->sendMessage($canvas, $reportName);
+            $image = $this->createImage($canvas, $reportName);
+            $response = $this->sendMessage($image);
+
         } catch (Swift_TransportException $e) {
             pushNotify('error', __('Mail service is not supported!'));
             return response()->json([
                 'error' => __('Mail service is not supported!'),
             ]);
+        } catch (Exception $e) {
+            pushNotify('error', $e->getMessage());
+            return response()->json([
+                'error' => $e->getMessage(),
+            ]);
         }
 
         pushNotify('success', __('Report sent! ' . var_export($response, 1)));
+
         return response()->json([
-            'response' => $direction,
-            'dateFrom'         => $request->get('from'),
-            'dateTo'           => $request->get('to'),
-            'success'          => __('Отчет отправлен! ' . var_export($response, 1)),
+            'report_image' => 'http://' . $_SERVER['HTTP_HOST'] . $image,
+            'response'     => $response,
+            'direction'    => $direction,
+            'dateFrom'     => $request->get('from'),
+            'dateTo'       => $request->get('to'),
+            'success'      => __('Report sent! ' . var_export($response, 1)),
         ]);
     }
 
     /**
      * Send Telegram message
      *
-     *** @param $attach binary
-     * @param $canvas binary
-     * @param $reportName
-     * @return bool|string
+     * @param $png_file_path string
+     * @return array
      */
-    function sendMessage($canvas, $reportName)
+    function sendMessage($png_file_path)
     {
-//        $xls_file_path = "/reports/$reportName.xlsx";
-//        $file = fopen(public_path() . $xls_file_path, 'wb');
-//        fwrite($file, $attach);
-//        fclose($file);
-
-        $png_file_path = "/reports/$reportName.png";
-        $file = fopen(public_path() . $png_file_path, 'wb');
-        $img = str_replace(['data:image/png;base64,', 'data:application/octet-stream;base64,'], [''], $canvas);
-        $img = str_replace(' ', '+', $img);
-        $fileData = base64_decode($img);
-        fwrite($file, $fileData);
-        fclose($file);
+        $response['telegram'] = $this->sendTelegramMessage($png_file_path);
 
         $viberReceiverIDs = [
             'VCvoJZRu3ZC9F24LosVBOw==', // я
@@ -444,24 +441,64 @@ class IndexController extends Controller
         ];
 
         foreach ($viberReceiverIDs as $user_id) {
-            $response[] = $this->send_message($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
+            $response['viber'][$user_id] = $this->sendViberMessage($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
         }
-
-//        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
-//        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path . ' | '. $_SERVER['HTTP_HOST'] . $xls_file_path;
-//        $ch = curl_init();
-//        $optArray = array(
-//            CURLOPT_URL            => $url,
-//            CURLOPT_RETURNTRANSFER => true,
-//        );
-//        curl_setopt_array($ch, $optArray);
-//        $result = curl_exec($ch);
-//        curl_close($ch);
 
         return $response;
     }
 
-    function send_message($receiverID, $TextMessage)
+    /**
+     * Send Telegram message
+     *
+     * @param $png_file_path string
+     * @return bool|string
+     */
+    function sendTelegramMessage($png_file_path)
+    {
+        if (empty(env('TELEGRAM_TOKEN')) || empty(env('CHAT_ID'))) {
+            return;
+        }
+
+        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
+        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path;
+        $ch = curl_init();
+        $optArray = array(
+            CURLOPT_URL            => $url,
+            CURLOPT_RETURNTRANSFER => true,
+        );
+        curl_setopt_array($ch, $optArray);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
+    }
+
+    /**
+     * Send Telegram message
+     *
+     * @param $canvas binary
+     * @param $reportName
+     * @return string
+     */
+    function createImage($canvas, $reportName)
+    {
+        $png_file_path = "/reports/$reportName.png";
+        $file = fopen(public_path() . $png_file_path, 'wb');
+        $img = str_replace(['data:image/png;base64,', 'data:application/octet-stream;base64,'], [''], $canvas);
+        $img = str_replace(' ', '+', $img);
+        $fileData = base64_decode($img);
+        fwrite($file, $fileData);
+        fclose($file);
+
+        return $png_file_path;
+    }
+
+    /**
+     * @param $receiverID
+     * @param $TextMessage
+     * @return bool|string
+     */
+    function sendViberMessage($receiverID, $TextMessage)
     {
         $curl = curl_init();
         $json_data = '{
@@ -501,12 +538,10 @@ class IndexController extends Controller
         curl_close($curl);
 
         if ($err) {
-            echo "cURL Error #:" . $err;
+            return "cURL Error #:" . $err;
         } else {
-            echo $response;
+            return $response;
         }
-
-        return $response;
     }
 
 }

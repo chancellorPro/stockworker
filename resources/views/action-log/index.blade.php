@@ -54,8 +54,6 @@
                 'id' => 'income',
                 'route_params' => [
                     'income' => \App\Models\ActionLog::INCOME,
-                    'has_parent' => false,
-                    'orderType' => __('Income report'),
                 ],
                 'name' => __('Income report'),
                 'fa_class' => 'fa-save',
@@ -71,8 +69,6 @@
                 'id' => 'outcome',
                 'route_params' => [
                     'income'     => \App\Models\ActionLog::OUTOME,
-                    'has_parent' => true,
-                    'orderType' => __('Outcome report'),
                 ],
                 'name' => __('Outcome report'),
                 'fa_class' => 'fa-save',
@@ -88,8 +84,6 @@
                 'id' => 'stock',
                 'route_params' => [
                     'income' => \App\Models\ActionLog::STOCK,
-                    'has_parent' => false,
-                    'orderType' => __('Stock state report'),
                 ],
                 'name' => __('Stock state report'),
                 'fa_class' => 'fa-save',

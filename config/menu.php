@@ -28,8 +28,8 @@ return [
             ['name' => 'Цвета', 'route' => 'color.index', 'icon' => 'fa-paint-brush'],
             ['name' => 'Заказчики', 'route' => 'customer.index', 'icon' => 'fa-fax'],
             ['name' => 'Менеджеры', 'route' => 'user.index', 'icon' => 'fa-users'],
-            ['name' => 'План', 'route' => 'plan.index', 'icon' => 'fa-bullhorn'],
-            ['name' => 'История', 'route' => 'history', 'icon' => 'fa-history'],
+//            ['name' => 'План', 'route' => 'plan.index', 'icon' => 'fa-bullhorn'],
+//            ['name' => 'История', 'route' => 'history', 'icon' => 'fa-history'],
         ],
     ],
 ];

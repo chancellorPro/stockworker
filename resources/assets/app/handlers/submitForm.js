@@ -9,6 +9,7 @@ import errorHandler from "components/http/errorHandler";
  */
 export default function(e) {
     e.preventDefault();
+    console.log('SEND');
 
     const currentButton = $(this);
 
@@ -39,7 +40,10 @@ export default function(e) {
                 successHandler(response);
             }
         })
-        .complete(() => {
+        .complete(r => {
+            if(r.responseJSON.hasOwnProperty('report_image')) {
+                $('#report_path').val(r.responseJSON.report_image);
+            }
             currentButton.removeClass('loading');
         })
         .send();

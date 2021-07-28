@@ -4,5 +4,13 @@ docker exec -it stockworker-db bash -c "mysql -u homestead -psecret homestead"
 mysql -u homestead -psecret homestead
 
 mysqldump -u homestead -p --databases homestead > /tmp/dump.sql
+
 docker cp stockworker-db:/tmp/dump.sql stockworker-app:/public/dump.sql
-docker cp /var/www/dump.sql stockworker-app:/public/dump.sql
+
+
+docker cp ./public/dump.sql stockworker-db:/tmp/dump.sql
+docker exec -it stockworker-db bash
+mysql -u homestead -p --default-character-set=utf8 homestead < /tmp/dump.sql
+
+
+mysql -u homestead -p --default-character-set=utf8 homestead < /tmp/dump.sql

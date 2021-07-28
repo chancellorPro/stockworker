@@ -1,7 +1,18 @@
 import html2canvas from 'html2canvas';
+import observer from "components/observer/EventObserver";
+import {SHOW_REPORT_PATH} from "modules/award/constants";
+import notifySuccess from "components/notify/notifySuccess";
 
 $(document)
-    .ready(function(){$('.reports').css('pointer-events', 'auto')})
+    .ready(function(){
+        $('.reports').css('pointer-events', 'auto');
+    })
+
+    .on('click', '#report_path', function () {
+        $('#report_path').select();
+        document.execCommand("copy");
+        notifySuccess('Copied to buffer!');
+    })
 
     .on('click', '#product_id', function () {
         $('#product_id').prev('.select2-container').find('.select2-search__field').focus()
@@ -39,7 +50,6 @@ $(document)
                     }
                 },
                 success: function (r) {
-                    console.log('success')
                     $('.reports').css('pointer-events', 'auto')
                     canvas_handler.empty();
                     if (r.hasOwnProperty('success')) {
@@ -75,7 +85,8 @@ $(document)
                 const copy_ele = $(element).find('.wrapper').get(0).cloneNode(true);
                 canvas_handler.append(copy_ele);
                 canvas_handler.css('height', element.scrollHeight + 20);
-                canvas_handler.css('width', 760);
+                canvas_handler.css('max-width', 760);
+                canvas_handler.css('width', '100%');
 
                 element.css('margin-bottom', 20);
                 element.css('padding-bottom', 40);
@@ -88,7 +99,6 @@ $(document)
                     let imageData = canvas.toDataURL("image/png");
                     let newData = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
                     $('#canvas-data').val(newData);
-                    $('#send-report').attr('disabled', false);
                     // element.append(canvas_handler.html())
                     element.empty();
                     element.get(0).appendChild(canvas)
