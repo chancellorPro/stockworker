@@ -38,6 +38,9 @@
             font-weight: bold;
             font-size: 15px;
         }
+        canvas {
+            margin-left: 15px;
+        }
     </style>
 </head>
 <body>
