@@ -1,9 +1,11 @@
 @extends('layouts.pages.mail')
 
 @section('main_container')
-    <div style="position: relative">
+    <div style="position: relative; margin-left: 10px;">
+        <p><h2>Сгенерированное изображение</h2></p>
         <div class="html-content-holder">
             <div class="wrapper">
+                <p><h2>Исходные данные</h2></p>
                 <table id="report-table"
                     style="padding: 20px;margin: 20px;border-collapse: collapse;border-left: 1px solid black;border-bottom: 1px solid black;">
                     <thead>
