@@ -84,11 +84,8 @@ $(document)
                 const copy_ele = $('#report-table').get(0).cloneNode(true);
                 canvas_handler.append(copy_ele);
                 canvas_handler.css('height', copy_ele.scrollHeight + 20);
-                canvas_handler.css('min-width', '600px');
+                canvas_handler.css('min-width', '700px');
 
-                // element.css('margin-bottom', 10);
-                // element.css('padding-left', 10);
-                // element.css('padding-bottom', 10);
 
                 html2canvas(copy_ele, {
                     scrollX: 0,
@@ -105,6 +102,7 @@ $(document)
                     setTimeout(function () {
                         submitBtn.button('reset');
                         $('#send-report').attr('disabled', false);
+                        $('#load').click();
                     }, 500)
                 });
 

@@ -41,6 +41,9 @@
         canvas {
             margin-left: 15px;
         }
+        .close{
+            font-size:40px;
+        }
     </style>
 </head>
 <body>
@@ -54,7 +57,7 @@
                         {{ csrf_field() }}
                         @include('common.buttons.save', [
                             'route' => 'send',
-                            'name' => __('Send report'),
+                            'name' => __('Report complete'),
                             'showPreloader' => true,
                             'route_params' => [
                                 'dateFrom' => $dateFrom,
