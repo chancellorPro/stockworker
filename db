@@ -5,10 +5,11 @@ mysql -u homestead -psecret homestead
 
 mysqldump -u homestead -p --databases homestead > /tmp/dump.sql
 
-docker cp stockworker-db:/tmp/dump.sql stockworker-app:/public/dump.sql
+docker cp stockworker-db:/tmp/dump.sql ./public/dump.sql
 
+docker cp ./database/dumps/dump.sql stockworker-db:/tmp/dump.sql
 
-docker cp ./public/dump.sql stockworker-db:/tmp/dump.sql
+docker cp ./storage/app/backup/dump.sql stockworker-db:/tmp/dump.sql
 docker exec -it stockworker-db bash
 mysql -u homestead -p --default-character-set=utf8 homestead < /tmp/dump.sql
 

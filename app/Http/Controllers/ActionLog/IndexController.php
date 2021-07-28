@@ -441,6 +441,7 @@ class IndexController extends Controller
      */
     function sendTelegramMessage($png_file_path)
     {
+        dd(env('TELEGRAM_TOKEN'), env('CHAT_ID'));
         if (empty(env('TELEGRAM_TOKEN')) || empty(env('CHAT_ID'))) {
             return;
         }
@@ -453,10 +454,18 @@ class IndexController extends Controller
             CURLOPT_RETURNTRANSFER => true,
         );
         curl_setopt_array($ch, $optArray);
-        $result = curl_exec($ch);
+        $response = curl_exec($ch);
         curl_close($ch);
 
-        return $result;
+        $err = curl_error($ch);
+
+        curl_close($ch);
+
+        if ($err) {
+            return "cURL Error #:" . $err;
+        } else {
+            return $response;
+        }
     }
 
     /**
