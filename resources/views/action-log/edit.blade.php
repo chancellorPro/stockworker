@@ -14,6 +14,7 @@
                 'id' => $model->id,
             ],
             'dataset' => [
+                'reload' => 0,
                 'method' => 'PATCH',
             ],
         ])

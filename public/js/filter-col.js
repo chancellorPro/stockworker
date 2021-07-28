@@ -9,7 +9,7 @@ function init_filter_col(url) {
         });
 
     $('.filter').keypress(function (e) {
-        if (e.which == 13) {
+        if (e.which === 13) {
             filter();
         }
     });
@@ -17,18 +17,15 @@ function init_filter_col(url) {
     function filter(clear = false) {
         let filter = [];
         if (!clear) {
-            var filterFilds = $("select.filter, input.filter").serializeArray();
-            
+            let filterFilds = $("select.filter, input.filter").serializeArray();
             $.each(filterFilds, function (key, row) {
-                if (row.value != '') {
+                if (row.value !== '' && filter.indexOf(row.name + '=' + row.value) === -1) {
                     filter.push(row.name + '=' + row.value);
                 }
             });
         } else {
             filter.push('clear_filter=1');
         }
- 
-        
         window.location.href = url + (url.indexOf('?') == -1 ? '?' : '&') + filter.join('&');
     }
 }

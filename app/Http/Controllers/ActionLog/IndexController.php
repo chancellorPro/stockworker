@@ -53,12 +53,12 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+//        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
+//                ->whereNotIn('id', array_filter($parentIds))
 
         $data = $this->applyFilter(
             $request,
-            ActionLog::with('product', 'customer')
-                ->whereNotIn('id', array_filter($parentIds))
+            ActionLog::selectRaw('action_log.id as id, action_log.date, action_log.income, action_log.product_id, action_log.count, action_log.customer_id')->with('product', 'customer')
                 ->orderBy('action_log.date', 'desc')
                 ->orderBy('action_log.id', 'desc')
         )->paginate($this->perPage);
@@ -69,8 +69,8 @@ class IndexController extends Controller
             'transaction_type' => config('presets.transaction_type'),
             'dateFrom'         => $request->get('dateFrom'),
             'dateTo'           => $request->get('dateTo'),
-            'products'         => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
-            'customers'        => Customer::all(),
+            'products'         => Product::all()->keyBy('id'),
+            'customers'        => Customer::all()->keyBy('id'),
             'boxes'            => Box::all()->keyBy('id'),
         ]);
     }
