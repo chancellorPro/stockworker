@@ -246,7 +246,6 @@ class IndexController extends Controller
             $request->offsetUnset('box_count');
         }
 
-        $plan = Plan::where(['product_id' => $action->product->id])->first();
         $stock = Stock::where(['product_id' => $action->product->id])->first();
 
         if ($request->get('count') == 0) {
@@ -267,24 +266,11 @@ class IndexController extends Controller
                         'description' => $request->get('description')
                     ]);
                 }
-
-                if (!empty($plan)) {
-                    $plan->progress += ((int)$request->get('count') - $action->count);
-                    if ($plan->progress >= $plan->count) {
-                        PlanHistory::create([
-                            'product_id' => (int)$request->get('product_id'),
-                            'count'      => $plan->count,
-                            'updated_at' => Carbon::now()->format('Y-m-d'),
-                            'created_at' => $plan->created_at
-                        ]);
-                    }
-                    $plan->destroy();
-                }
             } else {
                 /** OUTCOME */
                 if (!empty($stock)) {
                     $stock->update([
-                        'count'       => $stock->count + ((int)$request->get('count') - $action->count),
+                        'count'       => $stock->count + ($action->count - (int)$request->get('count')),
                         'description' => $request->get('description')
                     ]);
                 }
