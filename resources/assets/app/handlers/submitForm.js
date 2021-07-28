@@ -9,7 +9,6 @@ import errorHandler from "components/http/errorHandler";
  */
 export default function(e) {
     e.preventDefault();
-    console.log('SEND');
 
     const currentButton = $(this);
 

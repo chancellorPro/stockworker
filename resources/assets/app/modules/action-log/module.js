@@ -64,7 +64,6 @@ $(document)
                 },
                 complete: function (r) {
                     $('.reports').css('pointer-events', 'auto')
-                    console.log('complete');
                     postProcess();
                 },
             });
@@ -83,12 +82,6 @@ $(document)
                 canvas_handler.empty();
 
                 const copy_ele = $('#report-table').get(0).cloneNode(true);
-                console.log('copy_ele');
-                console.log(copy_ele);
-                console.log('scrollHeight');
-                console.log(copy_ele.offsetHeight);
-                console.log('scrollWidth');
-                console.log(copy_ele.offsetWidth);
                 canvas_handler.append(copy_ele);
                 canvas_handler.css('height', copy_ele.scrollHeight + 20);
                 canvas_handler.css('min-width', '600px');
