@@ -30,7 +30,7 @@ html , body{
     background: #26b99a4d;
 }
 #canvas_handler{
-    padding: 20px
+    padding: 5px
 }
 .toggle_ids{
     cursor: pointer;

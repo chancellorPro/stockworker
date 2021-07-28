@@ -82,14 +82,14 @@ $(document)
                 let canvas_handler = $("#canvas_handler");
                 canvas_handler.empty();
 
-                const copy_ele = $(element).find('.wrapper').get(0).cloneNode(true);
+                const copy_ele = $(element).find('.wrapper table').get(0).cloneNode(true);
                 canvas_handler.append(copy_ele);
                 canvas_handler.css('height', element.scrollHeight + 20);
-                canvas_handler.css('max-width', 760);
                 canvas_handler.css('width', '100%');
 
-                element.css('margin-bottom', 20);
-                element.css('padding-bottom', 40);
+                element.css('margin-bottom', 10);
+                element.css('padding-left', 10);
+                element.css('padding-bottom', 10);
 
                 html2canvas(copy_ele, {
                     scrollX: 0,
@@ -100,8 +100,8 @@ $(document)
                     let newData = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
                     $('#canvas-data').val(newData);
                     // element.append(canvas_handler.html())
-                    element.empty();
-                    element.get(0).appendChild(canvas)
+                    // element.empty();
+                    element.get(0).prepend(canvas)
 
                     setTimeout(function () {
                         submitBtn.button('reset');
