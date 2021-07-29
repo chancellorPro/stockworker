@@ -441,12 +441,12 @@ class IndexController extends Controller
      */
     function sendTelegramMessage($png_file_path)
     {
-        dd(env('TELEGRAM_TOKEN'), env('CHAT_ID'));
         if (empty(env('TELEGRAM_TOKEN')) || empty(env('CHAT_ID'))) {
+            Log::debug('sendTelegramMessage empty tm env');
             return;
         }
 
-        $url = "https://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
+        $url = "http://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
         $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path;
         $ch = curl_init();
         $optArray = array(
@@ -455,15 +455,16 @@ class IndexController extends Controller
         );
         curl_setopt_array($ch, $optArray);
         $response = curl_exec($ch);
-        curl_close($ch);
 
         $err = curl_error($ch);
 
         curl_close($ch);
 
         if ($err) {
+            Log::debug($err);
             return "cURL Error #:" . $err;
         } else {
+            Log::debug('success ' . $response);
             return $response;
         }
     }
