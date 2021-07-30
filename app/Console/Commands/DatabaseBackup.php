@@ -42,7 +42,7 @@ class DatabaseBackup extends Command
 
         $mailto = 'pavel@zolotarev.pp.ua';
         $subject = 'Stock backup ' . Carbon::now()->format('Y-m-d');
-        $file = "/home/ubuntu/Projects/stockworker/storage/app/backup/dump.sql";
+        $file = "/var/www/html/storage/app/backup/dump.sql";
         $message = "http://stock.zolotarev.pp.ua/true_storage/app/backup/dump.sql";
 
         Log::debug('file: ' . var_export($file, 1));
