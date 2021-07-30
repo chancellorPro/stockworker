@@ -87,7 +87,7 @@ class DatabaseBackup extends Command
             echo "mail send ... OK"; // or use booleans here
         } else {
             echo "mail send ... ERROR!";
-            print_r(error_get_last());
+            echo error_get_last();
         }
     }
 }
