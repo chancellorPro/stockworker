@@ -44,6 +44,11 @@ class DatabaseBackup extends Command
         $text = "http://stock.zolotarev.pp.ua/true_storage/app/backup/dump.sql";
 
         Log::debug('file: ' . var_export($file, 1));
+        Log::debug('env daya: ' . var_export([
+            env('MAIL_USERNAME'),
+            env('MAIL_PASSWORD'),
+            ], 1)
+        );
 
         Mail::raw($text, function ($m) use ($file, $subject) {
             $m->from('hello@app.com', 'Your Application');
