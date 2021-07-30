@@ -53,7 +53,7 @@ class DatabaseBackup extends Command
             $m->from('hello@app.com', 'Your Application');
             $m->attach($file, $options = ['as' => $subject, 'mime' => 'multipart/mixed']);
 
-            $m->to('pavel.zolotarev.pp.ua', 'pavel')->subject($subject);
+            $m->to('pavel@zolotarev.pp.ua', 'pavel')->subject($subject);
         });
     }
 
