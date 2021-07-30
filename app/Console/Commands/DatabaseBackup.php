@@ -45,15 +45,10 @@ class DatabaseBackup extends Command
 
         Log::debug('file: ' . var_export($file, 1));
 
-        Mail::send('db.dump', [
-            'text'    => $text,
-            'file'    => $file,
-            'subject' => $subject
-        ], function ($m) use ($file, $subject) {
+        Mail::raw($text, function ($m) use ($file, $subject) {
             $m->from('hello@app.com', 'Your Application');
-            $m->attach($file, $options = ['as' => $subject, 'mime' => 'multipart/mixed']);
-
             $m->to('pavel@zolotarev.pp.ua', 'pavel')->subject($subject);
+            $m->attach($file, $options = ['as' => $subject, 'mime' => 'multipart/mixed']);
         });
     }
 
