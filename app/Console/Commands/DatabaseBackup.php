@@ -33,32 +33,24 @@ class DatabaseBackup extends Command
      */
     public function handle()
     {
-        $filename = "backup-" . Carbon::now()->format('Y-m-d') . ".sql";
-
-        $containerCommand = "mysqldump --user=homestead --password=secret --host=stockworker-db homestead > " . "/docker-entrypoint-initdb.d/" . $filename;
-        $envCommand = 'docker exec -it stockworker-db bash -c "' . $containerCommand . '"';
-        $returnVar = NULL;
-        $output = NULL;
-
-        exec($envCommand, $output, $returnVar);
-
-        $copyCommand = "docker cp stockworker-db:/docker-entrypoint-initdb.d/dump.sql ./storage/app/backup/" . $filename;
-        exec($copyCommand, $output, $returnVar);
-
-        $this->sendMail($filename);
+        $this->sendMail();
     }
 
-
-    public function sendMail($filename)
+    public function sendMail()
     {
         Log::debug('sendMail');
 
         $mailto = 'pavel@zolotarev.pp.ua';
-        $subject = 'Stock backup';
-        $file = "./storage/app/backup/" . $filename;
-        $message = "http://stock.zolotarev.pp.ua/storage/app/backup/" . $filename;
+        $subject = 'Stock backup ' . Carbon::now()->format('Y-m-d');
+        $file = "/home/ubuntu/Projects/stockworker/storage/app/backup/dump.sql";
+        $message = "http://stock.zolotarev.pp.ua/true_storage/app/backup/dump.sql";
 
-//        Log::debug('file: ' . var_export($file, 1));
+        Log::debug('file: ' . var_export($file, 1));
+
+        if (!file_exists($file)) {
+            Log::debug('file not exists' . var_export($file, 1));
+            return;
+        }
 
         $content = file_get_contents($file);
         $content = chunk_split(base64_encode($content));
@@ -84,7 +76,7 @@ class DatabaseBackup extends Command
 
         // attachment
         $body .= "--" . $separator . $eol;
-        $body .= "Content-Type: application/octet-stream; name=\"" . $filename . "\"" . $eol;
+        $body .= "Content-Type: application/octet-stream; name=\"" . $file . "\"" . $eol;
         $body .= "Content-Transfer-Encoding: base64" . $eol;
         $body .= "Content-Disposition: attachment" . $eol;
         $body .= $content . $eol;
@@ -95,7 +87,7 @@ class DatabaseBackup extends Command
             echo "mail send ... OK"; // or use booleans here
         } else {
             echo "mail send ... ERROR!";
-            print_r( error_get_last() );
+            print_r(error_get_last());
         }
     }
 }
