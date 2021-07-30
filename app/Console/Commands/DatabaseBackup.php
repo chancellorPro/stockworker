@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class DatabaseBackup
@@ -33,7 +34,27 @@ class DatabaseBackup extends Command
      */
     public function handle()
     {
-        $this->sendMail();
+        $this->send();
+    }
+
+    public function send()
+    {
+        $subject = 'stock_backup_' . Carbon::now()->format('Y-m-d');
+        $file = "/var/www/html/storage/app/backup/dump.sql";
+        $text = "http://stock.zolotarev.pp.ua/true_storage/app/backup/dump.sql";
+
+        Log::debug('file: ' . var_export($file, 1));
+
+        Mail::send('db.dump', [
+            'text'    => $text,
+            'file'    => $file,
+            'subject' => $subject
+        ], function ($m) use ($file, $subject) {
+            $m->from('hello@app.com', 'Your Application');
+            $m->attach($file, $options = ['as' => $subject, 'mime' => 'multipart/mixed']);
+
+            $m->to('pavel.zolotarev.pp.ua', 'pavel')->subject($subject);
+        });
     }
 
     public function sendMail()
