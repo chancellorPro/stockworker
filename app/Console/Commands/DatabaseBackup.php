@@ -84,9 +84,11 @@ class DatabaseBackup extends Command
 
         //SEND Mail
         if (mail($mailto, $subject, $body, $headers)) {
+            Log::debug('mail send ... OK');
             echo "mail send ... OK"; // or use booleans here
         } else {
             echo "mail send ... ERROR!";
+            Log::debug('mail send ... ERROR! ' . var_export(error_get_last(), 1));
             echo error_get_last();
         }
     }
