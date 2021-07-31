@@ -419,16 +419,16 @@ class IndexController extends Controller
     {
         $response['telegram'] = $this->sendTelegramMessage($png_file_path);
 
-        $viberReceiverIDs = [
-            'VCvoJZRu3ZC9F24LosVBOw==', // я
-            'Lm9+v/ecMk90fl7tHAStjA==', // Папа
-            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
-            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
-        ];
-
-        foreach ($viberReceiverIDs as $user_id) {
-            $response['viber'][$user_id] = $this->sendViberMessage($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
-        }
+//        $viberReceiverIDs = [
+//            'VCvoJZRu3ZC9F24LosVBOw==', // я
+//            'Lm9+v/ecMk90fl7tHAStjA==', // Папа
+//            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
+//            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
+//        ];
+//
+//        foreach ($viberReceiverIDs as $user_id) {
+//            $response['viber'][$user_id] = $this->sendViberMessage($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
+//        }
 
         return $response;
     }
@@ -441,32 +441,17 @@ class IndexController extends Controller
      */
     function sendTelegramMessage($png_file_path)
     {
+        Log::debug('TG env params: ' . var_export([env('TELEGRAM_TOKEN'), env('CHAT_ID')], 1));
         if (empty(env('TELEGRAM_TOKEN')) || empty(env('CHAT_ID'))) {
-            Log::debug('sendTelegramMessage empty tm env');
             return;
         }
 
-        $url = "http://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID');
-        $url = $url . "&text=" . $_SERVER['HTTP_HOST'] . $png_file_path;
-        $ch = curl_init();
-        $optArray = array(
-            CURLOPT_URL            => $url,
-            CURLOPT_RETURNTRANSFER => true,
-        );
-        curl_setopt_array($ch, $optArray);
-        $response = curl_exec($ch);
+        $url = "http://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID')
+            . "&text=Report Link http://" . $_SERVER['HTTP_HOST'] . $png_file_path;
 
-        $err = curl_error($ch);
-
-        curl_close($ch);
-
-        if ($err) {
-            Log::debug($err);
-            return "cURL Error #:" . $err;
-        } else {
-            Log::debug('success ' . $response);
-            return $response;
-        }
+        $telegramResponse = file_get_contents($url);
+        Log::debug('TG response: ' . var_export($telegramResponse, 1));
+        return $telegramResponse;
     }
 
     /**
