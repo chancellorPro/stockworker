@@ -1,5 +1,6 @@
 # Laravel + Apache + Docker
 
+
 ## Description
 Start developing a fresh Laravel application with `docker` using `docker-compose`.
 
@@ -55,6 +56,12 @@ Run `php artisan` commands, example:
 $ ./php-artisan make:controller BlogPostController --resource
 php artisan make:controller BlogPostController --resource
 Controller created successfully.
+```
+
+```
+php artisan config:cache
+php artisan config:clear
+php artisan cache:clear
 ```
 
 ### phpunit
