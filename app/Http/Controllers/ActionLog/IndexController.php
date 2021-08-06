@@ -346,8 +346,11 @@ class IndexController extends Controller
      */
     public function orderSend(Request $request)
     {
-        $dateFrom = $request->get('dateFrom');
-        $dateTo = $request->get('dateTo');
+        $date_from = Carbon::createFromFormat('Y-m-d', $request->get('dateFrom'));
+        $date_to = Carbon::createFromFormat('Y-m-d', $request->get('dateTo'));
+        $dateFrom = $date_from->startOfDay()->format('Y-m-d H:i:s');
+        $dateTo = $date_to->endOfDay()->format('Y-m-d H:i:s');
+
         $canvas = $request->get('canvas');
         $direction = $request->get('direction');
 //        $template = $request->get('template');
