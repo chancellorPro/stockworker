@@ -422,16 +422,16 @@ class IndexController extends Controller
     {
         $response['telegram'] = $this->sendTelegramMessage($png_file_path);
 
-//        $viberReceiverIDs = [
-//            'VCvoJZRu3ZC9F24LosVBOw==', // я
-//            'Lm9+v/ecMk90fl7tHAStjA==', // Папа
-//            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
-//            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
-//        ];
-//
-//        foreach ($viberReceiverIDs as $user_id) {
-//            $response['viber'][$user_id] = $this->sendViberMessage($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
-//        }
+        $viberReceiverIDs = [
+            'VCvoJZRu3ZC9F24LosVBOw==', // я
+            'Lm9+v/ecMk90fl7tHAStjA==', // Папа
+            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
+            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
+        ];
+
+        foreach ($viberReceiverIDs as $user_id) {
+            $response['viber'][$user_id] = $this->sendViberMessage($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
+        }
 
         return $response;
     }
@@ -444,7 +444,6 @@ class IndexController extends Controller
      */
     function sendTelegramMessage($png_file_path)
     {
-        Log::debug('TG env params: ' . var_export([env('TELEGRAM_TOKEN'), env('CHAT_ID')], 1));
         if (empty(env('TELEGRAM_TOKEN')) || empty(env('CHAT_ID'))) {
             return;
         }
@@ -484,6 +483,8 @@ class IndexController extends Controller
      */
     function sendViberMessage($receiverID, $TextMessage)
     {
+        Log::debug('VIBER_AUTH_TOKEN: ' . var_export(env('VIBER_AUTH_TOKEN'), 1));
+
         $curl = curl_init();
         $json_data = '{
 "receiver":"' . $receiverID . '",
