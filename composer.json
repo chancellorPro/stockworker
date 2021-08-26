@@ -37,7 +37,10 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "name": "laravel/dusk",
+            "dont-discover": [
+                "laravel/dusk"
+            ]
         }
     },
     "autoload": {

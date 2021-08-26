@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 //        PulkitJalan\Google\GoogleServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -229,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 //        'Google' => PulkitJalan\Google\Facades\Google::class
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

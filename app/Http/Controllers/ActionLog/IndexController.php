@@ -22,12 +22,11 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
-use Maatwebsite\Excel\Excel;
 use Swift_TransportException;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class IndexController
@@ -465,6 +464,7 @@ class IndexController extends Controller
      */
     function createImage($canvas, $reportName)
     {
+        File::cleanDirectory(public_path() . '/reports/');
         $png_file_path = "/reports/$reportName.png";
         $file = fopen(public_path() . $png_file_path, 'wb');
         $img = str_replace(['data:image/png;base64,', 'data:application/octet-stream;base64,'], [''], $canvas);
