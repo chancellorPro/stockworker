@@ -19,7 +19,7 @@ class StockReport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['#', 'Товар', 'На складе', 'Кол-во ящиков', 'Кол-во в ящике', 'Вес полного ящика', "Объём ящика"];
+        return ['#', 'Товар', 'На складе', 'Кол-во ящиков', 'Кол-во в ящике', 'Вес полного ящика']; // , "Объём ящика"
     }
 
     /**
@@ -40,7 +40,7 @@ class StockReport implements FromCollection, WithHeadings
             'header'  => 'Склад за ' . str_replace('00:00:00', '', $this->from),
             'columns' => $this->headings(),
             'values'  => $builder->orderBy('stock.updated_at', 'desc')->get()->map(function ($item){
-                return [$item->product_id, $item->p_name, $item->s_count, $item->boxes_count, $item->box_size, $item->box_weight];
+                return [$item->product_id, $item->p_name, $item->s_count, $item->boxes_count, $item->box_size, $item->box_weight ?? ''];
             })->toArray(),
             'token'   => env('REPORT_TOKEN'),
         ]);
