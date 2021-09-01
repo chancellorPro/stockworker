@@ -34,8 +34,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('product-material', 'ProductMaterial\IndexController');
     Route::resource('color', 'Color\IndexController');
 
-    Route::post('export', 'ActionLog\IndexController@getExportData')->name('export');
-    Route::post('send', 'ActionLog\IndexController@orderSend')->name('send');
+    Route::post('export', 'ActionLog\IndexController@reportSend')->name('export');
+//    Route::post('send', 'ActionLog\IndexController@reportSend')->name('send');
     Route::get('viber-send', 'ActionLog\IndexController@send_message')->name('viber-send');
 });
 

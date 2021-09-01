@@ -296,102 +296,28 @@ class IndexController extends Controller
     }
 
     /**
-     * getExportData
-     *
-     * @param Request $request
-     * @return Application|Factory|View|void
-     */
-    public function getExportData(Request $request)
-    {
-        $date_from = $request->has('from') ? Carbon::createFromFormat('Y-m-d', $request->get('from')) : Carbon::now();
-        $date_to = $request->has('to') ? Carbon::createFromFormat('Y-m-d', $request->get('to')) : Carbon::now();
-        $from = $date_from->startOfDay()->format('Y-m-d H:i:s');
-        $to = $date_to->endOfDay()->format('Y-m-d H:i:s');
-//        $orderType = $request->get('orderType');
-
-        if ($request->get('income') == ActionLog::INCOME) {
-            $entity = new IncomeReport($from, $to, $request->get('income'));
-        } elseif ((int)$request->get('income') === ActionLog::OUTOME) {
-            $entity = new OutcomeReport($from, $to, $request->get('income'));
-        } elseif ((int)$request->get('income') === ActionLog::STOCK) {
-            $entity = new StockReport($from, $to, $request->get('income'));
-        }
-
-        $template = 'stock';
-        if ($request->has('income')) {
-            switch ((int)$request->get('income')) {
-                case 0:
-                    $template = 'income';
-                    break;
-                case 1:
-                    $template = 'outcome';
-                    break;
-            }
-        }
-
-        return view('emails.' . $template, [
-            'boxes'     => Box::all()->keyBy('id'),
-            'data'      => $entity->collection(),
-            'dateFrom'  => $request->get('from'),
-            'dateTo'    => $request->get('to'),
-            'direction' => $request->get('income'),
-            'template'  => $template,
-        ]);
-    }
-
-    /**
      * @param Request $request
      * @return JsonResponse
      */
-    public function orderSend(Request $request)
+    public function reportSend(Request $request)
     {
-        $date_from = Carbon::createFromFormat('Y-m-d', $request->get('dateFrom'));
-        $date_to = Carbon::createFromFormat('Y-m-d', $request->get('dateTo'));
+        $date_from = Carbon::createFromFormat('Y-m-d', $request->get('from'));
+        $date_to = Carbon::createFromFormat('Y-m-d', $request->get('to'));
         $dateFrom = $date_from->startOfDay()->format('Y-m-d H:i:s');
         $dateTo = $date_to->endOfDay()->format('Y-m-d H:i:s');
-
-        $canvas = $request->get('canvas');
-        $direction = $request->get('direction');
-//        $template = $request->get('template');
-//        $orderType = $request->get('orderType');
+        $direction = (int)$request->get('direction');
 
         try {
-            $currentDate = Carbon::now()->format('Y-m-d');
-
             if ($direction == ActionLog::INCOME) {
-                $reportName = $currentDate . '_development_report';
-                $entity = new IncomeReport($dateFrom, $dateTo, $direction);
-            } elseif ((int)$direction === ActionLog::OUTOME) {
-                $reportName = $currentDate . '_delivery_report';
-                $entity = new OutcomeReport($dateFrom, $dateTo, $direction);
-            } elseif ((int)$direction === ActionLog::STOCK) {
-                $reportName = $currentDate . '_stock_report';
-                $entity = new StockReport($dateFrom, $dateTo, $direction);
+                $entity = new IncomeReport($dateFrom, $dateTo);
+            } elseif ($direction === ActionLog::OUTOME) {
+                $entity = new OutcomeReport($dateFrom, $dateTo);
+            } elseif ($direction === ActionLog::STOCK) {
+                $entity = new StockReport($dateFrom, $dateTo);
             }
 
-            $request->merge(['data' => $entity->collection()]);
-            $request->merge(['boxes' => Box::all()->keyBy('id')]);
-            $request->merge(['hide_button' => true]);
+            $response = $this->sendReportData($entity->collection());
 
-//            $excel = App::make('excel');
-//            $attach = $excel->raw($entity, Excel::XLSX);
-
-//            Mail::send('emails.' . $template, $request->all(), function ($message) use ($attach, $orderType) {
-//                $message->subject($orderType);
-//                $message->from('alexander@zolotarev.pp.ua', 'Stock-worker');
-//                $message->to('pavel@zolotarev.pp.ua');
-//                $message->cc(['alexander@zolotarev.pp.ua', 'stockworker100@gmail.com']); // garantpak@gmail.com, korreks@meta.ua, cyr@zolotarev.pp.ua
-//                $message->attachData($attach, 'report.xlsx', $options = []);
-//            });
-
-            $image = $this->createImage($canvas, $reportName);
-            $response = $this->sendMessage($image);
-
-        } catch (Swift_TransportException $e) {
-            pushNotify('error', __('Mail service is not supported!'));
-            return response()->json([
-                'error' => __('Mail service is not supported!'),
-            ]);
         } catch (Exception $e) {
             pushNotify('error', $e->getMessage());
             return response()->json([
@@ -402,7 +328,6 @@ class IndexController extends Controller
         pushNotify('success', __('Report sent! ' . var_export($response, 1)));
 
         return response()->json([
-            'report_image' => 'http://' . $_SERVER['HTTP_HOST'] . $image,
             'response'     => $response,
             'direction'    => $direction,
             'dateFrom'     => $request->get('from'),
@@ -412,108 +337,26 @@ class IndexController extends Controller
     }
 
     /**
-     * Send Telegram message
-     *
-     * @param $png_file_path string
-     * @return array
-     */
-    function sendMessage($png_file_path)
-    {
-        $response['telegram'] = $this->sendTelegramMessage($png_file_path);
-
-        $viberReceiverIDs = [
-            'VCvoJZRu3ZC9F24LosVBOw==', // я
-            'Lm9+v/ecMk90fl7tHAStjA==', // Папа
-            'ldy/JYvJ/jQzmjRvbnmK8A==', // Олег
-            'mn9R76qex9RbhHj6MUu/4w==', // Гевоян Борис
-        ];
-
-        foreach ($viberReceiverIDs as $user_id) {
-            $response['viber'][$user_id] = $this->sendViberMessage($user_id, 'http://' . $_SERVER['HTTP_HOST'] . $png_file_path);
-        }
-
-        return $response;
-    }
-
-    /**
-     * Send Telegram message
-     *
-     * @param $png_file_path string
+     * @param $reportData
      * @return bool|string
      */
-    function sendTelegramMessage($png_file_path)
+    function sendReportData($reportData)
     {
-        if (empty(env('TELEGRAM_TOKEN')) || empty(env('CHAT_ID'))) {
-            return;
-        }
-
-        $url = "http://api.telegram.org/bot" . env('TELEGRAM_TOKEN') . "/sendMessage?chat_id=" . env('CHAT_ID')
-            . "&text=Report Link http://" . $_SERVER['HTTP_HOST'] . $png_file_path;
-
-        $telegramResponse = file_get_contents($url);
-        Log::debug('TG response: ' . var_export($telegramResponse, 1));
-        return $telegramResponse;
-    }
-
-    /**
-     * Send Telegram message
-     *
-     * @param $canvas binary
-     * @param $reportName
-     * @return string
-     */
-    function createImage($canvas, $reportName)
-    {
-        File::cleanDirectory(public_path() . '/reports/');
-        $png_file_path = "/reports/$reportName.png";
-        $file = fopen(public_path() . $png_file_path, 'wb');
-        $img = str_replace(['data:image/png;base64,', 'data:application/octet-stream;base64,'], [''], $canvas);
-        $img = str_replace(' ', '+', $img);
-        $fileData = base64_decode($img);
-        fwrite($file, $fileData);
-        fclose($file);
-
-        return $png_file_path;
-    }
-
-    /**
-     * @param $receiverID
-     * @param $TextMessage
-     * @return bool|string
-     */
-    function sendViberMessage($receiverID, $TextMessage)
-    {
-        Log::debug('VIBER_AUTH_TOKEN: ' . var_export(env('VIBER_AUTH_TOKEN'), 1));
-
         $curl = curl_init();
-        $json_data = '{
-"receiver":"' . $receiverID . '",
-"min_api_version":1,
-"sender":{
-"name":"stockReport",
-"avatar":"avatar.example.com"
-},
-"tracking_data":"tracking data",
-"type":"text",
-"text":"' . $TextMessage . '"
-}
-';
-        $data = json_decode($json_data);
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => "https://chatapi.viber.com/pa/send_message",
+            CURLOPT_URL            => env('REPORT_SERVICE'),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING       => "",
             CURLOPT_MAXREDIRS      => 10,
             CURLOPT_TIMEOUT        => 30,
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST  => "POST",
-            CURLOPT_POSTFIELDS     => json_encode($data),
+            CURLOPT_POSTFIELDS     => $reportData,
 
             CURLOPT_HTTPHEADER => array(
                 "Cache-Control: no-cache",
-                "Content-Type: application/JSON",
-                "X-Viber-Auth-Token: " . env('VIBER_AUTH_TOKEN')
+                "Content-Type: application/json",
             ),
         ));
 

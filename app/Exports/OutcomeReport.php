@@ -10,16 +10,15 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class OutcomeReport implements FromCollection, WithHeadings
 {
+    const DIRECTION = ActionLog::OUTOME;
 
     protected $from;
     protected $to;
-    protected $income;
 
-    public function __construct($from, $to, $income)
+    public function __construct($from, $to)
     {
         $this->from = $from;
         $this->to = $to;
-        $this->income = $income;
     }
 
     public function headings(): array
@@ -28,9 +27,9 @@ class OutcomeReport implements FromCollection, WithHeadings
     }
 
     /**
-    * @return Collection
+    * @return string
     */
-    public function collection()
+    public function collection(): string
     {
         $builder = ActionLog::selectRaw('
         action_log.product_id,
@@ -40,13 +39,15 @@ class OutcomeReport implements FromCollection, WithHeadings
             ->leftJoin('products AS p', 'p.id', '=', 'action_log.product_id')
             ->leftJoin('customers AS c', 'c.id', '=', 'action_log.customer_id')
             ->whereBetween('action_log.date', [$this->from, $this->to])
-            ->where(['income' => $this->income]);
+            ->where(['income' => self::DIRECTION]);
 
-
-        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
-
-        $builder->whereNotIn('p.id', array_filter($parentIds));
-
-        return $builder->orderBy('c.id')->groupBy('c.id', 'action_log.product_id')->get();
+        return json_encode([
+            'header'  => 'Отгрузка за ' . str_replace('00:00:00', '', $this->from),
+            'columns' => $this->headings(),
+            'values'  => $builder->orderBy('c.id')->groupBy('c.id', 'action_log.product_id')->get()->map(function ($item){
+                return [$item->product_id, $item->p_name, $item->al_count, $item->c_name];
+            })->toArray(),
+            'token'   => env('REPORT_TOKEN'),
+        ]);
     }
 }

@@ -53,14 +53,13 @@
                 'route' => 'export',
                 'id' => 'income',
                 'route_params' => [
-                    'income' => \App\Models\ActionLog::INCOME,
+                    'direction' => \App\Models\ActionLog::INCOME,
                 ],
                 'name' => __('Income report'),
                 'fa_class' => 'fa-save',
                 'class' => 'reports',
                 'dataset' => [
                     'method' => 'GET',
-                    'event' => 'REPORT_SHOW_FORM',
                 ],
             ])
             {{-- Outcome report --}}
@@ -68,14 +67,13 @@
                 'route' => 'export',
                 'id' => 'outcome',
                 'route_params' => [
-                    'income'     => \App\Models\ActionLog::OUTOME,
+                    'direction'     => \App\Models\ActionLog::OUTOME,
                 ],
                 'name' => __('Outcome report'),
                 'fa_class' => 'fa-save',
                 'class' => 'reports',
                 'dataset' => [
                     'method' => 'GET',
-                    'event' => 'REPORT_SHOW_FORM',
                 ],
             ])
             {{-- Stock state report --}}
@@ -83,14 +81,13 @@
                 'route' => 'export',
                 'id' => 'stock',
                 'route_params' => [
-                    'income' => \App\Models\ActionLog::STOCK,
+                    'direction' => \App\Models\ActionLog::STOCK,
                 ],
                 'name' => __('Stock state report'),
                 'fa_class' => 'fa-save',
                 'class' => 'reports',
                 'dataset' => [
                     'method' => 'GET',
-                    'event' => 'REPORT_SHOW_FORM',
                 ],
             ])
         </div>
