@@ -69,14 +69,24 @@ trait FilterBuilder
                             break;
                         case 'date_range':
                             if(!empty($filterValue['from'])) {
-                                $dateFrom = fromPacificToUTC($filterValue['from'] . ' 00:00:00');
+                                $dateFrom = $filterValue['from'] . ' 00:00:00';
                                 $where[] = [$field, '>=', $dateFrom];
                             }
                             if(!empty($filterValue['to'])) {
-                                $dateTo = fromPacificToUTC($filterValue['to'] . ' 23:59:59');
+                                $dateTo = $filterValue['to'] . ' 23:59:59';
                                 $where[] = [$field, '<=', $dateTo];
                             }
                             break;
+//                        case 'date_range':
+//                            if(!empty($filterValue['from'])) {
+//                                $dateFrom = fromPacificToUTC($filterValue['from'] . ' 00:00:00');
+//                                $where[] = [$field, '>=', $dateFrom];
+//                            }
+//                            if(!empty($filterValue['to'])) {
+//                                $dateTo = fromPacificToUTC($filterValue['to'] . ' 23:59:59');
+//                                $where[] = [$field, '<=', $dateTo];
+//                            }
+//                            break;
                         case 'int_range':
                             if(!empty($filterValue['from'])) {
                                 $intFrom = $filterValue['from'];

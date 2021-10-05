@@ -84,7 +84,8 @@ trait PstMutator
      */
     public function setStartedAtPstAttribute($date)
     {
-        $this->attributes['started_at'] = !empty($date) ? fromPacificToUTC($date) : null;
+//        $this->attributes['started_at'] = !empty($date) ? fromPacificToUTC($date) : null;
+        $this->attributes['started_at'] = !empty($date) ? $date : null;
     }
 
     /**
@@ -104,7 +105,8 @@ trait PstMutator
      */
     public function setFinishedAtPstAttribute($date)
     {
-        $this->attributes['finished_at'] = !empty($date) ? fromPacificToUTC($date) : null;
+//        $this->attributes['finished_at'] = !empty($date) ? fromPacificToUTC($date) : null;
+        $this->attributes['finished_at'] = !empty($date) ? $date : null;
     }
 
     /**
@@ -124,7 +126,8 @@ trait PstMutator
      */
     public function setDateFromPstAttribute($date)
     {
-        $this->attributes['date_from'] = !empty($date) ? fromPacificToUTC($date) : null;
+        $this->attributes['date_from'] = !empty($date) ? $date : null;
+//        $this->attributes['date_from'] = !empty($date) ? fromPacificToUTC($date) : null;
     }
 
     /**
@@ -144,7 +147,8 @@ trait PstMutator
      */
     public function setDateToPstAttribute($date)
     {
-        $this->attributes['date_to'] = !empty($date) ? fromPacificToUTC($date) : null;
+        $this->attributes['date_to'] = !empty($date) ? $date : null;
+//        $this->attributes['date_to'] = !empty($date) ? fromPacificToUTC($date) : null;
     }
 
     /**
