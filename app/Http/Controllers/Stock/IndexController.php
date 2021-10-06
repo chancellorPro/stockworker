@@ -41,18 +41,8 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        $builder = Stock::selectRaw('sum(a.count) as outcome_sum, stock.product_id, max(stock.partition) as partition_number,
-        max(stock.count) as count, max(stock.description) as description, max(p.count) as plan_count, max(p.progress) as progress')
-            ->leftJoin('plan AS p', 'p.product_id', '=', 'stock.product_id')
-            ->leftJoin('action_log AS a', function($join) {
-                $join->on('a.product_id', '=', 'stock.product_id')
-                    ->where('a.income', '=', ActionLog::OUTOME)
-                    ->where('a.date', '>', DB::raw('p.start'));
-            })
-            ->join('products AS pr', 'pr.id', '=', 'stock.product_id')
-            ->orderBy('p.product_id', 'desc')
-            ->orderBy('stock.updated_at', 'desc')
-            ->groupBy('stock.updated_at', 'a.product_id', 'stock.product_id', 'p.product_id');
+        $builder = Stock::selectRaw('stock.product_id, stock.count, stock.description')->with('product')
+            ->orderBy('stock.updated_at', 'desc');
 
         $data = $this->applyFilter($request, $builder)->paginate($this->perPage);
         $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();

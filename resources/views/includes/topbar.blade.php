@@ -57,12 +57,6 @@
                         </form>
                     </ul>
                 </li>
-                <li>
-                    <a href="{{ env('SECOND_APP_URL') . request()->getRequestUri() }}">
-                        <span class="fa fa-share link-to-cms"></span>
-                        {{ env('SECOND_APP_NAME') }}
-                    </a>
-                </li>
             </ul>
         </nav>
     </div>

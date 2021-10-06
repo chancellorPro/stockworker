@@ -633,6 +633,7 @@ body .container.body .right_col {
     background: #D9DEE4
 }
 body {
+    user-select: none !important;
     color: #000000;
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
     font-size: 13px;

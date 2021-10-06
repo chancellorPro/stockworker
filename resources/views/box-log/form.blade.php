@@ -5,7 +5,7 @@
 @include('layouts.form-fields.select2', [
     'label' => __('Action type'),
     'model' => $currentModel,
-    'name' => 'income',
+    'name' => 'action_type',
     'collection' => $transaction_type,
     'id' => 'id',
     'value' => 'name',
@@ -13,11 +13,11 @@
 ])
 
 @include('layouts.form-fields.select2', [
-    'fieldId' => 'product_id',
-    'label' => __('Product'),
+    'fieldId' => 'box_id',
+    'label' => __('Box'),
     'model' => $currentModel,
-    'name' => 'product_id',
-    'collection' => $products,
+    'name' => 'box_id',
+    'collection' => $boxes,
     'id' => 'id',
     'value' => 'name',
     'addempty' => true,
@@ -36,15 +36,6 @@
     <div class="col-md-5">
         @include('layouts.form-fields.input', [
             'model' => $currentModel,
-            'name'  => 'box_count',
-            'inputType' => 'number',
-            'placeholder' => 'Кол-во ящиков',
-            'label' => false,
-        ])
-    </div>
-    <div class="col-md-5">
-        @include('layouts.form-fields.input', [
-            'model' => $currentModel,
             'name'  => 'count',
             'inputType' => 'number',
             'placeholder' => 'Единицы товара',
@@ -53,32 +44,11 @@
     </div>
 </div>
 
-@include('layouts.form-fields.select2', [
-    'label' => __('Customer'),
-    'model' => $currentModel,
-    'name' => 'customer_id',
-    'collection' => $customers,
-    'id' => 'id',
-    'value' => 'name',
-    'addempty' => true,
-])
-
-@include('layouts.form-fields.text', [
-    'model' => $currentModel,
-    'name'  => 'description',
-    'label' => __('Description'),
-])
-
 @include('layouts.form-fields.input', [
     'value' => auth()->user()->id,
     'name'  => 'created_by',
     'label' => false,
     'inputType' => 'hidden',
-])
-@include('layouts.form-fields.checkbox', [
-    'value' => $currentModel,
-    'name'  => 'ignore_boxes_stock',
-    'label' => __('Ignore boxes stock'),
 ])
 <script type="text/javascript">
     $(document).ready(function () {

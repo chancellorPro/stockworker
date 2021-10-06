@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ActionLog\ActionLogRequest;
 use App\Models\ActionLog;
 use App\Models\Box;
+use App\Models\BoxesStock;
 use App\Models\Customer;
 use App\Models\Plan;
 use App\Models\PlanHistory;
@@ -17,16 +18,12 @@ use App\Models\Stock;
 use App\Traits\FilterBuilder;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use Swift_TransportException;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Class IndexController
@@ -52,9 +49,6 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-//        $parentIds = Product::selectRaw('distinct parent_product')->get()->pluck('parent_product')->toArray();
-//                ->whereNotIn('id', array_filter($parentIds))
-
         $data = $this->applyFilter(
             $request,
             ActionLog::selectRaw('action_log.id as id, action_log.date, action_log.income, action_log.product_id, action_log.count, action_log.customer_id')->with('product', 'customer')
@@ -139,13 +133,15 @@ class IndexController extends Controller
     public function store(ActionLogRequest $request)
     {
         try {
-            $plan = Plan::where(['product_id' => (int)$request->get('product_id')])->first();
             $stock = Stock::where(['product_id' => (int)$request->get('product_id')])->first();
             $product = Product::whereId((int)$request->get('product_id'))->first();
 
             if ($request->has('box_count')) {
-                $request->merge(['count' => (int)$request->get('box_count') * $product->box_size]);
+                $box_count = (int)$request->get('box_count');
+                $request->merge(['count' => $box_count * $product->box_size]);
                 $request->offsetUnset('box_count');
+            } else {
+                $box_count = (int)$request->get('count') / $product->box_size;
             }
 
             $description = $stock->description;
@@ -154,33 +150,33 @@ class IndexController extends Controller
             }
 
             if ((int)$request->get('income') === ActionLog::INCOME) {
+                /** INCOME */
                 $insertData = [
                     'count'       => $stock->count + (int)$request->get('count'),
                     'description' => $stock->description . ' ' . $request->get('description')
                 ];
 
-                if (!empty($request->get('partition'))) {
-                    $insertData['partition'] = $request->get('partition');
-                }
                 if (!empty($stock)) {
                     $stock->update($insertData);
                 }
-                if (!empty($plan)) {
-                    $plan->progress += (int)$request->get('count');
-                    if ($plan->progress >= $plan->count) {
-                        PlanHistory::create([
-                            'product_id' => (int)$request->get('product_id'),
-                            'count'      => $plan->count,
-                            'updated_at' => Carbon::now()->format('Y-m-d'),
-                            'created_at' => $plan->created_at
-                        ]);
-                    }
-                    $plan->delete();
-                    pushNotify('success', __('План по товару #' . $request->get('product_id') . ' закрыт'));
-
-                }
             } else {
                 /** OUTCOME */
+
+                if(!$request->get('ignore_boxes_stock')) {
+                    $boxesStock = BoxesStock::where(['box_id' => $product->box_id])->first();
+                    if(!$boxesStock) {
+                        BoxesStock::create([
+                            'box_id' => $product->box_id,
+                            'count' => 0,
+                        ]);
+                        $boxesStock = BoxesStock::where(['box_id' => $product->box_id])->first();
+                    }
+
+                    $boxesStock->update([
+                        'count' => $boxesStock->count - $box_count
+                    ]);
+                }
+
                 if (!empty($stock)) {
                     $count = $stock->count -= (int)$request->get('count');
                     if ($count < 0) {
@@ -190,10 +186,6 @@ class IndexController extends Controller
                         'count'       => $count,
                         'description' => $description
                     ];
-
-                    if (!empty($request->get('partition'))) {
-                        $insertData['partition'] = $request->get('partition');
-                    }
 
                     $stock->update($insertData);
                 }
@@ -328,11 +320,11 @@ class IndexController extends Controller
         pushNotify('success', __('Report sent! ' . var_export($response, 1)));
 
         return response()->json([
-            'response'     => $response,
-            'direction'    => $direction,
-            'dateFrom'     => $request->get('from'),
-            'dateTo'       => $request->get('to'),
-            'success'      => __('Report sent! ' . var_export($response, 1)),
+            'response'  => $response,
+            'direction' => $direction,
+            'dateFrom'  => $request->get('from'),
+            'dateTo'    => $request->get('to'),
+            'success'   => __('Report sent! ' . var_export($response, 1)),
         ]);
     }
 

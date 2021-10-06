@@ -1,5 +1,5 @@
 @extends('layouts.pages.config', [
-	'title' => 'Action log',
+	'title' => 'Box log',
 	'data' => $data,
 	'filter' => $filter,
 ])
@@ -8,17 +8,16 @@
     <div id="canvas_handler" style="position: absolute;right:100000px;"></div>
     @php
         use Carbon\Carbon as Carbon;
-        $field = 'today';
-        $selected = request()->get('date_range') ?? '';
-        $inputsStyle = 'style="visibility: hidden; height: 0"';
-        $currentDay = Carbon::now()->startOfDay()->format('Y-m-d');
+        $field = 'report';
+        $startDay = Carbon::now()->subMonth(1)->startOfMonth()->format('Y-m-d');
+        $endDay = Carbon::now()->subMonth(1)->endOfMonth()->format('Y-m-d');
     @endphp
     <div class="col-sm-12">
         <div class="col-sm-3">
             @if(auth()->id() < 3)
                 {{-- Create --}}
                 @include('common.buttons.create', [
-                    'route' => 'action-log.create',
+                    'route' => 'box-log.create',
                     'name' => __('Create action'),
                     'class' => 'ajax-modal-action show-form',
                     'dataset' => [
@@ -34,7 +33,7 @@
                 name="{{$field}}[from]"
                 autocomplete="off"
                 placeholder="from"
-                value="{{ $dateFrom ?? $currentDay }}"
+                value="{{ $dateFrom ?? $startDay }}"
             >
         </div>
         <div class="col-sm-2">
@@ -44,43 +43,15 @@
                 name="{{$field}}[to]"
                 autocomplete="off"
                 placeholder="to"
-                value="{{ $dateTo?? $currentDay }}"
+                value="{{ $dateTo ?? $endDay }}"
             >
         </div>
         <div class="col-sm-5">
-            {{-- Income report --}}
+            {{-- report --}}
             @include('common.buttons.save', [
-                'route' => 'export',
-                'id' => 'income',
-                'route_params' => [
-                    'direction' => \App\Models\ActionLog::INCOME,
-                ],
-                'name' => __('Income report'),
-                'fa_class' => 'fa-save',
-                'class' => 'reports',
-            ])
-            {{-- Outcome report --}}
-            @include('common.buttons.save', [
-                'route' => 'export',
-                'id' => 'outcome',
-                'route_params' => [
-                    'direction'     => \App\Models\ActionLog::OUTOME,
-                ],
-                'name' => __('Outcome report'),
-                'fa_class' => 'fa-save',
-                'class' => 'reports',
-                'dataset' => [
-                    'method' => 'GET',
-                ],
-            ])
-            {{-- Stock state report --}}
-            @include('common.buttons.save', [
-                'route' => 'export',
-                'id' => 'stock',
-                'route_params' => [
-                    'direction' => \App\Models\ActionLog::STOCK,
-                ],
-                'name' => __('Stock state report'),
+                'route' => 'box-report',
+                'id' => 'report',
+                'name' => __('Report'),
                 'fa_class' => 'fa-save',
                 'class' => 'reports',
                 'dataset' => [
@@ -96,25 +67,17 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>@lang('Income')</th>
-                <th>@lang('Product')</th>
-                <th>@lang('Date')</th>
+                <th>@lang('Action type')</th>
+                <th>@lang('Name')</th>
                 <th>@lang('Count')</th>
-                <th>@lang('Weight')</th>
-                <th>@lang('Outcome capacity')</th>
-                <th>@lang('Customer')</th>
-                <th>@lang('Description')</th>
+                <th>@lang('Date')</th>
                 <th class="actions">@lang('Actions')</th>
             </tr>
             <tr>
-                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'income', 'filterCollection' => $transaction_type])</th>
-                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'product', 'filterCollection' => $products])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'action_type', 'filterCollection' => $transaction_type])</th>
+                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'box_id', 'filterCollection' => $boxes])</th>
+                <th></th>
                 <th>@include('layouts.filter-col', ['filterType' => 'date_range', 'field' => 'date'])</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>@include('layouts.filter-col', ['filterType' => 'select', 'field' => 'customer', 'filterCollection' => $customers])</th>
-                <th></th>
                 <th class="filter-actions">@include('layouts.filter-col', ['filterType' => 'actions'])</th>
             </tr>
             </thead>
@@ -124,40 +87,32 @@
             @endphp
             @foreach($data as $item)
                 <tr>
-                    <td style="background: #1abb9c;text-align: left;color: #fff;font-size: 15px;font-weight: bold;vertical-align: middle;{{ $item->income ? 'background:#ff897b' : 'background:#1abb9c' }}"
-                        title="{{ $item->income ? __('Outcome') : __('Income') }}">
-                        {{ $item->income ? __('Outcome') : __('Income') }}
+                    <td style="background: #1abb9c;text-align: left;color: #fff;font-size: 15px;font-weight: bold;vertical-align: middle;{{ $item->action_type ? 'background:#ff897b' : 'background:#1abb9c' }}"
+                        title="{{ $item->action_type ? __('Outcome') : __('Income') }}">
+                        {{ $item->action_type ? __('Outcome') : __('Income') }}
                     </td>
-                    <td>{{ $item->product ? $item->product->name : '' }}</td>
-                    <td style="{{ $currentDate > Carbon::createFromFormat('Y-m-d', $item->date)->setTimezone('Europe/Kiev') ? 'background:silver' : '' }}">{{ $item->date }}</td>
+                    <td>{{ $item->box->name }}</td>
                     <td>{{ $item->count }}</td>
-
-                    <td>{{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $item->product->box_weight, 1) : '' }}</td>
-                    <td>{{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $boxes[$item->product->box_id]->capacity, 1) : '' }}</td>
-                    <td>{{ $item->customer ? $item->customer->name : '' }}</td>
-                    <td>
-                        {{ $item->description }}
-                        {{ isset($item->product) ? (int)$item->product->parent_product > 0 ? 'Зависимый товар' : '' : '' }}
-                    </td>
+                    <td style="{{ $currentDate > Carbon::createFromFormat('Y-m-d', $item->date)->setTimezone('Europe/Kiev') ? 'background:silver' : '' }}">{{ $item->date }}</td>
                     <td>
                         @if(auth()->id() < 3)
                             @include('common.buttons.edit', [
-                                'route' => 'action-log.edit',
+                                'route' => 'box-log.edit',
                                 'route_params' => [
                                     'id' => $item->id,
                                 ],
                                 'class' => 'ajax-modal-action show-form',
                                 'dataset' => [
-                                    'header' => $item->name,
+                                    'header' => $item->box->name,
                                 ],
                             ])
                             @include('common.buttons.delete', [
-                                'route' => 'action-log.destroy',
+                                'route' => 'box-log.destroy',
                                 'route_params' => [
                                     'id' => $item->id,
                                 ],
                                 'dataset' => [
-                                    'header' => $item->name,
+                                    'header' => $item->box->name,
                                 ],
                             ])
                         @endif
@@ -174,7 +129,7 @@
     <script src="{{ asset("js/filter-col.js") }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            init_filter_col("{{ route('action-log.index') }}");
+            init_filter_col("{{ route('box-log.index') }}");
 
         });
 

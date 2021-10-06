@@ -24,12 +24,16 @@ return [
             ['name' => 'Товары', 'route' => 'product.index', 'icon' => 'fa-th-large'],
             ['name' => 'Материалы Товаров', 'route' => 'product-material.index', 'icon' => 'fa-delicious'],
             ['name' => 'Материалы', 'route' => 'material.index', 'icon' => 'fa-puzzle-piece'],
-            ['name' => 'Ящики', 'route' => 'box.index', 'icon' => 'fa-dropbox'],
             ['name' => 'Цвета', 'route' => 'color.index', 'icon' => 'fa-paint-brush'],
             ['name' => 'Заказчики', 'route' => 'customer.index', 'icon' => 'fa-fax'],
-            ['name' => 'Менеджеры', 'route' => 'user.index', 'icon' => 'fa-users'],
 //            ['name' => 'План', 'route' => 'plan.index', 'icon' => 'fa-bullhorn'],
 //            ['name' => 'История', 'route' => 'history', 'icon' => 'fa-history'],
         ],
+        'boxes' => [
+            ['name' => 'Поставки ящиков', 'route' => 'box-log.index', 'icon' => 'fa-dropbox'],
+            ['name' => 'Ящики на складе', 'route' => 'box-stock.index', 'icon' => 'fa-dropbox'],
+            ['name' => 'Типы ящиков', 'route' => 'box.index', 'icon' => 'fa-dropbox'],
+            ['name' => 'Менеджеры', 'route' => 'user.index', 'icon' => 'fa-users'],
+        ]
     ],
 ];

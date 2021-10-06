@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class ActionLog
+ * Class BoxLog
  */
-class ActionLog extends Model
+class BoxLog extends Model
 {
 
     const INCOME = 0;
@@ -20,7 +20,7 @@ class ActionLog extends Model
      *
      * @var string
      */
-    protected $table = 'action_log';
+    protected $table = 'box_log';
 
     /**
      * Fillable
@@ -28,13 +28,10 @@ class ActionLog extends Model
      * @var array
      */
     protected $fillable = [
+        'box_id',
         'date',
-        'income',
-        'product_id',
         'count',
-        'customer_id',
-        'description',
-        'created_by',
+        'action_type',
     ];
 
     /**
@@ -42,18 +39,8 @@ class ActionLog extends Model
      *
      * @return BelongsTo
      */
-    public function product()
+    public function box()
     {
-        return $this->belongsTo(Product::class, 'product_id');
-    }
-
-    /**
-     * Customer relation
-     *
-     * @return BelongsTo
-     */
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class, 'customer_id');
+        return $this->belongsTo(Box::class, 'box_id');
     }
 }

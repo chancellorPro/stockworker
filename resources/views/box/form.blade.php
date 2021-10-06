@@ -30,3 +30,10 @@
     'name'  => 'weight',
     'label' => __('Weight'),
 ])
+
+{{-- Actual --}}
+@include('layouts.form-fields.checkbox', [
+    'model' => $currentModel,
+    'name'  => 'actual',
+    'label' => __('Actual'),
+])

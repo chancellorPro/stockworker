@@ -48,6 +48,22 @@ import './handlers';
  */
 import './styles/index.scss';
 
+$('#toggle-menu').on('click', function () {
+    if($(this).hasClass('main')) {
+        console.log('has main');
+        $(this).removeClass('main');
+        $(this).find('span').text('Меню ящиков');
+        $('.left_col').css('background', '#1f587a');
+    } else {
+        console.log('no main');
+        $(this).addClass('main');
+        $(this).find('span').text('Меню товаров');
+        $('.left_col').css('background', '#43667B');
+    }
+    $(document.querySelectorAll('.main-menu')).toggle();
+    $(document.querySelectorAll('.box-menu')).toggle();
+});
+
 /**
  * Modules loader
  */

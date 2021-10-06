@@ -1,20 +1,19 @@
-<form method="POST" action="{{ route('action-log.update', ['id' => $model->id]) }}" class="form-horizontal">
+<form method="POST" action="{{ route('stock.update', ['id' => $model->product_id]) }}" class="form-horizontal">
     {{ method_field('PATCH') }}
     {{ csrf_field() }}
 
-    @include ('action-log.form', [
+    @include ('stock.form', [
         'model' => $model,
     ])
 
     <div class="pull-right">
         @include('common.buttons.cancel')
         @include('common.buttons.save', [
-            'route' => 'action-log.update',
+            'route' => 'stock.update',
             'route_params' => [
-                'id' => $model->id,
+                'id' => $model->product_id,
             ],
             'dataset' => [
-                'reload' => 1,
                 'method' => 'PATCH',
             ],
         ])

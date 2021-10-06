@@ -78,7 +78,7 @@ class IndexController extends Controller
 
         return view('product.create', [
             'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
-            'boxes'     => Box::all()->keyBy('id'),
+            'boxes'     => Box::where('actual', 1)->get(),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
         ]);
@@ -114,7 +114,7 @@ class IndexController extends Controller
         return view('product.edit', [
             'model'     => Product::find($id),
             'products'  => Product::whereNotIn('products.id', array_filter($parentIds))->get(),
-            'boxes'     => Box::all()->keyBy('id'),
+            'boxes'     => Box::where('actual', 1)->get(),
             'colors'    => config('presets.color'),
             'materials' => config('presets.material'),
         ]);

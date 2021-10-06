@@ -195,15 +195,15 @@ return [
     ],
 
     'date_ranges' => [
-        ['id' => 'today',          'name' => 'Today'],
-        ['id' => 'yesterday',      'name' => 'Yesterday'],
-        ['id' => 'current-week',   'name' => 'Current week'],
-        ['id' => 'previous-week',  'name' => 'Previous week'],
-        ['id' => 'current-month',  'name' => 'Current month'],
-        ['id' => 'previous-month', 'name' => 'Previous month'],
-        ['id' => 'last-seven',     'name' => 'Last 7 days'],
-        ['id' => 'last-thirty',    'name' => 'Last 30 days'],
-        ['id' => 'custom',         'name' => 'Custom'],
+        ['id' => 'custom',         'name' => 'Вручную'],
+        ['id' => 'today',          'name' => 'Сегодня'],
+        ['id' => 'yesterday',      'name' => 'Вчера'],
+        ['id' => 'current-week',   'name' => 'Текущая неделя'],
+        ['id' => 'previous-week',  'name' => 'Предидущая неделя'],
+        ['id' => 'current-month',  'name' => 'Текущий месяц'],
+        ['id' => 'previous-month', 'name' => 'Предидущай месяц'],
+        ['id' => 'last-seven',     'name' => 'Последние 7 дней'],
+        ['id' => 'last-thirty',    'name' => 'Последние 30 дней'],
     ],
 
     'time_types' => [

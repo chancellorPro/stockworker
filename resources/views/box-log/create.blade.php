@@ -1,15 +1,16 @@
-<form method="POST" action="{{ route('action-log.store') }}" class="form-horizontal">
+<form method="POST" action="{{ route('box-log.store') }}" class="form-horizontal">
     {{ csrf_field() }}
 
-    @include ('action-log.form')
+    @include ('box-log.form')
 
     <div class="pull-right">
         @include('common.buttons.cancel')
         @include('common.buttons.save', [
-            'route' => 'action-log.store',
+            'route' => 'box-log.store',
             'name' => __('Create'),
             'dataset' => [
-                'reload' => 0,
-            ],])
+                'reload' => 1,
+            ],
+        ])
     </div>
 </form>

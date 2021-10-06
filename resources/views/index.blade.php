@@ -12,6 +12,7 @@
 
   <style>
     html, body {
+      user-select: none;
       background-color: #fff;
       background-image: radial-gradient(circle, #fff, #fff, #ddd);
       color: #636b6f;

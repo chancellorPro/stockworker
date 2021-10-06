@@ -25,6 +25,9 @@
     "Outcome": "Отгрузка со склада",
     "Partition from": "Исходная ячейка",
     "Partition to": "Целевая ячейка",
+    "Box stock": "Склад ящиков",
+    "Ignore boxes stock": "Игнорировать склад ящиков",
+    "Actual": "Активный",
     "Color": "Цвет",
     "Move": "Переместить",
     "Colors": "Цвета",
@@ -76,7 +79,10 @@
     "Create Product Material": "Связать материал с товаром",
     "Capacity": "Объём, м. куб",
     "Title": "Название",
+    "Type": "Тип",
     "Size": "Размер",
+    "Box log": "Поставки ящиков",
+    "Report": "Отчет",
     "Outcome capacity": "Объём отгрузки, м. куб",
     "Weight": "Вес, кг"
 }

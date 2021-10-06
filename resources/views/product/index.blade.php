@@ -25,9 +25,9 @@
                 <th class="id">@lang('Id')</th>
                 <th class="col-sm-2">@lang('Name')</th>
                 <th class="id">@lang('Box size')</th>
-                <th class="id">@lang('Box')</th>
+                <th class="col-sm-2">@lang('Box')</th>
                 <th class="id">@lang('Box weight')</th>
-                <th class="col-sm-3">@lang('Description')</th>
+                <th class="col-sm-2">@lang('Description')</th>
                 <th class="actions">@lang('Actions')</th>
             </tr>
             <tr>
@@ -46,7 +46,7 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->box_size }}</td>
-                    <td>{{ $item->box_id !== null && isset($boxes[$item->box_id]) ? $boxes[$item->box_id]->capacity : '' }}</td>
+                    <td>{!! $item->box_id !== null && isset($boxes[$item->box_id]) ? $boxes[$item->box_id]->name . "<br><b>" . $boxes[$item->box_id]->capacity . "<b>" : '' !!}</td>
                     <td>{{ $item->box_weight }}</td>
                     <td>{{ $item->description ?? '' }}</td>
                     <td>

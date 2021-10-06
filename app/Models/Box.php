@@ -27,6 +27,7 @@ class Box extends Model
         'capacity',
         'size',
         'weight',
+        'actual',
     ];
 
 }
