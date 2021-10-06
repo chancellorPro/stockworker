@@ -86,10 +86,10 @@ class IndexController extends Controller
         try {
             $boxesStock = BoxesStock::where(['box_id' => (int)$request->get('box_id')])->first();
 
-            if(!$boxesStock) {
+            if (!$boxesStock) {
                 BoxesStock::create([
                     'box_id' => (int)$request->get('box_id'),
-                    'count' => 0,
+                    'count'  => 0,
                 ]);
                 $boxesStock = BoxesStock::where(['box_id' => (int)$request->get('box_id')])->first();
             }
@@ -168,13 +168,10 @@ class IndexController extends Controller
                     'description' => $request->get('description')
                 ]);
             }
-            $request->offsetUnset('count');
         } else {
 
-            /** INCOME */
             if ((int)$request->get('action_type') === BoxLog::INCOME) {
-                Log::info(json_encode($request->all()));
-
+                /** INCOME */
                 if (!empty($boxesStock)) {
                     $boxesStock->update([
                         'count' => $boxesStock->count + ((int)$request->get('count') - $action->count),
@@ -204,6 +201,30 @@ class IndexController extends Controller
      */
     public function destroy(int $id)
     {
+        try {
+            $action = BoxLog::findOrFail($id);
+            $boxesStock = BoxesStock::where(['box_id' => $action->box->id])->first();
+
+            if ($action->action_type == BoxLog::INCOME) {
+                /** INCOME */
+                if (!empty($boxesStock)) {
+                    $boxesStock->update([
+                        'count' => $boxesStock->count - $action->count,
+                    ]);
+                }
+            } else {
+                /** OUTCOME */
+                if (!empty($boxesStock)) {
+                    $boxesStock->update([
+                        'count' => $boxesStock->count + $action->count,
+                    ]);
+                }
+            }
+        } catch (QueryException $e) {
+            Log::info(json_encode($e->getMessage()));
+            return $this->error(['message' => 'Такого количества нет на складе!']);
+        }
+
         BoxLog::destroy($id);
 
         return $this->success();
@@ -233,10 +254,10 @@ class IndexController extends Controller
         pushNotify('success', __('Report sent! ' . var_export($response, 1)));
 
         return response()->json([
-            'response'  => $response,
-            'dateFrom'  => $request->get('from'),
-            'dateTo'    => $request->get('to'),
-            'success'   => __('Report sent! ' . var_export($response, 1)),
+            'response' => $response,
+            'dateFrom' => $request->get('from'),
+            'dateTo'   => $request->get('to'),
+            'success'  => __('Report sent! ' . var_export($response, 1)),
         ]);
     }
 

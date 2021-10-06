@@ -9,7 +9,7 @@
             'route' => 'action-log.store',
             'name' => __('Create'),
             'dataset' => [
-                'reload' => 0,
+                'reload' => 1,
             ],])
     </div>
 </form>
