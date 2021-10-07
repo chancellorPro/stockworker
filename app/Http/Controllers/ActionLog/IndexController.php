@@ -180,7 +180,7 @@ class IndexController extends Controller
                 if (!empty($stock)) {
                     $count = $stock->count -= (int)$request->get('count');
                     if ($count < 0) {
-                        return $this->error(['message' => 'Такого количества товара нет на складе!']);
+                        return $this->error(['message' => 'Такого количества товара нет на складе! 1']);
                     }
                     $insertData = [
                         'count'       => $count,
@@ -194,7 +194,7 @@ class IndexController extends Controller
             ActionLog::create($request->all());
         } catch (QueryException $e) {
             Log::info(json_encode($e->getMessage()));
-            return $this->error(['message' => 'Такого количества товара нет на складе!']);
+            return $this->error(['message' => 'Такого количества товара нет на складе! 2']);
         }
 
         pushNotify('success', __('Product') . ' ' . __('common.action.added'));
