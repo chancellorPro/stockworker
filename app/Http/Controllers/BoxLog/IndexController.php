@@ -222,7 +222,7 @@ class IndexController extends Controller
             }
         } catch (QueryException $e) {
             Log::info(json_encode($e->getMessage()));
-            return $this->error(['message' => 'Такого количества нет на складе!']);
+            return $this->error(['message' => 'Такого количества ящиков нет на складе!']);
         }
 
         BoxLog::destroy($id);
