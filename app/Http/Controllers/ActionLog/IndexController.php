@@ -162,12 +162,12 @@ class IndexController extends Controller
             } else {
                 /** OUTCOME */
 
-                if(!$request->get('ignore_boxes_stock')) {
+                if (!$request->get('ignore_boxes_stock')) {
                     $boxesStock = BoxesStock::where(['box_id' => $product->box_id])->first();
-                    if(!$boxesStock) {
+                    if (!$boxesStock) {
                         BoxesStock::create([
                             'box_id' => $product->box_id,
-                            'count' => 0,
+                            'count'  => 0,
                         ]);
                         $boxesStock = BoxesStock::where(['box_id' => $product->box_id])->first();
                     }
@@ -282,6 +282,25 @@ class IndexController extends Controller
      */
     public function destroy(int $id)
     {
+        $action = ActionLog::findOrFail($id);
+        $stock = Stock::where(['product_id' => $action->product->id])->first();
+
+        if ($action->income === ActionLog::INCOME) {
+            /** INCOME */
+            if (!empty($stock)) {
+                $stock->update([
+                    'count' => $stock->count - $action->count,
+                ]);
+            }
+        } else {
+            /** OUTCOME */
+            if (!empty($stock)) {
+                $stock->update([
+                    'count' => $stock->count + $action->count,
+                ]);
+            }
+        }
+
         ActionLog::destroy($id);
 
         return $this->success();
