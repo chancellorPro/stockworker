@@ -38,6 +38,7 @@ class BoxReport implements FromCollection, WithHeadings
             'header'  => 'Склад ящиков за ' . str_replace('00:00:00', '', $this->from),
             'columns' => $this->headings(),
             'values'  => $data,
+            'format'  => 'xls',
             'token'   => env('REPORT_TOKEN'),
         ]);
     }
