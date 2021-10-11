@@ -64,7 +64,7 @@ $(document)
                 },
                 complete: function (r) {
                     $('.reports').css('pointer-events', 'auto')
-                    postProcess();
+                    // postProcess();
                 },
             });
         }
