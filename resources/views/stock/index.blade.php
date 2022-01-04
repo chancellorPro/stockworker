@@ -38,8 +38,16 @@
                     <td>{{ $item->product_id }}</td>
                     <td>{{ $item->product ? $item->product->name : '' }}</td>
                     <td>{{ $item->count }}</td>
-                    <td>{{ ceil($item->count / $item->product->box_size) }}</td>
-                    <td>{{ $item->product->box_size }}</td>
+                    <td>
+                        @if(is_object($item->product) )
+                            {{ ceil($item->count / $item->product->box_size) }}
+                        @endif
+                    </td>
+                    <td>
+                        @if(is_object($item->product) )
+                            {{ $item->product->box_size }}
+                        @endif
+                    </td>
                     <td>{{ $item->product->box_weight }}</td>
                     <td>{{ (isset($item->product) && isset($boxes[$item->product->box_id])) ? $boxes[$item->product->box_id]->capacity : '' }}</td>
                     <td>{{ $item->description }}</td>
