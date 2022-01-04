@@ -132,12 +132,19 @@
                     <td style="{{ $currentDate > Carbon::createFromFormat('Y-m-d', $item->date)->setTimezone('Europe/Kiev') ? 'background:silver' : '' }}">{{ $item->date }}</td>
                     <td>{{ $item->count }}</td>
 
-                    <td>{{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $item->product->box_weight, 1) : '' }}</td>
-                    <td>{{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $boxes[$item->product->box_id]->capacity, 1) : '' }}</td>
+                    <td>
+                        @if(!empty($item->product))
+                        {{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $item->product->box_weight, 1) : '' }}
+                        @endif
+                    </td>
+                    <td>
+                        @if(!empty($item->product))
+                        {{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $boxes[$item->product->box_id]->capacity, 1) : '' }}
+                        @endif
+                    </td>
                     <td>{{ $item->customer ? $item->customer->name : '' }}</td>
                     <td>
                         {{ $item->description }}
-                        {{ isset($item->product) ? (int)$item->product->parent_product > 0 ? 'Зависимый товар' : '' : '' }}
                     </td>
                     <td>
                         @if(auth()->id() < 3)
