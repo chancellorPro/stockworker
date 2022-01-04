@@ -133,12 +133,12 @@
                     <td>{{ $item->count }}</td>
 
                     <td>
-                        @if(!empty($item->product))
+                        @if(is_object($item->product))
                         {{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $item->product->box_weight, 1) : '' }}
                         @endif
                     </td>
                     <td>
-                        @if(!empty($item->product))
+                        @if(is_object($item->product))
                         {{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $boxes[$item->product->box_id]->capacity, 1) : '' }}
                         @endif
                     </td>
