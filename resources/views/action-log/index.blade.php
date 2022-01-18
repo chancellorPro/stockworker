@@ -138,7 +138,7 @@
                         @endif
                     </td>
                     <td>
-                        @if(is_object($item->product))
+                        @if(is_object($item->product) && isset($boxes[$item->product->box_id]))
                         {{ $item->income ? round(($item->count / ($item->product->box_size ?? 1)) * $boxes[$item->product->box_id]->capacity, 1) : '' }}
                         @endif
                     </td>
